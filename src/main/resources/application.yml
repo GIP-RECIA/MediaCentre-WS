@@ -1,0 +1,96 @@
+#
+# Copyright (C) 2017 GIP-RECIA https://www.recia.fr/
+# @Author (C) 2017 Julien Gribonvald <julien.gribonvald@recia.fr>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#                 http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+server:
+  port: ${appPort:8080}
+
+# Spring MVC actuator endpoints available via /admin/info, /admin/health, ...
+#server.servlet-path: /
+#management.context-path: /admin
+
+# http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints
+endpoints:
+  enabled: false
+  info:
+    enabled: true
+  health:
+    enabled: true
+  metrics:
+    enabled: true
+
+info:
+  app:
+    name: @project.artifactId@
+    version: @project.version@
+
+logging:
+    config: "classpath:logback.xml"
+
+app:
+  security:
+    authorizedIPAccess:
+      - 127.0.0.1
+
+httpClient:
+  maxTotal: 200
+  defaultMaxPerRoute: 50
+#  keyStorePath:
+#  keyStorePassword:
+
+requestConfig:
+  connectionRequestTimeout: 5000
+  conectTimeout: 5000
+  socketTimeout: 2000
+
+structureInfoRest:
+  hostConfig:
+    scheme: https
+    host:
+    port: 443
+    maxPerRoute: 50
+  uri:
+
+ressources:
+  configurations:
+    GAR:
+      hostConfig:
+        scheme: https
+        host:
+        port: 443
+        maxPerRoute: 50
+#      headers:
+#        -
+#          param: Accept
+#          value: "application/xml"
+#        -
+#          param: Accept-Encoding
+#          value: "gzip, deflate"
+#      clientKeyAlias: GAR
+      ressourceUri: "/resources/{idENT}/{UAI}/{GARPersonIdentifiant}"
+      # Bouclera sur cette attribut pour les requêtes, laisser à vide si pas de boucle
+      attributeOnLoop: UAI
+      # each uri Attributes must map with an app attribute or a user attribute
+ #     appParams:
+ #       -
+ #         param: idENT
+ #         value:
+ #     userParams:
+ #       -
+ #         param: UAI
+ #         value:
+ #       -
+ #         param: GARPersonIdentifiant
+ #         value:
