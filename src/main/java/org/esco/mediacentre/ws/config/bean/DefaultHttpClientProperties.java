@@ -28,6 +28,7 @@ public class DefaultHttpClientProperties {
 	private int maxTotal;
 	private int defaultMaxPerRoute;
 
+	private String keyStoreType;
 	private String keyStorePath;
 	private String keyStorePassword;
 

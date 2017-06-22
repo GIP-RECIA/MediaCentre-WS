@@ -18,7 +18,6 @@ package org.esco.mediacentre.ws.config;
 import javax.annotation.PostConstruct;
 
 import lombok.extern.slf4j.Slf4j;
-
 import org.apache.http.client.config.RequestConfig;
 import org.esco.mediacentre.ws.config.bean.HttpRequestTimeoutProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,8 @@ public class HttpRequestConfiguration {
 		RequestConfig result = RequestConfig.custom()
 				.setConnectionRequestTimeout(httpRequestTimeoutConfiguration.getConnectionRequestTimeout())
 				.setConnectTimeout(httpRequestTimeoutConfiguration.getConectTimeout())
-				.setSocketTimeout(httpRequestTimeoutConfiguration.getSocketTimeout()).build();
+				.setSocketTimeout(httpRequestTimeoutConfiguration.getSocketTimeout())
+				.build();
 		return result;
 	}
 

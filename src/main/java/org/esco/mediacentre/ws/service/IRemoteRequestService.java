@@ -18,10 +18,12 @@ package org.esco.mediacentre.ws.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.constraints.NotNull;
+
 import org.esco.mediacentre.ws.model.ressource.Ressource;
 
 public interface IRemoteRequestService {
 
-	List<Ressource> getRessources(final Map<String, List<String>> userInfos);
+	List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos);
 
 }

@@ -47,6 +47,7 @@ public class RemoteRequestServiceConfiguration {
 		GARRequestServiceImpl rs = new GARRequestServiceImpl();
 		rs.setGarConfiguration(garClientConfiguration.getGARProperties());
 		rs.setRemoteAccessTemplate(garClientConfiguration.GARRestTemplate());
+		rs.setStructureInfoRequestService(structureInfoRequestService);
 		return rs;
 	}
 

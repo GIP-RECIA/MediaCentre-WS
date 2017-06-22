@@ -33,12 +33,14 @@ import org.esco.mediacentre.ws.model.ressource.IdEtablissement;
 import org.esco.mediacentre.ws.model.ressource.ListeRessourcesWrapper;
 import org.esco.mediacentre.ws.model.ressource.Ressource;
 import org.esco.mediacentre.ws.model.structure.Structure;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 @NoArgsConstructor
 @Slf4j
-public class GARRequestServiceImpl implements IRemoteRequestService {
+public class GARRequestServiceImpl implements IRemoteRequestService, InitializingBean {
 
 	@Setter
 	private RessourceProperties garConfiguration;
@@ -49,7 +51,7 @@ public class GARRequestServiceImpl implements IRemoteRequestService {
 	@Setter
 	private StructureInfoRequestService structureInfoRequestService;
 
-	public List<Ressource> getRessources(final Map<String, List<String>> userInfos) {
+	public List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos) {
 		String uri = garConfiguration.getRessourceUri();
 		// in app param we don't have user multiple values
 		for (ParamValueProperty param : garConfiguration.getAppParams()) {
@@ -127,15 +129,17 @@ public class GARRequestServiceImpl implements IRemoteRequestService {
 		if (uri.matches(".*\\{.*\\}.*")) {
 			throw new CustomRestRequestException();
 		}
-		ListeRessourcesWrapper ressourcesObj = null;
+		ListeRessourcesWrapper ressourcesObj;
 		try {
+			final URI uriConstructed =  new URI(garConfiguration.getHostConfig().getScheme() + "://" + garConfiguration.getHostConfig().getHost() +
+					(garConfiguration.getHostConfig().getPort() > 0 ? ":" + garConfiguration.getHostConfig().getPort() : "") + uri);
+
 			if (log.isDebugEnabled()) {
-				log.debug("Requesting uri {}", uri);
+				log.debug("Requesting uri {}", uri.toString());
 			}
-			ressourcesObj = remoteAccessTemplate.getForObject(
-					new URI(garConfiguration.getHostConfig().getScheme(), garConfiguration.getHostConfig().getHost(), ":" + garConfiguration.getHostConfig().getPort(), uri, null), ListeRessourcesWrapper.class);
+			ressourcesObj = remoteAccessTemplate.getForObject(uriConstructed, ListeRessourcesWrapper.class);
 		} catch (URISyntaxException e) {
-			log.error("Erreur to construct the URI {}", uri);
+			log.error("Erreur to construct the URI {}", uri, e);
 			throw new CustomRestRequestException(e);
 		}
 		//TODO manage Status ?
@@ -164,5 +168,12 @@ public class GARRequestServiceImpl implements IRemoteRequestService {
 		if (log.isDebugEnabled()) {
 			log.debug("completeAndMergeRessourceInformations returned {}", initialRessources);
 		}
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		Assert.notNull(this.garConfiguration, "The GAR configuration bean wasn't setted !");
+		Assert.notNull(this.remoteAccessTemplate, "The RestTemplate bean wasn't setted !");
+		Assert.notNull(this.structureInfoRequestService, "The StructureInfoRequestService bean wasn't setted !");
 	}
 }

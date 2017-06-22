@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -31,12 +33,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.esco.mediacentre.ws.model.ressource.ListeRessourcesWrapper;
 import org.esco.mediacentre.ws.model.ressource.Ressource;
 import org.esco.mediacentre.ws.model.structure.Structure;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
 
 @Slf4j
-public class MockedRequestServiceImpl implements IRemoteRequestService {
+public class MockedRequestServiceImpl implements IRemoteRequestService, InitializingBean {
 
 	private Resource resources0377777U;
 	private Resource resources0450822X;
@@ -78,7 +81,7 @@ public class MockedRequestServiceImpl implements IRemoteRequestService {
 		Assert.state(structure0377777U != null, "The Rest Service to obtain structures informations returned a null Structure for UAI '0377777U' !");
 	}
 
-	public List<Ressource> getRessources(final Map<String, List<String>> userInfos) {
+	public List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos) {
 		init();
 		List<Ressource> ressources = Lists.newArrayList();
 		ObjectMapper mapper = new ObjectMapper();
@@ -100,5 +103,10 @@ public class MockedRequestServiceImpl implements IRemoteRequestService {
 		}
 
 		return ressources;
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		Assert.notNull(this.structureInfoRequestService, "The StructureInfoRequestService bean wasn't setted !");
 	}
 }
