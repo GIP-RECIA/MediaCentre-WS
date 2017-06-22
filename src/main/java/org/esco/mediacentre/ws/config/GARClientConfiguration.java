@@ -15,19 +15,18 @@
  */
 package org.esco.mediacentre.ws.config;
 
+import java.io.File;
 import java.io.FileInputStream;
-import java.net.Socket;
 import java.security.KeyStore;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.net.ssl.SSLContext;
 import javax.validation.constraints.NotNull;
 
 import lombok.extern.slf4j.Slf4j;
-
 import org.apache.http.Header;
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
@@ -35,7 +34,6 @@ import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.routing.HttpRoute;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
-import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.DefaultHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
@@ -43,7 +41,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicHeader;
-import org.apache.http.ssl.PrivateKeyDetails;
 import org.apache.http.ssl.PrivateKeyStrategy;
 import org.apache.http.ssl.SSLContexts;
 import org.esco.mediacentre.ws.config.bean.DefaultHttpClientProperties;
@@ -102,7 +99,7 @@ public class GARClientConfiguration {
 
 	@Bean(name = "GARRestTemplate")
 	public RestTemplate GARRestTemplate() {
-		RestTemplate restTemplate = new RestTemplate(GARHttpRequestFactory());
+		final RestTemplate restTemplate = new RestTemplate(GARHttpRequestFactory());
 		return restTemplate;
 	}
 
@@ -111,22 +108,31 @@ public class GARClientConfiguration {
 		// For details see : https://hc.apache.org/httpcomponents-client-4.5.x/tutorial/html/connmgmt.html#d5e371
 		try {
 			SSLContext sslContext;
-			KeyStore clientKS = null;
+			KeyStore clientKS;
 			if (defaultProperties.getKeyStorePath() != null && defaultProperties.getKeyStorePassword() != null) {
-				clientKS = KeyStore.getInstance(KeyStore.getDefaultType());
+				if (defaultProperties.getKeyStoreType() != null) {
+					clientKS = KeyStore.getInstance(defaultProperties.getKeyStoreType());
+				} else {
+					clientKS = KeyStore.getInstance(KeyStore.getDefaultType());
+				}
 				clientKS.load(new FileInputStream(defaultProperties.getKeyStorePath()), defaultProperties
 						.getKeyStorePassword().toCharArray());
 
+				PrivateKeyStrategy privateKeyStrategy = null;
+				if (getGARProperties().getClientKeyAlias() != null) {
+					// Unconditionally return our configured alias allowing the consumer
+					// to throw an appropriate exception rather than trying to generate our
+					// own here if our configured alias is not a key in the aliases map.
+					privateKeyStrategy = (aliases, socket) -> getGARProperties().getClientKeyAlias();
+				}
+
 				sslContext = SSLContexts
 						.custom()
-						.loadKeyMaterial(clientKS, defaultProperties.getKeyStorePassword().toCharArray(),
-								new PrivateKeyStrategy() {
-									@Override
-									public String chooseAlias(Map<String, PrivateKeyDetails> aliases, Socket socket) {
-										// TODO Auto-generated method stub
-										return getGARProperties().getClientKeyAlias();
-									}
-								}).loadTrustMaterial(null, new TrustSelfSignedStrategy()).build();
+						.loadKeyMaterial(new File(defaultProperties.getKeyStorePath()), defaultProperties.getKeyStorePassword().toCharArray(),
+								defaultProperties.getKeyStorePassword().toCharArray(), privateKeyStrategy)
+						.loadTrustMaterial(new File(defaultProperties.getKeyStorePath()), defaultProperties
+								.getKeyStorePassword().toCharArray(), new TrustSelfSignedStrategy())
+						.build();
 			} else {
 				sslContext = SSLContexts.custom().loadTrustMaterial(null, new TrustSelfSignedStrategy()).build();
 			}
@@ -135,19 +141,19 @@ public class GARClientConfiguration {
 					new DefaultHostnameVerifier());
 
 			Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory> create()
-					.register("https", sslConnectionFactory).register("http", new PlainConnectionSocketFactory())
+					.register("https", sslConnectionFactory)
 					.build();
 
 			List<Header> headers = new ArrayList<Header>();
 			for (ParamValueProperty prop : getGARProperties().getHeaders()) {
 				headers.add(new BasicHeader(prop.getParam(), prop.getValue()));
 			}
+			headers.add(new BasicHeader("Date", new Date().toString()));
 
 			return HttpClientBuilder.create().setConnectionManagerShared(true)
 					.setConnectionManager(GARConnectionManager(registry)).setSSLSocketFactory(sslConnectionFactory)
 					.setDefaultRequestConfig(requestConfig).setDefaultHeaders(headers).build();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			log.error("Could not create HttpClient ! {}", e.getMessage(), e);
 			return null;
 		}
