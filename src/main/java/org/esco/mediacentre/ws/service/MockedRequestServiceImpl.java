@@ -45,7 +45,7 @@ public class MockedRequestServiceImpl implements IRemoteRequestService, Initiali
 	private Resource resources0450822X;
 
 	@Setter
-	private StructureInfoRequestService structureInfoRequestService;
+	private IStructureInfoService structureInfoService;
 
 	private Structure structure0450822X;
 	private Structure structure0377777U;
@@ -68,8 +68,8 @@ public class MockedRequestServiceImpl implements IRemoteRequestService, Initiali
 	}
 
 	private void init(){
-		if (structureInfoRequestService != null) {
-			Map<String, Structure> structs = structureInfoRequestService.getStructuresInfos(Lists.newArrayList("0450822X", "0377777U"));
+		if (structureInfoService != null) {
+			Map<String, Structure> structs = structureInfoService.getStructuresInfosList(Lists.newArrayList("0450822X", "0377777U"));
 			Assert.state(structs != null, "The Rest Service to obtain structures informations should not return a null value !");
 			structure0450822X = structs.get("0450822X");
 			structure0377777U = structs.get("0377777U");
@@ -107,6 +107,6 @@ public class MockedRequestServiceImpl implements IRemoteRequestService, Initiali
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		Assert.notNull(this.structureInfoRequestService, "The StructureInfoRequestService bean wasn't setted !");
+		Assert.notNull(this.structureInfoService, "The structureInfoService bean wasn't setted !");
 	}
 }

@@ -22,8 +22,8 @@ import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.esco.mediacentre.ws.service.GARRequestServiceImpl;
 import org.esco.mediacentre.ws.service.IRemoteRequestService;
+import org.esco.mediacentre.ws.service.IStructureInfoService;
 import org.esco.mediacentre.ws.service.MockedRequestServiceImpl;
-import org.esco.mediacentre.ws.service.StructureInfoRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -39,7 +39,7 @@ public class RemoteRequestServiceConfiguration {
 	private GARClientConfiguration garClientConfiguration;
 
 	@Autowired
-	private StructureInfoRequestService structureInfoRequestService;
+	private IStructureInfoService structureInfoService;
 
 	@Bean
 	@ConditionalOnBean(name = "GARClientConfiguration")
@@ -47,7 +47,8 @@ public class RemoteRequestServiceConfiguration {
 		GARRequestServiceImpl rs = new GARRequestServiceImpl();
 		rs.setGarConfiguration(garClientConfiguration.getGARProperties());
 		rs.setRemoteAccessTemplate(garClientConfiguration.GARRestTemplate());
-		rs.setStructureInfoRequestService(structureInfoRequestService);
+		rs.setStructureInfoService(structureInfoService);
+		rs.setHttpHeaders(garClientConfiguration.GARHttpRequestHeaders());
 		return rs;
 	}
 
@@ -56,7 +57,7 @@ public class RemoteRequestServiceConfiguration {
 	@Profile("STRUCT_REST")
 	public IRemoteRequestService mockedWithStructRestRequestService() {
 		MockedRequestServiceImpl mockedService = new MockedRequestServiceImpl();
-		mockedService.setStructureInfoRequestService(structureInfoRequestService);
+		mockedService.setStructureInfoService(structureInfoService);
 		return mockedService;
 	}
 

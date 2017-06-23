@@ -34,6 +34,11 @@ import org.esco.mediacentre.ws.model.ressource.ListeRessourcesWrapper;
 import org.esco.mediacentre.ws.model.ressource.Ressource;
 import org.esco.mediacentre.ws.model.structure.Structure;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
@@ -49,7 +54,10 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 	private RestTemplate remoteAccessTemplate;
 
 	@Setter
-	private StructureInfoRequestService structureInfoRequestService;
+	private HttpHeaders httpHeaders;
+
+	@Setter
+	private IStructureInfoService structureInfoService;
 
 	public List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos) {
 		String uri = garConfiguration.getRessourceUri();
@@ -62,17 +70,17 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 		final String authorizedAttrLoop = garConfiguration.getAttributeOnLoop();
 		String userMappedIdEtab = null;
 		final String userParamIdEtab = garConfiguration.getAttributeIdEtab();
-		final Map<String, Structure> mapStructure = structureInfoRequestService.getStructuresInfos(userInfos.getOrDefault(userParamIdEtab, Lists.newArrayList()));
+		final Map<String, Structure> mapStructure = structureInfoService.getStructuresInfosList(userInfos.getOrDefault(userParamIdEtab, Lists.newArrayList()));
 		// in user attributes we should manage multiple values and corresponding to autorized loop
 		for (ParamValueProperty param : garConfiguration.getUserParams()) {
 			if (!StringUtils.isEmpty(authorizedAttrLoop) && authorizedAttrLoop.equalsIgnoreCase(param.getParam())) {
 				userMappedAttributeToLoop = param.getValue();
-				continue;
+				continue;// go to next loop
 			}
 			List<String> userVal = userInfos.getOrDefault(param.getValue(), Lists.newArrayList());
 			if (!userVal.isEmpty()) {
-				if (log.isDebugEnabled()) {
-					log.debug("Replacing in uri {} the attribute {} with value {}", uri, param.getParam(), userVal.get(0));
+				if (log.isTraceEnabled()) {
+					log.trace("Replacing in uri {} the attribute {} with value {}", uri, param.getParam(), userVal.get(0));
 				}
 				uri = uri.replaceAll("\\{" + param.getParam() + "\\}", userVal.get(0));
 				if (!StringUtils.isEmpty(userParamIdEtab) && userParamIdEtab.equalsIgnoreCase(param.getParam())) {
@@ -92,14 +100,14 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 						userMappedIdEtab = attr;
 					}
 					final String req = uri.replaceAll("\\{" + authorizedAttrLoop + "\\}", attr);
-					if (log.isDebugEnabled()) {
-						log.debug("Replacing in uri {} the attribute {} with value {}", uri, authorizedAttrLoop, attr);
+					if (log.isTraceEnabled()) {
+						log.trace("Replacing in uri {} the attribute {} with value {}", uri, authorizedAttrLoop, attr);
 					}
 					try {
 						if (log.isTraceEnabled()) {
 							log.trace("userMappedIdEtab value is {} from {}", userMappedIdEtab, userParamIdEtab);
 						}
-						completeAndMergeRessourceInformations(ressources, runUriCall(req), mapStructure.get(userMappedIdEtab));
+						completeAndMergeRessourceInformations(ressources, runUriCall(req), getStructureWithFallBack(mapStructure, userMappedIdEtab));
 					} catch (CustomRestRequestException e) {
 						log.error(
 								"The user defined with theses attributes '{}' doesn't have attribute replacement possible on URI {}",
@@ -115,7 +123,8 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 			if (log.isTraceEnabled()) {
 				log.trace("userMappedIdEtab value is {} from {}", userMappedIdEtab, userParamIdEtab);
 			}
-			completeAndMergeRessourceInformations(ressources, runUriCall(uri), mapStructure.get(userMappedIdEtab));
+
+			completeAndMergeRessourceInformations(ressources, runUriCall(uri), getStructureWithFallBack(mapStructure, userMappedIdEtab));
 			return ressources;
 		} catch (CustomRestRequestException e) {
 			log.error(
@@ -137,7 +146,16 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 			if (log.isDebugEnabled()) {
 				log.debug("Requesting uri {}", uri.toString());
 			}
-			ressourcesObj = remoteAccessTemplate.getForObject(uriConstructed, ListeRessourcesWrapper.class);
+			HttpEntity<String> httpEntity = new HttpEntity<>(null, httpHeaders);
+
+			final ResponseEntity<ListeRessourcesWrapper> response = remoteAccessTemplate.exchange(uriConstructed, HttpMethod.GET, httpEntity, new ParameterizedTypeReference<ListeRessourcesWrapper>(){});
+
+			if (log.isDebugEnabled()) {
+				log.debug("Requesting GAR ressources on {} returned a response with status {} and \n" +
+								"\nresponse{}\n",
+						uriConstructed, response.getStatusCode(), response);
+			}
+			ressourcesObj = response.getBody();
 		} catch (URISyntaxException e) {
 			log.error("Erreur to construct the URI {}", uri, e);
 			throw new CustomRestRequestException(e);
@@ -170,10 +188,22 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 		}
 	}
 
+	private Structure getStructureWithFallBack(final Map<String, Structure> mapStructure, final String id) {
+		Structure structure = mapStructure.get(id);
+		if (structure == null) {
+			log.warn("An error occured ! it can't get the structure informations with the identifier {}, so we make a limited fallback !", id);
+			structure = new Structure();
+			structure.setCode(id);
+			structure.setDisplayName(id);
+		}
+		return structure;
+	}
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		Assert.notNull(this.garConfiguration, "The GAR configuration bean wasn't setted !");
 		Assert.notNull(this.remoteAccessTemplate, "The RestTemplate bean wasn't setted !");
-		Assert.notNull(this.structureInfoRequestService, "The StructureInfoRequestService bean wasn't setted !");
+		Assert.notNull(this.structureInfoService, "The StructureInfoService bean wasn't setted !");
+		Assert.notNull(this.httpHeaders, "The httpHeaders bean wasn't setted !");
 	}
 }

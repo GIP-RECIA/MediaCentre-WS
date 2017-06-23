@@ -15,14 +15,10 @@
  */
 package org.esco.mediacentre.ws.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.net.ssl.SSLContext;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.Header;
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.config.Registry;
@@ -36,7 +32,6 @@ import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
-import org.apache.http.message.BasicHeader;
 import org.apache.http.ssl.SSLContexts;
 import org.esco.mediacentre.ws.config.bean.DefaultHttpClientProperties;
 import org.esco.mediacentre.ws.config.bean.StructureInfosRestProperties;
@@ -96,12 +91,9 @@ public class StructureRestClientConfiguration {
 					.register("https", sslConnectionFactory).register("http", new PlainConnectionSocketFactory())
 					.build();
 
-			List<Header> headers = new ArrayList<>();
-			headers.add(new BasicHeader("Accept", "application/json"));
-			headers.add(new BasicHeader("Accept-Encoding", "gzip, deflate"));
 			return HttpClientBuilder.create().setConnectionManagerShared(true)
 					.setConnectionManager(StructureConnectionManager(registry)).setSSLSocketFactory(sslConnectionFactory)
-					.setDefaultRequestConfig(requestConfig).setDefaultHeaders(headers).build();
+					.setDefaultRequestConfig(requestConfig).build();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			log.error("Could not create HttpClient ! {}", e.getMessage(), e);

@@ -52,6 +52,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
@@ -97,11 +98,21 @@ public class GARClientConfiguration {
 		return new HttpComponentsClientHttpRequestFactory(GARHttpClient());
 	}
 
-	@Bean(name = "GARRestTemplate")
+	@Bean
 	public RestTemplate GARRestTemplate() {
 		final RestTemplate restTemplate = new RestTemplate(GARHttpRequestFactory());
 		return restTemplate;
 	}
+
+    @Bean
+    public HttpHeaders GARHttpRequestHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        for (ParamValueProperty prop : getGARProperties().getHeaders()) {
+            headers.add(prop.getParam(), prop.getValue());
+        }
+        headers.add("Date", new Date().toString());
+        return headers;
+    }
 
 	@Bean
 	public CloseableHttpClient GARHttpClient() {
