@@ -118,9 +118,9 @@ public class RessourceListeResourceTest {
     public void testRecuperation() throws Exception {
         if (garClientConfiguration != null) {
             URI serverUri1 = new URI(garClientConfiguration.getGARProperties().getHostConfig().getScheme(), garClientConfiguration.getGARProperties().getHostConfig().getHost(),
-                    "/resources/netocentre/0450822X/F08001ut", null);
+                    "/ressources/F0/0450822X/F08001ut", null);
             URI serverUri2 = new URI(garClientConfiguration.getGARProperties().getHostConfig().getScheme(), garClientConfiguration.getGARProperties().getHostConfig().getHost(),
-                    "/resources/netocentre/0377777U/F08001ut", null);
+                    "/ressources/F0/0377777U/F08001ut", null);
 
             if (mockGARServer != null) {
                 mockGARServer.expect(MockRestRequestMatchers.requestTo(serverUri1))

@@ -41,6 +41,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @NoArgsConstructor
@@ -70,27 +71,35 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 		final String authorizedAttrLoop = garConfiguration.getAttributeOnLoop();
 		String userMappedIdEtab = null;
 		final String userParamIdEtab = garConfiguration.getAttributeIdEtab();
-		final Map<String, Structure> mapStructure = structureInfoService.getStructuresInfosList(userInfos.getOrDefault(userParamIdEtab, Lists.newArrayList()));
+		String userParamIdEtabMapped = null;
+
 		// in user attributes we should manage multiple values and corresponding to autorized loop
 		for (ParamValueProperty param : garConfiguration.getUserParams()) {
 			if (!StringUtils.isEmpty(authorizedAttrLoop) && authorizedAttrLoop.equalsIgnoreCase(param.getParam())) {
 				userMappedAttributeToLoop = param.getValue();
+				if (authorizedAttrLoop.equals(userParamIdEtab)){
+					userParamIdEtabMapped = param.getValue();
+				}
 				continue;// go to next loop
 			}
 			List<String> userVal = userInfos.getOrDefault(param.getValue(), Lists.newArrayList());
 			if (!userVal.isEmpty()) {
-				if (log.isTraceEnabled()) {
-					log.trace("Replacing in uri {} the attribute {} with value {}", uri, param.getParam(), userVal.get(0));
+				if (log.isDebugEnabled()) {
+					log.debug("Replacing in uri {} the attribute {} with value {}", uri, param.getParam(), userVal.get(0));
 				}
 				uri = uri.replaceAll("\\{" + param.getParam() + "\\}", userVal.get(0));
 				if (!StringUtils.isEmpty(userParamIdEtab) && userParamIdEtab.equalsIgnoreCase(param.getParam())) {
 					userMappedIdEtab = userVal.get(0);
-					if (log.isTraceEnabled()) {
-						log.trace("setting userMappedIdEtab with {}", userVal.get(0));
+					userParamIdEtabMapped = param.getValue();
+					if (log.isDebugEnabled()) {
+						log.debug("setting userMappedIdEtab with {} and userParamIdEtabMapped with {}", userMappedIdEtab, userParamIdEtabMapped);
 					}
 				}
 			}
 		}
+
+		final Map<String, Structure> mapStructure = structureInfoService.getStructuresInfosList(userInfos.getOrDefault(userParamIdEtabMapped, Lists.newArrayList()));
+
 		if (!StringUtils.isEmpty(userMappedAttributeToLoop)) {
 			final List<String> userAttrVals = userInfos.getOrDefault(userMappedAttributeToLoop, Lists.newArrayList());
 			if (!userAttrVals.isEmpty()) {
@@ -100,12 +109,12 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 						userMappedIdEtab = attr;
 					}
 					final String req = uri.replaceAll("\\{" + authorizedAttrLoop + "\\}", attr);
-					if (log.isTraceEnabled()) {
-						log.trace("Replacing in uri {} the attribute {} with value {}", uri, authorizedAttrLoop, attr);
+					if (log.isDebugEnabled()) {
+						log.debug("Replacing in uri {} the attribute {} with value {}", uri, authorizedAttrLoop, attr);
 					}
 					try {
-						if (log.isTraceEnabled()) {
-							log.trace("userMappedIdEtab value is {} from {}", userMappedIdEtab, userParamIdEtab);
+						if (log.isDebugEnabled()) {
+							log.debug("userMappedIdEtab value is {} from {}", userMappedIdEtab, userParamIdEtab);
 						}
 						completeAndMergeRessourceInformations(ressources, runUriCall(req), getStructureWithFallBack(mapStructure, userMappedIdEtab));
 					} catch (CustomRestRequestException e) {
@@ -120,8 +129,8 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 
 		try {
 			List<Ressource> ressources = new ArrayList<Ressource>();
-			if (log.isTraceEnabled()) {
-				log.trace("userMappedIdEtab value is {} from {}", userMappedIdEtab, userParamIdEtab);
+			if (log.isDebugEnabled()) {
+				log.debug("userMappedIdEtab value is {} from {}", userMappedIdEtab, userParamIdEtab);
 			}
 
 			completeAndMergeRessourceInformations(ressources, runUriCall(uri), getStructureWithFallBack(mapStructure, userMappedIdEtab));
@@ -138,13 +147,14 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 		if (uri.matches(".*\\{.*\\}.*")) {
 			throw new CustomRestRequestException();
 		}
-		ListeRessourcesWrapper ressourcesObj;
+		ListeRessourcesWrapper ressourcesObj = null;
+		final String rootURL = garConfiguration.getHostConfig().getScheme() + "://" + garConfiguration.getHostConfig().getHost() +
+				(garConfiguration.getHostConfig().getPort() > 0 ? ":" + garConfiguration.getHostConfig().getPort() : "");
 		try {
-			final URI uriConstructed =  new URI(garConfiguration.getHostConfig().getScheme() + "://" + garConfiguration.getHostConfig().getHost() +
-					(garConfiguration.getHostConfig().getPort() > 0 ? ":" + garConfiguration.getHostConfig().getPort() : "") + uri);
+			final URI uriConstructed =  new URI(rootURL + uri);
 
 			if (log.isDebugEnabled()) {
-				log.debug("Requesting uri {}", uri.toString());
+				log.debug("Requesting uri {}", uriConstructed.toString());
 			}
 			HttpEntity<String> httpEntity = new HttpEntity<>(null, httpHeaders);
 
@@ -157,8 +167,10 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 			}
 			ressourcesObj = response.getBody();
 		} catch (URISyntaxException e) {
-			log.error("Erreur to construct the URI {}", uri, e);
+			log.error("Erreur to construct the URI {}", rootURL + uri, e);
 			throw new CustomRestRequestException(e);
+		} catch (HttpClientErrorException e) {
+			log.error("Erreur client request on URL {}, returned status {}, with response {}", rootURL + uri, e.getStatusCode(), e.getResponseBodyAsString(), e);
 		}
 		//TODO manage Status ?
 		return (ressourcesObj != null && ressourcesObj.getListeRessources() != null) ? ressourcesObj.getListeRessources().getRessource() : Lists.newArrayList();

@@ -35,6 +35,7 @@ public class StructureInfoServiceImpl implements IStructureInfoService {
 
     @Override
     public Map<String, Structure> getStructuresInfosList(final List<String> ids) {
+        log.debug("Requesting Structures infos on {}", ids);
         Set<String> idsToRequest = Sets.newHashSet();
         Map<String, Structure> structuresInfos = new HashMap<>();
 
@@ -63,7 +64,7 @@ public class StructureInfoServiceImpl implements IStructureInfoService {
                 structureMap.put(entry.getKey(), new Pair<Structure, Date>(entry.getValue(), expirationDate));
             }
         }
-
+        log.debug("Returning infos on {}", structuresInfos);
         return structuresInfos;
     }
 
