@@ -36,7 +36,6 @@ import org.apache.http.conn.routing.HttpRoute;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.ssl.DefaultHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
@@ -141,11 +140,11 @@ public class GARClientConfiguration {
 						.custom()
 						.loadKeyMaterial(new File(defaultProperties.getKeyStorePath()), defaultProperties.getKeyStorePassword().toCharArray(),
 								defaultProperties.getKeyStorePassword().toCharArray(), privateKeyStrategy)
-						.loadTrustMaterial(new File(defaultProperties.getKeyStorePath()), defaultProperties
-								.getKeyStorePassword().toCharArray(), new TrustSelfSignedStrategy())
+//						.loadTrustMaterial(new File(defaultProperties.getKeyStorePath()), defaultProperties
+//								.getKeyStorePassword().toCharArray(), new TrustSelfSignedStrategy())
 						.build();
 			} else {
-				sslContext = SSLContexts.custom().loadTrustMaterial(null, new TrustSelfSignedStrategy()).build();
+				sslContext = SSLContexts.createSystemDefault();
 			}
 
 			SSLConnectionSocketFactory sslConnectionFactory = new SSLConnectionSocketFactory(sslContext,
