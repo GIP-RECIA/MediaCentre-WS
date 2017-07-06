@@ -56,8 +56,8 @@ public class StructureInfoServiceImpl implements IStructureInfoService {
         }
 
         if (!idsToRequest.isEmpty()) {
-            final Date expirationDate = new Date(now.getTime() + duration);
-            log.debug("Expiring date is {}, from {}", expirationDate, now);
+            final Date expirationDate = new Date(now.getTime() + duration * 1000);
+            log.debug("New expiring date is {}, from {}", expirationDate, now);
             Map<String, Structure> requestedStructures = structureInfoRequestService.getStructuresInfos(idsToRequest);
             for (Map.Entry<String, Structure> entry : requestedStructures.entrySet()) {
                 structuresInfos.put(entry.getKey(), entry.getValue());
