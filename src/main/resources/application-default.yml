@@ -47,6 +47,7 @@ app:
 httpClient:
   maxTotal: 200
   defaultMaxPerRoute: 50
+#  keyStoreType: "JKS"
 #  keyStorePath:
 #  keyStorePassword:
 
@@ -62,6 +63,8 @@ structureInfoRest:
     port: 443
     maxPerRoute: 50
   uri:
+  # duration in second
+#  expiringDataDuration: 7200
 
 ressources:
   configurations:
@@ -69,7 +72,7 @@ ressources:
       hostConfig:
         scheme: https
         host:
-        port: 443
+        #port: 443
         maxPerRoute: 50
 #      headers:
 #        -
@@ -79,9 +82,11 @@ ressources:
 #          param: Accept-Encoding
 #          value: "gzip, deflate"
 #      clientKeyAlias: GAR
-      ressourceUri: "/resources/{idENT}/{UAI}/{GARPersonIdentifiant}"
+      ressourceUri: "/ressources/{idENT}/{UAI}/{GARPersonIdentifiant}"
       # Bouclera sur cette attribut pour les requêtes, laisser à vide si pas de boucle
       attributeOnLoop: UAI
+      # Nom de l'attribut mappant l'attribut User définissant l'idEtablissement
+      attributeIdEtab: UAI
       # each uri Attributes must map with an app attribute or a user attribute
  #     appParams:
  #       -

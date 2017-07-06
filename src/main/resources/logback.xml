@@ -18,31 +18,25 @@
 -->
 
 <configuration scan="true" scanPeriod="30 seconds">
-  <contextName>mediacentre-ws</contextName>
+    <contextName>mediacentre-ws</contextName>
 
-  <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
-  <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
-  <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
-  <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    <!-- | Expose the logback configuration via JMX + -->
+    <jmxConfigurator />
 
-  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-      <encoder>
-        <charset>utf-8</charset>
-        <Pattern>${CONSOLE_LOG_PATTERN}</Pattern>
-        </encoder>
-  </appender>
+    <!-- | Specify a local property that sets up the logging directory + -->
+    <!-- NOTE set -Dlogback.logfileDirectory=/PATH/ to override the default propety setted in pom.xml -->
+    <property scope="local" name="LOG_DIR" value="${logback.logfileDirectory}" />
 
-  <!--
-   | Specify a local property that sets up the logging directory
-   +-->
-  <property scope="local" name="LOG_DIR" value="${logback.logfileDirectory}" />
 
-<!-- The FILE and ASYNC appenders are here as examples for a production configuration -->
+    <!-- The FILE and ASYNC appenders are here as examples for a production
+        configuration -->
 
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${LOG_DIR}/${CONTEXT_NAME}.log</File>
+    <appender name="FILE"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/${CONTEXT_NAME}.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/${CONTEXT_NAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/${CONTEXT_NAME}.%d{yyyy-MM-dd}.gz
+            </fileNamePattern>
             <maxHistory>366</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -50,41 +44,31 @@
             <Pattern>%d %-5level [%thread] %logger: %msg%n</Pattern>
         </encoder>
     </appender>
-<!--
-    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
-        <queueSize>512</queueSize>
-        <appender-ref ref="FILE"/>
-    </appender>
--->
+    <!-- <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>512</queueSize> <appender-ref ref="FILE"/> </appender> -->
 
+    <logger name="com.mysema" level="WARN" />
+    <logger name="javax.activation" level="WARN" />
+    <logger name="javax.validation" level="WARN" />
+    <logger name="ch.qos.logback" level="WARN" />
+    <logger name="com.sun.xml.internal.bind" level="INFO" />
+    <logger name="net.sf.ehcache" level="WARN" />
+    <logger name="org.apache" level="WARN" />
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF" />
+    <logger name="org.bson" level="WARN" />
+    <logger name="org.springframework" level="WARN" />
 
-    <logger name="org.apache.tomcat" level="INFO"/>
-    <logger name="org.apache.catalina" level="INFO"/>
-    <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
-    <logger name="org.bson" level="WARN"/>
-    <logger name="org.hibernate.validator" level="WARN"/>
-    <logger name="org.hibernate" level="WARN"/>
-    <logger name="org.hibernate.ejb.HibernatePersistence" level="OFF"/>
-    <logger name="org.atmosphere" level="WARN"/>
-    <logger name="org.thymeleaf" level="WARN"/>
-    <logger name="org.xnio" level="WARN"/>
-    <logger name="com.mangofactory.swagger" level="WARN"/>
-    <logger name="com.wordnik.swagger" level="WARN"/>
-    <logger name="liquibase" level="WARN"/>
-    <logger name="sun.rmi.transport" level="WARN"/>
-
-    <logger name="javax.xml.bind" level="WARN"/>
-    <logger name="com.fasterxml.jackson" level="WARN"/>
-
-    <logger name="org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer" level="INFO" />
-    <logger name="org.springframework" level="INFO" />
+    <!-- <logger name="javax.xml.bind" level="DEBUG"/> -->
+    <!-- <logger name="com.fasterxml.jackson" level="TRACE"/> -->
 
     <!-- for REST request debug -->
-    <!--<logger name="org.springframework.security.web.util.matcher" level="DEBUG" />-->
-    <!--<logger name="org.springframework.security.web" level="DEBUG"/>-->
-    <!--<logger name="org.springframework.security.web.FilterChainProxy" level="DEBUG" />-->
-    <!--<logger name="org.springframework.http" level="DEBUG" />-->
-    <!--<logger name="org.springframework.security.cas" level="DEBUG"/>-->
+    <!--<logger name="org.springframework.security.web.util.matcher" level="DEBUG"
+        /> -->
+    <!--<logger name="org.springframework.security.web.FilterChainProxy" level="DEBUG"
+        /> -->
+    <!--<logger name="org.springframework.security.web" level="DEBUG"/> -->
+    <!--<logger name="org.springframework.security" level="DEBUG"/> -->
+    <!--<logger name="org.springframework.http" level="DEBUG" /> -->
 
 
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
@@ -92,10 +76,10 @@
     </contextListener>
 
     <root level="${logback.loglevel}">
-        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE" />
     </root>
 
-    <logger name="org.esco.ressources.ws" level="${logback.loglevel}">
+    <logger name="org.esco.ressources.ws" additivity="false" level="${logback.loglevel}">
         <appender-ref ref="FILE" />
     </logger>
 
