@@ -170,7 +170,12 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 			log.error("Erreur to construct the URI {}", rootURL + uri, e);
 			throw new CustomRestRequestException(e);
 		} catch (HttpClientErrorException e) {
-			log.error("Erreur client request on URL {}, returned status {}, with response {}", rootURL + uri, e.getStatusCode(), e.getResponseBodyAsString(), e);
+			// provinding the error stasktrace only on debug as the custom logged error should be suffisant.
+			if (log.isDebugEnabled()) {
+				log.error("Erreur client request on URL {}, returned status {}, with response {}", rootURL + uri, e.getStatusCode(), e.getResponseBodyAsString(),e);
+			} else {
+				log.error("Erreur client request on URL {}, returned status {}, with response {}", rootURL + uri, e.getStatusCode(), e.getResponseBodyAsString());
+			}
 		}
 		//TODO manage Status ?
 		return (ressourcesObj != null && ressourcesObj.getListeRessources() != null) ? ressourcesObj.getListeRessources().getRessource() : Lists.newArrayList();
