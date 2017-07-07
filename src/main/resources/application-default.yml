@@ -37,7 +37,7 @@ info:
     version: @project.version@
 
 logging:
-    config: "classpath:logback.xml"
+  config: "classpath:logback.xml"
 
 app:
   security:
@@ -56,13 +56,13 @@ requestConfig:
   conectTimeout: 5000
   socketTimeout: 2000
 
-structureInfoRest:
-  hostConfig:
-    scheme: https
-    host:
-    port: 443
-    maxPerRoute: 50
-  uri:
+#structureInfoRest:
+#  hostConfig:
+#    scheme: https
+#    host:
+#    port: 443
+#    maxPerRoute: 50
+#  uri:
   # duration in second
 #  expiringDataDuration: 7200
 

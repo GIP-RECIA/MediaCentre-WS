@@ -70,6 +70,8 @@
     <!--<logger name="org.springframework.security" level="DEBUG"/> -->
     <!--<logger name="org.springframework.http" level="DEBUG" /> -->
 
+    <logger name="org.esco.mediacentre.ws" additivity="false" level="${logback.loglevel}" />
+
 
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
@@ -78,9 +80,5 @@
     <root level="${logback.loglevel}">
         <appender-ref ref="FILE" />
     </root>
-
-    <logger name="org.esco.ressources.ws" additivity="false" level="${logback.loglevel}">
-        <appender-ref ref="FILE" />
-    </logger>
 
 </configuration>

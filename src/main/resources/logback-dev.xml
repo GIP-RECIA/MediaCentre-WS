@@ -81,6 +81,8 @@
     <logger name="org.springframework.web.client" level="TRACE" />
     <logger name="org.apache.http" level="INFO" />
 
+    <logger name="org.esco.mediacentre.ws" level="DEBUG" />
+
     <!-- for REST request debug -->
     <!--<logger name="org.springframework.security.web.util.matcher" level="DEBUG" />-->
     <!--<logger name="org.springframework.security.web" level="DEBUG"/>-->
@@ -93,12 +95,8 @@
         <resetJUL>true</resetJUL>
     </contextListener>
 
-    <root level="${logback.loglevel}">
+    <root level="INFO">
         <appender-ref ref="CONSOLE"/>
     </root>
-
-    <logger name="org.esco.ressources.ws" level="${logback.loglevel}">
-        <appender-ref ref="CONSOLE" />
-    </logger>
 
 </configuration>

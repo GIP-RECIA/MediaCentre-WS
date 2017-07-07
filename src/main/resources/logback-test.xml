@@ -85,16 +85,15 @@
     <!--<logger name="org.springframework.security" level="DEBUG"/> -->
     <!--<logger name="org.springframework.http" level="DEBUG" /> -->
 
-
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
     </contextListener>
 
-    <root level="${logback.loglevel}">
+    <root level="INFO">
         <appender-ref ref="CONSOLE" />
     </root>
 
-    <logger name="org.esco.ressources.ws" level="${logback.loglevel}">
+    <logger name="org.esco.mediacentre.ws" level="DEBUG">
         <appender-ref ref="CONSOLE" />
 
     </logger>
