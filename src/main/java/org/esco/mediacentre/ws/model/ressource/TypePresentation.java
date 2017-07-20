@@ -35,10 +35,8 @@ import lombok.ToString;
 public class TypePresentation implements Serializable {
 
     @NonNull
-    @JsonProperty(value = "code", required = true)
     public String code;
     @NonNull
-    @JsonProperty(value = "nom", required = true)
     public String nom;
 
     /**
@@ -59,19 +57,19 @@ public class TypePresentation implements Serializable {
         this.nom = nom;
     }
 
-    @JsonProperty("code")
+    @JsonProperty(value = "code", required = true)
     public String getCode() {
         return code;
     }
-    @JsonProperty("code")
+    @JsonProperty(value = "code", required = true)
     public void setCode(String code) {
         this.code = code;
     }
-    @JsonProperty("nom")
+    @JsonProperty(value = "nom", required = true)
     public String getNom() {
         return nom;
     }
-    @JsonProperty("nom")
+    @JsonProperty(value = "nom", required = true)
     public void setNom(String nom) {
         this.nom = nom;
     }

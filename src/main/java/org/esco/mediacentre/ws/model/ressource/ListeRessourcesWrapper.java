@@ -31,10 +31,8 @@ import lombok.ToString;
 })
 @ToString
 @EqualsAndHashCode
-public class ListeRessourcesWrapper implements Serializable
-{
+public class ListeRessourcesWrapper implements Serializable {
 
-    @JsonProperty("listeRessources")
     @Valid
     private ListeRessources listeRessources;
 

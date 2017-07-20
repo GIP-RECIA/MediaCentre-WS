@@ -35,10 +35,8 @@ import lombok.ToString;
 public class UriDescription implements Serializable {
 
     @NonNull
-    @JsonProperty(value = "nom", required = true)
     public String nom;
     @NonNull
-    @JsonProperty(value = "uri", required = true)
     public String uri;
 
     /**
@@ -54,19 +52,19 @@ public class UriDescription implements Serializable {
         this.uri = uri;
     }
 
-    @JsonProperty("nom")
+    @JsonProperty(value = "nom", required = true)
     public String getNom() {
         return nom;
     }
-    @JsonProperty("nom")
+    @JsonProperty(value = "nom", required = true)
     public void setNom(String nom) {
         this.nom = nom;
     }
-    @JsonProperty("uri")
+    @JsonProperty(value = "uri", required = true)
     public String getUri() {
         return uri;
     }
-    @JsonProperty("uri")
+    @JsonProperty(value = "uri", required = true)
     public void setUri(String uri) {
         this.uri = uri;
     }

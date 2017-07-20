@@ -35,7 +35,6 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class ListeRessources implements Serializable {
 
-    @JsonProperty("ressource")
     @Valid
     private List<Ressource> ressource = new ArrayList<Ressource>();
 

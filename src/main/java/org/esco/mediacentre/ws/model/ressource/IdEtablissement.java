@@ -34,11 +34,9 @@ import lombok.ToString;
 public class IdEtablissement implements Serializable {
 
     @NonNull
-    @JsonProperty(value = "UAI", required = true)
     public String UAI;
 
     @NonNull
-    @JsonProperty("nom")
     public String nom;
 
     public IdEtablissement() {
@@ -50,19 +48,19 @@ public class IdEtablissement implements Serializable {
         this.nom = nom;
     }
 
-    @JsonProperty("UAI")
+    @JsonProperty(value = "UAI", required = true)
     public String getUAI() {
         return UAI;
     }
-    @JsonProperty("UAI")
+    @JsonProperty(value = "UAI", required = true)
     public void setUAI(String UAI) {
         this.UAI = UAI;
     }
-    @JsonProperty("nom")
+    @JsonProperty(value = "nom", required = true)
     public String getNom() {
         return nom;
     }
-    @JsonProperty("nom")
+    @JsonProperty(value = "nom", required = true)
     public void setNom(String nom) {
         this.nom = nom;
     }

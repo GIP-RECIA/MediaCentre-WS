@@ -56,65 +56,42 @@ public class Ressource implements Serializable {
 
     /** Source de la ressource : GAR par exemple). */
     @NonNull
-    @JsonProperty(value = "sourceEtiquette", required = true)
     public String sourceEtiquette;
-
     @NonNull
-    @JsonProperty(value = "distributeurTech", required = true)
     public String distributeurTech;
-    @NonNull
-    @JsonProperty(value = "domaineEnseignement", required = true)
     @Valid
     public List<UriDescription> domaineEnseignement = new ArrayList<UriDescription>();
     @NonNull
-    @JsonProperty(value = "idEditeur", required = true)
     public String idEditeur;
     @NonNull
-    @JsonProperty(value = "idRessource", required = true)
     public String idRessource;
     /** Ajout interne */
-    @JsonProperty("idEtablissement")
     @Valid
     public List<IdEtablissement> idEtablissement = new ArrayList<IdEtablissement>();
     @NonNull
-    @JsonProperty(value = "idType", required = true)
     public String idType;
-    @NonNull
-    @JsonProperty(value = "niveauEducatif", required = true)
     @Valid
     public List<UriDescription> niveauEducatif = new ArrayList<UriDescription>();
     @NonNull
-    @JsonProperty(value = "nomEditeur", required = true)
     public String nomEditeur;
     @NonNull
-    @JsonProperty(value = "nomRessource", required = true)
     public String nomRessource;
-    @NonNull
-    @JsonProperty(value = "typePedagogique", required = true)
     @Valid
     public List<UriDescription> typePedagogique = new ArrayList<UriDescription>();
     @NonNull
-    @JsonProperty(value = "typePresentation", required = true)
     @Valid
-    public List<TypePresentation> typePresentation = new ArrayList<TypePresentation>();
-    @NonNull
-    @JsonProperty(value = "typologieDocument", required = true)
+    public TypePresentation typePresentation;
     @Valid
     public List<UriDescription> typologieDocument = new ArrayList<UriDescription>();
     @NonNull
-    @JsonProperty(value = "urlAccesRessource", required = true)
     public String urlAccesRessource;
-    @JsonProperty(value = "urlSourceEtiquette", required = false)
+
     public String urlSourceEtiquette;
-    @NonNull
-    @JsonProperty(value = "urlVignette", required = true)
+
     public String urlVignette;
     @NonNull
-    @JsonProperty(value = "validateurTech", required = true)
     public String validateurTech;
 
-
-    @JsonProperty("description")
     public String description;
 
     /**
@@ -147,7 +124,7 @@ public class Ressource implements Serializable {
      */
     public Ressource(final String distributeurTech, final String validateurTech, final String sourceEtiquette, final List<UriDescription> domaineEnseignement,
                      final String idEditeur, final String idRessource, final List<IdEtablissement> idEtablissement, final String idType, final List<UriDescription> niveauEducatif,
-                     final String nomEditeur, final String nomRessource,final  List<UriDescription> typePedagogique,final  List<TypePresentation> typePresentation,
+                     final String nomEditeur, final String nomRessource,final  List<UriDescription> typePedagogique,final TypePresentation typePresentation,
                      final List<UriDescription> typologieDocument, final String urlAccesRessource, final String urlSourceEtiquette, final String urlVignette, final String description) {
         this.distributeurTech = distributeurTech;
         this.validateurTech = validateurTech;
@@ -169,182 +146,182 @@ public class Ressource implements Serializable {
         this.description = description;
     }
 
-    @JsonProperty("distributeurTech")
+    @JsonProperty(value = "distributeurTech", required = true)
     public String getDistributeurTech() {
         return distributeurTech;
     }
 
-    @JsonProperty("distributeurTech")
+    @JsonProperty(value = "distributeurTech", required = true)
     public void setDistributeurTech(String distributeurTech) {
         this.distributeurTech = distributeurTech;
     }
 
-    @JsonProperty("domaineEnseignement")
+    @JsonProperty(value = "domaineEnseignement", required = false)
     public List<UriDescription> getDomaineEnseignement() {
         return domaineEnseignement;
     }
 
-    @JsonProperty("domaineEnseignement")
+    @JsonProperty(value = "domaineEnseignement", required = false)
     public void setDomaineEnseignement(List<UriDescription> domaineEnseignement) {
         this.domaineEnseignement = domaineEnseignement;
     }
 
-    @JsonProperty("idEditeur")
+    @JsonProperty(value = "idEditeur", required = true)
     public String getIdEditeur() {
         return idEditeur;
     }
 
-    @JsonProperty("idEditeur")
+    @JsonProperty(value = "idEditeur", required = true)
     public void setIdEditeur(String idEditeur) {
         this.idEditeur = idEditeur;
     }
 
-    @JsonProperty("idRessource")
+    @JsonProperty(value = "idRessource", required = true)
     public String getIdRessource() {
         return idRessource;
     }
 
-    @JsonProperty("idRessource")
+    @JsonProperty(value = "idRessource", required = true)
     public void setIdRessource(String idRessource) {
         this.idRessource = idRessource;
     }
 
-    @JsonProperty("idEtablissement")
+    @JsonProperty(value = "idEtablissement", required = true)
     public List<IdEtablissement> getIdEtablissement() {
         return idEtablissement;
     }
 
-    @JsonProperty("idEtablissement")
+    @JsonProperty(value = "idEtablissement", required = true)
     public void setIdEtablissement(List<IdEtablissement> idEtablissement) {
         this.idEtablissement = idEtablissement;
     }
 
-    @JsonProperty("idType")
+    @JsonProperty(value = "idType", required = true)
     public String getIdType() {
         return idType;
     }
 
-    @JsonProperty("idType")
+    @JsonProperty(value = "idType", required = true)
     public void setIdType(String idType) {
         this.idType = idType;
     }
 
-    @JsonProperty("niveauEducatif")
+    @JsonProperty(value = "niveauEducatif", required = false)
     public List<UriDescription> getNiveauEducatif() {
         return niveauEducatif;
     }
 
-    @JsonProperty("niveauEducatif")
+    @JsonProperty(value = "niveauEducatif", required = false)
     public void setNiveauEducatif(List<UriDescription> niveauEducatif) {
         this.niveauEducatif = niveauEducatif;
     }
 
-    @JsonProperty("nomEditeur")
+    @JsonProperty(value = "nomEditeur", required = true)
     public String getNomEditeur() {
         return nomEditeur;
     }
 
-    @JsonProperty("nomEditeur")
+    @JsonProperty(value = "nomEditeur", required = true)
     public void setNomEditeur(String nomEditeur) {
         this.nomEditeur = nomEditeur;
     }
 
-    @JsonProperty("nomRessource")
+    @JsonProperty(value = "nomRessource", required = true)
     public String getNomRessource() {
         return nomRessource;
     }
 
-    @JsonProperty("nomRessource")
+    @JsonProperty(value = "nomRessource", required = true)
     public void setNomRessource(String nomRessource) {
         this.nomRessource = nomRessource;
     }
 
-    @JsonProperty("sourceEtiquette")
+    @JsonProperty(value = "sourceEtiquette", required = true, access = JsonProperty.Access.READ_ONLY)
     public String getSourceEtiquette() {
         return sourceEtiquette;
     }
 
-    @JsonProperty("sourceEtiquette")
+    @JsonProperty(value = "nomSourceEtiquetteGar", required = true, access = JsonProperty.Access.WRITE_ONLY)
     public void setSourceEtiquette(String sourceEtiquette) {
         this.sourceEtiquette = sourceEtiquette;
     }
 
-    @JsonProperty("typePedagogique")
+    @JsonProperty(value = "typePedagogique", required = false)
     public List<UriDescription> getTypePedagogique() {
         return typePedagogique;
     }
 
-    @JsonProperty("typePedagogique")
+    @JsonProperty(value = "typePedagogique", required = false)
     public void setTypePedagogique(List<UriDescription> typePedagogique) {
         this.typePedagogique = typePedagogique;
     }
 
-    @JsonProperty("typePresentation")
-    public List<TypePresentation> getTypePresentation() {
+    @JsonProperty(value = "typePresentation", required = true)
+    public TypePresentation getTypePresentation() {
         return typePresentation;
     }
 
-    @JsonProperty("typePresentation")
-    public void setTypePresentation(List<TypePresentation> typePresentation) {
+    @JsonProperty(value = "typePresentation", required = true)
+    public void setTypePresentation(TypePresentation typePresentation) {
         this.typePresentation = typePresentation;
     }
 
-    @JsonProperty("typologieDocument")
+    @JsonProperty(value = "typologieDocument", required = false)
     public List<UriDescription> getTypologieDocument() {
         return typologieDocument;
     }
 
-    @JsonProperty("typologieDocument")
+    @JsonProperty(value = "typologieDocument", required = false)
     public void setTypologieDocument(List<UriDescription> typologieDocument) {
         this.typologieDocument = typologieDocument;
     }
 
-    @JsonProperty("urlAccesRessource")
+    @JsonProperty(value = "urlAccesRessource", required = true)
     public String getUrlAccesRessource() {
         return urlAccesRessource;
     }
 
-    @JsonProperty("urlAccesRessource")
+    @JsonProperty(value = "urlAccesRessource", required = true)
     public void setUrlAccesRessource(String urlAccesRessource) {
         this.urlAccesRessource = urlAccesRessource;
     }
 
-    @JsonProperty("urlSourceEtiquette")
+    @JsonProperty(value = "urlSourceEtiquette", required = false)
     public String getUrlSourceEtiquette() {
         return urlSourceEtiquette;
     }
 
-    @JsonProperty("urlSourceEtiquette")
+    @JsonProperty(value = "urlSourceEtiquette", required = false)
     public void setUrlSourceEtiquette(String urlSourceEtiquette) {
         this.urlSourceEtiquette = urlSourceEtiquette;
     }
 
-    @JsonProperty("urlVignette")
+    @JsonProperty(value = "urlVignette", required = false)
     public String getUrlVignette() {
         return urlVignette;
     }
 
-    @JsonProperty("urlVignette")
+    @JsonProperty(value = "urlVignette", required = false)
     public void setUrlVignette(String urlVignette) {
         this.urlVignette = urlVignette;
     }
 
-    @JsonProperty("validateurTech")
+    @JsonProperty(value = "validateurTech", required = true)
     public String getValidateurTech() {
         return validateurTech;
     }
 
-    @JsonProperty("validateurTech")
+    @JsonProperty(value = "validateurTech", required = true)
     public void setValidateurTech(String validateurTech) {
         this.validateurTech = validateurTech;
     }
 
-    @JsonProperty("description")
+    @JsonProperty(value = "description", required = true)
     public String getDescription() {
         return description;
     }
 
-    @JsonProperty("description")
+    @JsonProperty(value = "description", required = true)
     public void setDescription(String description) {
         this.description = description;
     }
