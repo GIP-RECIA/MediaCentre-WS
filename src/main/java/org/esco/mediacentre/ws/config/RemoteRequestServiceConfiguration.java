@@ -29,7 +29,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 
 @Configuration
 @Slf4j
@@ -54,18 +53,9 @@ public class RemoteRequestServiceConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean(name="GARClientConfiguration")
-	@Profile("STRUCT_REST")
 	public IRemoteRequestService mockedWithStructRestRequestService() {
 		MockedRequestServiceImpl mockedService = new MockedRequestServiceImpl();
 		mockedService.setStructureInfoService(structureInfoService);
-		return mockedService;
-	}
-
-	@Bean
-	@ConditionalOnMissingBean(name="GARClientConfiguration")
-	@Profile("!STRUCT_REST")
-	public IRemoteRequestService mockedRequestService() {
-		MockedRequestServiceImpl mockedService = new MockedRequestServiceImpl();
 		return mockedService;
 	}
 

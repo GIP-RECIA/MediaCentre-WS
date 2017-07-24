@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.esco.mediacentre.ws.model.ressource.ListeRessourcesWrapper;
@@ -41,7 +42,9 @@ import org.springframework.util.Assert;
 @Slf4j
 public class MockedRequestServiceImpl implements IRemoteRequestService, InitializingBean {
 
+	@Getter
 	private Resource resources0377777U;
+	@Getter
 	private Resource resources0450822X;
 
 	@Setter
@@ -51,8 +54,8 @@ public class MockedRequestServiceImpl implements IRemoteRequestService, Initiali
 	private Structure structure0377777U;
 
 	public MockedRequestServiceImpl() {
-		resources0377777U = new ClassPathResource("json/gar_reponse_0377777U.json");
-		resources0450822X = new ClassPathResource("json/gar_reponse_0450822X.json");
+		resources0377777U = new ClassPathResource("/json/gar_reponse_0377777U.json");
+		resources0450822X = new ClassPathResource("/json/gar_reponse_0450822X.json");
 		String ressourceContent = null;
 		String ressourceContent2 = null;
 		try {
@@ -61,10 +64,10 @@ public class MockedRequestServiceImpl implements IRemoteRequestService, Initiali
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Assert.state(ressourceContent != null, "file in classPath 'json/gar_reponse_0450822X.json' doesn't exist!");
-		Assert.state(ressourceContent2 != null, "file in classPath 'json/gar_reponse_0377777U.json' doesn't exist!");
-		Assert.state(!ressourceContent.isEmpty(), "file in classPath 'json/gar_reponse_0450822X.json' is Empty!");
-		Assert.state(!ressourceContent2.isEmpty(), "file in classPath 'json/gar_reponse_0377777U.json' is Empty!");
+		Assert.state(ressourceContent != null, "file in classPath '/json/gar_reponse_0450822X.json' doesn't exist!");
+		Assert.state(ressourceContent2 != null, "file in classPath '/json/gar_reponse_0377777U.json' doesn't exist!");
+		Assert.state(!ressourceContent.isEmpty(), "file in classPath '/json/gar_reponse_0450822X.json' is Empty!");
+		Assert.state(!ressourceContent2.isEmpty(), "file in classPath '/json/gar_reponse_0377777U.json' is Empty!");
 	}
 
 	private void init(){
@@ -98,7 +101,7 @@ public class MockedRequestServiceImpl implements IRemoteRequestService, Initiali
 				log.warn("Please check json datas on files json/gar_response_*.json, theses files should have a readable content for mocking !");
 			}
 		} catch (IOException e) {
-			log.error("During mocking an error occured while reading json datas on files json/gar_response_*.json");
+			log.error("During mocking an error occured while reading json datas on files /json/gar_response_*.json", e);
 			return new ArrayList<Ressource>();
 		}
 

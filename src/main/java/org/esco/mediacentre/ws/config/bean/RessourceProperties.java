@@ -16,6 +16,7 @@
 package org.esco.mediacentre.ws.config.bean;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.constraints.NotNull;
 
@@ -39,5 +40,7 @@ public class RessourceProperties {
 	private List<ParamValueProperty> headers;
 
 	private String clientKeyAlias;
+
+	private Map<String, List<String>> testUser;
 
 }

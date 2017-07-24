@@ -15,12 +15,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.esco.mediacentre.ws.model.structure.Structure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 /**
  * Created by jgribonvald on 23/06/17.
  */
 @Service
+@Profile("!WITHOUT_STRUCT_REST")
 @Slf4j
 public class StructureInfoServiceImpl implements IStructureInfoService {
 

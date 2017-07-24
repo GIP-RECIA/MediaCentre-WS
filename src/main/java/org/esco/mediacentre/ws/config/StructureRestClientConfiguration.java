@@ -36,13 +36,17 @@ import org.apache.http.ssl.SSLContexts;
 import org.esco.mediacentre.ws.config.bean.DefaultHttpClientProperties;
 import org.esco.mediacentre.ws.config.bean.StructureInfosRestProperties;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
+@Profile("!WITHOUT_STRUCT_REST")
 @Slf4j
 public class StructureRestClientConfiguration {
 
@@ -51,6 +55,12 @@ public class StructureRestClientConfiguration {
 
 	@Autowired
 	private RequestConfig requestConfig;
+
+	@Autowired
+	@Qualifier(value = "StructureRestTemplate")
+	@Lazy
+	@Getter
+	private RestTemplate restTemplate;
 
 	@Autowired
 	@Getter
@@ -103,8 +113,6 @@ public class StructureRestClientConfiguration {
 
 	@Bean(name = "StructureRestTemplate")
 	public RestTemplate StructureRestTemplate() {
-		RestTemplate restTemplate = new RestTemplate(StructureHttpRequestFactory());
-		return restTemplate;
+		return new RestTemplate(StructureHttpRequestFactory());
 	}
-
 }

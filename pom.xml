@@ -78,19 +78,31 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>
         <resources>
             <resource>
                 <filtering>true</filtering>
-                <directory>${basedir}/src/main/resources</directory>
+                <directory>src/main/resources</directory>
                 <includes>
                     <include>logback*.xml</include>
                     <include>*.yml</include>
                 </includes>
             </resource>
         </resources>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+            <testResource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>json/**</include>
+                </includes>
+            </testResource>
+        </testResources>
         <plugins>
             <plugin>
                 <groupId>com.mycila</groupId>
@@ -132,6 +144,13 @@
                     </delimiters>
                     <useDefaultDelimiters>false</useDefaultDelimiters>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <classifier>exec</classifier>
+                    </configuration>
             </plugin>
         </plugins>
     </build>
