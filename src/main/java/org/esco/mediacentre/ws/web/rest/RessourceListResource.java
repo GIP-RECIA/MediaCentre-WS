@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import org.esco.mediacentre.ws.model.ressource.Ressource;
 import org.esco.mediacentre.ws.service.IRemoteRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/api")
+@Slf4j
 public class RessourceListResource {
 
 	@Autowired
@@ -37,10 +39,12 @@ public class RessourceListResource {
 
 	@RequestMapping(value = "/ressources", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Ressource> getRessources(@RequestBody Map<String, List<String>> userInfos) {
+		log.debug("Requesting ressources for user {}", userInfos);
 		List<Ressource> ressources = Lists.newArrayList();
 		for (IRemoteRequestService remote : remoteServices) {
 			ressources.addAll(remote.getRessources(userInfos));
 		}
+		log.trace("Returning for user {} these ressources {}", userInfos, ressources);
 		return ressources;
 	}
 }

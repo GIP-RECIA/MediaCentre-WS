@@ -125,7 +125,7 @@ public class RessourceListeResourceTest {
                     .andExpect(jsonPath("$.[0].idEtablissement", Matchers.hasSize(1)))
                     .andExpect(jsonPath("$.[0].idEtablissement.[0]", Matchers.hasKey("UAI")))
                     .andExpect(jsonPath("$.[0].idEtablissement.[0].UAI").value(Matchers.isIn(Lists.newArrayList("0450822X", "0377777U"))));
-        }  else {
+        } else {
 //            userinfos are setted from configuration file
 //            userInfos.put("uid",  Lists.newArrayList("F1600m19"));
 //            userInfos.put("ESCOUAI", Lists.newArrayList("0291595B"));
