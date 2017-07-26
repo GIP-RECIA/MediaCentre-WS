@@ -51,8 +51,6 @@
     <!-- <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
         <queueSize>512</queueSize> <appender-ref ref="FILE"/> </appender> -->
 
-    <logger name="org.esco.ressources.ws" level="DEBUG" />
-
     <logger name="com.mysema" level="DEBUG" />
     <logger name="javax.activation" level="WARN" />
     <logger name="javax.validation" level="WARN" />
@@ -86,6 +84,8 @@
     <!--<logger name="org.springframework.security" level="DEBUG"/> -->
     <!--<logger name="org.springframework.http" level="DEBUG" /> -->
 
+    <logger name="org.esco.mediacentre.ws" level="DEBUG" />
+
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
     </contextListener>
@@ -93,10 +93,5 @@
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
     </root>
-
-    <logger name="org.esco.mediacentre.ws" level="DEBUG">
-        <appender-ref ref="CONSOLE" />
-
-    </logger>
 
 </configuration>
