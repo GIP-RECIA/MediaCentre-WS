@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -127,6 +128,17 @@ public class GARClientConfiguration {
 				}
 				clientKS.load(new FileInputStream(defaultProperties.getKeyStorePath()), defaultProperties
 						.getKeyStorePassword().toCharArray());
+				if (log.isDebugEnabled()) {
+					log.debug("Loaded defined keystore file {} with size of {}", defaultProperties.getKeyStorePath(), clientKS.size());
+					if (clientKS.size() > 1) {
+						Enumeration<String> enumeration = clientKS.aliases();
+						while (enumeration.hasMoreElements()) {
+							final String alias = enumeration.nextElement();
+							log.debug("Showing certificates with alias {} and \ncertificate {} and \nkey {}", alias, clientKS.getCertificate(alias),
+									clientKS.getKey(alias, defaultProperties.getKeyStorePassword().toCharArray()));
+						}
+					}
+				}
 
 				PrivateKeyStrategy privateKeyStrategy = null;
 				if (getGARProperties().getClientKeyAlias() != null) {
