@@ -27,16 +27,21 @@ public class OverrideUserInfo {
     private static Map<String, List<String>> collelv;
     private static Map<String, List<String>> collprof;
     static {
-        lycelv = ImmutableMap.of("uid", Lists.newArrayList("F1600m3y"),"ESCOUAI", Lists.newArrayList("0290009C"),"ESCOUAICourant",
-                Lists.newArrayList("0290009C"), "ENTPersonProfils", Lists.newArrayList("National_ELV"));
-        collelv = ImmutableMap.of("uid", Lists.newArrayList("F1600m40"),"ESCOUAI", Lists.newArrayList("0291595B"),"ESCOUAICourant",
-                Lists.newArrayList("0291595B"), "ENTPersonProfils", Lists.newArrayList("National_ELV"));
-        lycprof = ImmutableMap.of("uid", Lists.newArrayList("F1600m5c"),"ESCOUAI", Lists.newArrayList("0290009C","0291595B"),"ESCOUAICourant",
-                Lists.newArrayList("0290009C"), "ENTPersonProfils", Lists.newArrayList("National_ENS"));
-        collprof = ImmutableMap.of("uid", Lists.newArrayList("F1600m5c"),"ESCOUAI", Lists.newArrayList("0291595B"),"ESCOUAICourant",
-                Lists.newArrayList("0291595B"), "ENTPersonProfils", Lists.newArrayList("National_ENS"));
-        lycpers = ImmutableMap.of("uid", Lists.newArrayList("F1600m5c"),"ESCOUAI", Lists.newArrayList("0290009C"),"ESCOUAICourant",
-                Lists.newArrayList("0290009C"), "ENTPersonProfils", Lists.newArrayList("National_DOC"));
+        lycelv = ImmutableMap.of("uid", Lists.newArrayList("F1700ivg"),"ESCOUAI", Lists.newArrayList("0290009C"),"ESCOUAICourant",
+                Lists.newArrayList("0290009C"), "ENTPersonProfils", Lists.newArrayList("National_ELV"), "ENTPersonGARIdentifiant",
+                Lists.newArrayList("5a6c685b-9f00-4cf9-ba84-5c29f8acd6f5"));
+        collelv = ImmutableMap.of("uid", Lists.newArrayList("F1700jef"),"ESCOUAI", Lists.newArrayList("0291595B"),"ESCOUAICourant",
+                Lists.newArrayList("0291595B"), "ENTPersonProfils", Lists.newArrayList("National_ELV"), "ENTPersonGARIdentifiant",
+                Lists.newArrayList("5c9f5a97-56ec-4218-8cfc-7916dab37e7a"));
+        lycprof = ImmutableMap.of("uid", Lists.newArrayList("F1700k0b"),"ESCOUAI", Lists.newArrayList("0290009C"),"ESCOUAICourant",
+                Lists.newArrayList("0290009C"), "ENTPersonProfils", Lists.newArrayList("National_ENS"), "ENTPersonGARIdentifiant",
+                Lists.newArrayList("7e0f273f-ad5d-43cd-b63d-ae6c3f8b6451"));
+        collprof = ImmutableMap.of("uid", Lists.newArrayList("F1700k0o"),"ESCOUAI", Lists.newArrayList("0291595B"),"ESCOUAICourant",
+                Lists.newArrayList("0291595B"), "ENTPersonProfils", Lists.newArrayList("National_ENS"), "ENTPersonGARIdentifiant",
+                Lists.newArrayList("b6ffca54-5f54-4bfe-b0e8-504e2f0a2722"));
+        lycpers = ImmutableMap.of("uid", Lists.newArrayList("F1700k17"),"ESCOUAI", Lists.newArrayList("0290009C","0291595B"),"ESCOUAICourant",
+                Lists.newArrayList("0290009C"), "ENTPersonProfils", Lists.newArrayList("National_DOC"), "ENTPersonGARIdentifiant",
+                Lists.newArrayList("68fc7ecd-1a51-4005-b5fd-bb20375d6528"));
     }
 
     @Around("execution(* org.esco.mediacentre.ws.web.rest.RessourceListResource.getRessources(..)) && args(userInfos)")
