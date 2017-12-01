@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.esco.mediacentre.ws.model.ressource.IdEtablissement;
+import org.esco.mediacentre.ws.model.ressource.Ressource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -68,6 +70,32 @@ public class OverrideUserInfo {
     }
 
     private void logMapping(Map<String, List<String>> userInfos, Map<String, List<String>> newUserInfos) {
-        log.debug("Apply User info replacement : \nfrom {} \ninto {}", userInfos, newUserInfos);
+        log.warn("Apply User info replacement : \nfrom {} \ninto {}", userInfos, newUserInfos);
     }
+
+    @Around("execution(* org.esco.mediacentre.ws.service.GARRequestServiceImpl.getRessources(..))")
+    public Object overrideStrucInfos(ProceedingJoinPoint pjp) throws Throwable {
+        Object[] args=pjp.getArgs();
+        Object objs = pjp.proceed(args);
+        if (objs != null && objs instanceof List) {
+            for (Object obj: (List) objs) {
+                if (obj instanceof Ressource) {
+                    Ressource r = (Ressource) obj;
+                    for (IdEtablissement s: r.getIdEtablissement()) {
+                        if (s.getUAI() != null) {
+                            if (s.getUAI().equals("0291595B")) {
+                                s.setUAI("0377777U");
+                                log.warn("Structure infos replacement : \nfrom {} \ninto {}", "0291595B", s.getUAI());
+                            } else if (s.getUAI().equals("0290009C")) {
+                                s.setUAI("0450822X");
+                                log.warn("Structure infos replacement : \nfrom {} \ninto {}", "0290009C", s.getUAI());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return objs;
+    }
+
 }
