@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.esco.mediacentre.ws.service;
+package org.esco.mediacentre.ws.service.exception;
 
 /**
  * Created by jgribonvald on 12/06/17.

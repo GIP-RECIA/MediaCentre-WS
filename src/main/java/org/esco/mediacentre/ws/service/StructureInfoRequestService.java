@@ -31,6 +31,7 @@ import org.esco.mediacentre.ws.config.StructureRestClientConfiguration;
 import org.esco.mediacentre.ws.config.bean.StructureInfosRestProperties;
 import org.esco.mediacentre.ws.model.structure.MapStructuresWrapper;
 import org.esco.mediacentre.ws.model.structure.Structure;
+import org.esco.mediacentre.ws.service.exception.CustomRestRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Profile;

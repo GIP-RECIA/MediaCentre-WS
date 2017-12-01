@@ -34,6 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.esco.mediacentre.ws.config.GARClientConfiguration;
 import org.esco.mediacentre.ws.service.IRemoteRequestService;
 import org.esco.mediacentre.ws.service.MockedRequestServiceImpl;
+import org.esco.mediacentre.ws.web.rest.exception.GlobalExceptionHandler;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,6 +42,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -91,7 +93,9 @@ public class RessourceListeResourceTest {
         ReflectionTestUtils.setField(restListRessources,
                 "remoteServices", remoteServices);
 
-        this.mockListRessourcesMvc = MockMvcBuilders.standaloneSetup(restListRessources).build();
+        this.mockListRessourcesMvc = MockMvcBuilders.standaloneSetup(restListRessources)
+                .setControllerAdvice(new GlobalExceptionHandler())
+                .build();
     }
 
     private MockedRequestServiceImpl getMockedService() {
@@ -139,6 +143,7 @@ public class RessourceListeResourceTest {
             assertThat(configUser.keySet(), hasItem("ESCOUAI"));
             assertThat(configUser.keySet(), hasItem("ESCOUAICourant"));
             assertThat(configUser.keySet(), hasItem("ENTPersonProfils"));
+            assertThat(configUser.keySet(), hasItem("ENTPersonGARIdentifiant"));
 
             mockListRessourcesMvc.perform(post("/api/ressources")
                     .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -152,7 +157,30 @@ public class RessourceListeResourceTest {
                     .andExpect(jsonPath("$.[0].idEtablissement", Matchers.hasSize(1)))
                     .andExpect(jsonPath("$.[0].idEtablissement.[0]", Matchers.hasKey("UAI")));
         }
+    }
 
+    @Test
+    public void testErreurRecup() throws Exception {
+        Map<String,List<String>> userInfos = new HashMap<>();
+        userInfos.put("uid",  Lists.newArrayList("erreur"));
+        userInfos.put("ESCOUAI", Lists.newArrayList("NOTEXIST"));
+        userInfos.put("ESCOUAICourant", Lists.newArrayList("NOTEXIST"));
+        userInfos.put("ENTPersonProfils", Lists.newArrayList("National_ENS"));
+        userInfos.put("ENTPersonGARIdentifiant", Lists.newArrayList("NOTEXIST"));
+        log.debug("User tested {}", userInfos);
 
+        mockListRessourcesMvc.perform(post("/api/ressources")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(userInfos)))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$", Matchers.hasKey("Erreur")))
+                .andExpect(jsonPath("$.Erreur", Matchers.hasKey("Code")))
+                .andExpect(jsonPath("$.Erreur.Code", Matchers.equalToIgnoringCase(HttpStatus.BAD_REQUEST.getReasonPhrase())))
+                .andExpect(jsonPath("$.Erreur", Matchers.hasKey("Message")))
+                .andExpect(jsonPath("$.Erreur.Message", Matchers.notNullValue()))
+                .andExpect(jsonPath("$.Erreur", Matchers.hasKey("Resource")))
+                ;
     }
 }

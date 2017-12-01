@@ -1,0 +1,7 @@
+{
+    "Erreur": {
+        "Code": "Bad Request",
+        "Message": "Établissement non trouvé",
+        "Resource": "ressources/idENT/idEtablissementInvalide/idUtilisateur"
+    }
+}

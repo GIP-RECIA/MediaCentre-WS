@@ -31,13 +31,16 @@ import com.google.common.io.Files;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.esco.mediacentre.ws.model.erreur.ErreurWrapper;
 import org.esco.mediacentre.ws.model.ressource.ListeRessourcesWrapper;
 import org.esco.mediacentre.ws.model.ressource.Ressource;
 import org.esco.mediacentre.ws.model.structure.Structure;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
+import org.springframework.web.client.HttpClientErrorException;
 
 @Slf4j
 public class MockedRequestServiceImpl implements IRemoteRequestService, InitializingBean {
@@ -46,6 +49,8 @@ public class MockedRequestServiceImpl implements IRemoteRequestService, Initiali
 	private Resource resources0377777U;
 	@Getter
 	private Resource resources0450822X;
+	@Getter
+	private Resource resourceErreur;
 
 	@Setter
 	private IStructureInfoService structureInfoService;
@@ -56,18 +61,23 @@ public class MockedRequestServiceImpl implements IRemoteRequestService, Initiali
 	public MockedRequestServiceImpl() {
 		resources0377777U = new ClassPathResource("/json/gar_reponse_0377777U.json");
 		resources0450822X = new ClassPathResource("/json/gar_reponse_0450822X.json");
+		resourceErreur = new ClassPathResource("/json/gar_reponse_erreur.json");
 		String ressourceContent = null;
 		String ressourceContent2 = null;
+		String ressourceContent3 = null;
 		try {
 			ressourceContent = Files.toString(new File(resources0377777U.getURI()), Charset.forName("UTF-8"));
 			ressourceContent2 = Files.toString(new File(resources0450822X.getURI()), Charset.forName("UTF-8"));
+			ressourceContent3 = Files.toString(new File(resourceErreur.getURI()), Charset.forName("UTF-8"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		Assert.state(ressourceContent != null, "file in classPath '/json/gar_reponse_0450822X.json' doesn't exist!");
 		Assert.state(ressourceContent2 != null, "file in classPath '/json/gar_reponse_0377777U.json' doesn't exist!");
+		Assert.state(ressourceContent3 != null, "file in classPath '/json/gar_reponse_erreur.json' doesn't exist!");
 		Assert.state(!ressourceContent.isEmpty(), "file in classPath '/json/gar_reponse_0450822X.json' is Empty!");
 		Assert.state(!ressourceContent2.isEmpty(), "file in classPath '/json/gar_reponse_0377777U.json' is Empty!");
+		Assert.state(!ressourceContent3.isEmpty(), "file in classPath '/json/gar_reponse_erreur.json' is Empty!");
 	}
 
 	private void init(){
@@ -91,6 +101,18 @@ public class MockedRequestServiceImpl implements IRemoteRequestService, Initiali
 		try {
 			ListeRessourcesWrapper lr1 = mapper.readValue(resources0450822X.getInputStream(), ListeRessourcesWrapper.class);
 			ListeRessourcesWrapper lr2 = mapper.readValue(resources0377777U.getInputStream(), ListeRessourcesWrapper.class);
+			ErreurWrapper erreur = mapper.readValue(resourceErreur.getInputStream(), ErreurWrapper.class);
+
+			if (userInfos.get("uid").contains("erreur") && erreur != null) {
+				HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+				for (HttpStatus hs: HttpStatus.values()) {
+					if (hs.getReasonPhrase().equals(erreur.getErreur().getCode())){
+						status=hs;
+					}
+				}
+				throw new HttpClientErrorException(status, erreur.getErreur().getMessage(),
+						mapper.writeValueAsBytes(erreur), Charset.defaultCharset());
+			}
 
 			if (lr1.getListeRessources() != null && lr1.getListeRessources().getRessource() != null
 					&& lr2.getListeRessources() != null && lr2.getListeRessources().getRessource() != null) {

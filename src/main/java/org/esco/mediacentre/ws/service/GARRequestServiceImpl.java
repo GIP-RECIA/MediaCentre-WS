@@ -42,6 +42,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @NoArgsConstructor
@@ -121,6 +122,7 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 						log.error(
 								"The user defined with theses attributes '{}' doesn't have attribute replacement possible on URI {}",
 								userInfos, uri);
+                        throw new RestClientException("Mauvaise configuration de l'application.", e);
 					}
 				}
 				return ressources;
@@ -139,11 +141,11 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 			log.error(
 					"The user defined with theses attributes '{}' doesn't have attribute replacement possible on URI {}",
 					userInfos, uri);
-			return null;
+            throw new RestClientException("Mauvaise configuration de l'application.", e);
 		}
 	}
 
-	private List<Ressource> runUriCall(final String uri) throws CustomRestRequestException {
+	private List<Ressource> runUriCall(final String uri) throws CustomRestRequestException, RestClientException {
 		if (uri.matches(".*\\{.*\\}.*")) {
 			throw new CustomRestRequestException();
 		}
@@ -159,25 +161,40 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 			HttpEntity<String> httpEntity = new HttpEntity<>(null, httpHeaders);
 
 			final ResponseEntity<ListeRessourcesWrapper> response = remoteAccessTemplate.exchange(uriConstructed, HttpMethod.GET, httpEntity, new ParameterizedTypeReference<ListeRessourcesWrapper>(){});
-
 			if (log.isDebugEnabled()) {
 				log.debug("Requesting GAR ressources on {} returned a response with status {} and \n" +
 								"\nresponse{}\n",
 						uriConstructed, response.getStatusCode(), response);
 			}
+
+			if (log.isTraceEnabled()) {
+				final ResponseEntity<String> responseTrace = remoteAccessTemplate.exchange(uriConstructed, HttpMethod.GET, httpEntity, String.class);
+				log.trace("Requesting GAR ressources on {} returned a response with status {} and \n" +
+								"\nresponse{}\n",
+						uriConstructed, responseTrace.getStatusCode(), responseTrace.getBody());
+			}
+
 			ressourcesObj = response.getBody();
 		} catch (URISyntaxException e) {
-			log.error("Erreur to construct the URI {}", rootURL + uri, e);
-			throw new CustomRestRequestException(e);
+            log.error("Error to construct the URI {}", rootURL + uri, e);
+            throw new CustomRestRequestException(e);
 		} catch (HttpClientErrorException e) {
-			// provinding the error stasktrace only on debug as the custom logged error should be suffisant.
+			// provinding the error stacktrace only on debug as the custom logged error should be suffisant.
 			if (log.isDebugEnabled()) {
-				log.error("Erreur client request on URL {}, returned status {}, with response {}", rootURL + uri, e.getStatusCode(), e.getResponseBodyAsString(),e);
+				log.error("Error client request on URL {}, returned status {}, with response {}", rootURL + uri, e.getStatusCode(), e.getResponseBodyAsString(),e);
 			} else {
-				log.error("Erreur client request on URL {}, returned status {}, with response {}", rootURL + uri, e.getStatusCode(), e.getResponseBodyAsString());
+				log.error("Error client request on URL {}, returned status {}, with response {}", rootURL + uri, e.getStatusCode(), e.getResponseBodyAsString());
 			}
-		}
-		//TODO manage Status ?
+            throw e;
+
+        } catch (RestClientException e) {
+            if (log.isDebugEnabled()) {
+                log.error("Error client request on URL {}, with cause {}", rootURL + uri, e.getLocalizedMessage(),e);
+            } else {
+                log.error("Error client request on URL {}, with cause {}", rootURL + uri, e.getLocalizedMessage());
+            }
+            throw e;
+        }
 		return (ressourcesObj != null && ressourcesObj.getListeRessources() != null) ? ressourcesObj.getListeRessources().getRessource() : Lists.newArrayList();
 	}
 
