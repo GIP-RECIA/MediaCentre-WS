@@ -35,6 +35,7 @@ import org.esco.mediacentre.ws.model.erreur.ErreurWrapper;
 import org.esco.mediacentre.ws.model.ressource.ListeRessourcesWrapper;
 import org.esco.mediacentre.ws.model.ressource.Ressource;
 import org.esco.mediacentre.ws.model.structure.Structure;
+import org.esco.mediacentre.ws.service.exception.AuthorizedResourceException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -95,6 +96,10 @@ public class MockedRequestServiceImpl implements IRemoteRequestService, Initiali
 	}
 
 	public List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos) {
+		if (!this.isUserAuthorized(userInfos)) {
+			log.warn("The user isn't allowed to obtain resources from the GAR !");
+			throw new AuthorizedResourceException(GARRequestServiceImpl.UN_AUTHORIZED_MESSAGE);
+		}
 		init();
 		List<Ressource> ressources = Lists.newArrayList();
 		ObjectMapper mapper = new ObjectMapper();
@@ -128,6 +133,17 @@ public class MockedRequestServiceImpl implements IRemoteRequestService, Initiali
 		}
 
 		return ressources;
+	}
+
+	public boolean isUserAuthorized(@NotNull final Map<String, List<String>> userInfos){
+		final String propName = "ENTPersonProfils";
+		final List<String> authorizedVal = Lists.newArrayList("National_ENS", "National_ELV", "National_DOC");
+		if (userInfos.containsKey(propName)) {
+			for (final String authorized: authorizedVal) {
+				if (userInfos.get(propName).contains(authorized)) return true;
+			}
+		}
+		return false;
 	}
 
 	@Override

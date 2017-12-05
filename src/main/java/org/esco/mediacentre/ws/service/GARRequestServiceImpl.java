@@ -33,6 +33,8 @@ import org.esco.mediacentre.ws.model.ressource.IdEtablissement;
 import org.esco.mediacentre.ws.model.ressource.ListeRessourcesWrapper;
 import org.esco.mediacentre.ws.model.ressource.Ressource;
 import org.esco.mediacentre.ws.model.structure.Structure;
+import org.esco.mediacentre.ws.service.exception.AuthorizedResourceException;
+import org.esco.mediacentre.ws.service.exception.CustomRestRequestException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -49,6 +51,8 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class GARRequestServiceImpl implements IRemoteRequestService, InitializingBean {
 
+	public static final String UN_AUTHORIZED_MESSAGE = "L'utilisateur n'est pas autorisé à utiliser les ressources au travers la plateforme GAR.";
+
 	@Setter
 	private RessourceProperties garConfiguration;
 
@@ -62,6 +66,10 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 	private IStructureInfoService structureInfoService;
 
 	public List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos) {
+        if (!this.isUserAuthorized(userInfos)) {
+            log.warn("The user isn't allowed to obtain resources from the GAR !");
+            throw new AuthorizedResourceException(UN_AUTHORIZED_MESSAGE);
+        }
 		String uri = garConfiguration.getRessourceUri();
 		// in app param we don't have user multiple values
 		for (ParamValueProperty param : garConfiguration.getAppParams()) {
@@ -231,6 +239,20 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 			structure.setDisplayName(id);
 		}
 		return structure;
+	}
+
+	public boolean isUserAuthorized(@NotNull final Map<String, List<String>> userInfos) {
+		final Map<String,List<String>> userProps = garConfiguration.getAuthorizedUsers();
+		if (userProps.isEmpty()) return true;
+		for (Map.Entry<String, List<String>> entry : userProps.entrySet()) {
+			log.debug("test user contains authorized values {} from users-info {} ", entry.getValue(), userInfos.get(entry.getKey()));
+			if (userInfos.containsKey(entry.getKey())) {
+				for (final String authorized: entry.getValue()) {
+					if (userInfos.get(entry.getKey()).contains(authorized)) return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@Override

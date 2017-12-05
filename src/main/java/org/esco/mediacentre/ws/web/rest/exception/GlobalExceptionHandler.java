@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.esco.mediacentre.ws.model.erreur.Erreur;
 import org.esco.mediacentre.ws.model.erreur.ErreurWrapper;
+import org.esco.mediacentre.ws.service.exception.AuthorizedResourceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -64,6 +65,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 				        e.getLocalizedMessage(),
 				        null)
         ),HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 
+	@ExceptionHandler(AuthorizedResourceException.class)
+	@ResponseBody
+	ResponseEntity<ErreurWrapper> AuthorizedResourceException(HttpServletRequest request, Throwable ex) {
+		final AuthorizedResourceException e = (AuthorizedResourceException) ex;
+		return new ResponseEntity<ErreurWrapper>(new ErreurWrapper(
+				new Erreur(
+						HttpStatus.BAD_REQUEST.getReasonPhrase(),
+						ex.getLocalizedMessage(),
+						null)
+		),HttpStatus.BAD_REQUEST);
 	}
 }

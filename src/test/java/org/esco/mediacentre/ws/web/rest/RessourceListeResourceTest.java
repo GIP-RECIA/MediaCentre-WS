@@ -32,6 +32,7 @@ import javax.annotation.PostConstruct;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.esco.mediacentre.ws.config.GARClientConfiguration;
+import org.esco.mediacentre.ws.service.GARRequestServiceImpl;
 import org.esco.mediacentre.ws.service.IRemoteRequestService;
 import org.esco.mediacentre.ws.service.MockedRequestServiceImpl;
 import org.esco.mediacentre.ws.web.rest.exception.GlobalExceptionHandler;
@@ -182,5 +183,30 @@ public class RessourceListeResourceTest {
                 .andExpect(jsonPath("$.Erreur.Message", Matchers.notNullValue()))
                 .andExpect(jsonPath("$.Erreur", Matchers.hasKey("Resource")))
                 ;
+    }
+
+    @Test
+    public void testErreurUnAuthorized() throws Exception {
+        Map<String,List<String>> userInfos = new HashMap<>();
+        userInfos.put("uid",  Lists.newArrayList("F01000ugr"));
+        userInfos.put("ESCOUAI", Lists.newArrayList("0450822X","0377777U"));
+        userInfos.put("ESCOUAICourant", Lists.newArrayList("0450822X"));
+        userInfos.put("ENTPersonProfils", Lists.newArrayList("National_EVS"));
+        userInfos.put("ENTPersonGARIdentifiant", Lists.newArrayList("NOTEXIST"));
+        log.debug("User tested {}", userInfos);
+
+        mockListRessourcesMvc.perform(post("/api/ressources")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(userInfos)))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$", Matchers.hasKey("Erreur")))
+                .andExpect(jsonPath("$.Erreur", Matchers.hasKey("Code")))
+                .andExpect(jsonPath("$.Erreur.Code", Matchers.equalToIgnoringCase(HttpStatus.BAD_REQUEST.getReasonPhrase())))
+                .andExpect(jsonPath("$.Erreur", Matchers.hasKey("Message")))
+                .andExpect(jsonPath("$.Erreur.Message", Matchers.equalTo(GARRequestServiceImpl.UN_AUTHORIZED_MESSAGE)))
+                .andExpect(jsonPath("$.Erreur", Matchers.hasKey("Resource")))
+        ;
     }
 }

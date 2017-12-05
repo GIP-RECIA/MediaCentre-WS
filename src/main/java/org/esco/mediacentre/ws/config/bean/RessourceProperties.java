@@ -41,6 +41,8 @@ public class RessourceProperties {
 
 	private String clientKeyAlias;
 
+	private Map<String,List<String>> authorizedUsers;
+
 	private Map<String, List<String>> testUser;
 
 }

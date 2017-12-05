@@ -13,19 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.esco.mediacentre.ws.service;
+package org.esco.mediacentre.ws.service.exception;
 
-import java.util.List;
-import java.util.Map;
+/**
+ * Created by jgribonvald on 01/12/17.
+ */
+public class AuthorizedResourceException extends RuntimeException {
 
-import javax.validation.constraints.NotNull;
+    public AuthorizedResourceException() {
+        super();
+    }
 
-import org.esco.mediacentre.ws.model.ressource.Ressource;
-
-public interface IRemoteRequestService {
-
-	List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos);
-
-	boolean isUserAuthorized(@NotNull final Map<String, List<String>> userInfos);
-
+    public AuthorizedResourceException(final String message) {
+        super(message);
+    }
 }
