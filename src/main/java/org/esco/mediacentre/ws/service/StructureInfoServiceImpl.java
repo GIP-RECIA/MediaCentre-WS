@@ -10,9 +10,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.PostConstruct;
 
 import com.google.common.collect.Sets;
-import javafx.util.Pair;
 import lombok.extern.slf4j.Slf4j;
 import org.esco.mediacentre.ws.model.structure.Structure;
+import org.esco.mediacentre.ws.service.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
