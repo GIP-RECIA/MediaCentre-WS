@@ -17,6 +17,24 @@
         <version>1.5.4.RELEASE</version>
     </parent>
 
+    <distributionManagement>
+        <repository>
+            <id>esco-releases</id>
+            <url>https://nexus.recia.fr/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>esco-snapshots</id>
+            <url>https://nexus.recia.fr/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <scm>
+        <connection>scm:git:ssh://git@github.com/GIP-RECIA/MediaCentre-WS.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/GIP-RECIA/MediaCentre-WS.git</developerConnection>
+        <url>https://github.com/GIP-RECIA/MediaCentre-WS.git</url>
+        <tag>HEAD</tag>
+    </scm>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
@@ -243,4 +261,5 @@
             <url>https://repo.spring.io/libs-release</url>
         </pluginRepository>
     </pluginRepositories>
+
 </project>
