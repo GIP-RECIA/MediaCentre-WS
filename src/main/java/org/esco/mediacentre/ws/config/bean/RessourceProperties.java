@@ -15,6 +15,7 @@
  */
 package org.esco.mediacentre.ws.config.bean;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +42,7 @@ public class RessourceProperties {
 
 	private String clientKeyAlias;
 
-	private Map<String,List<String>> authorizedUsers;
+	private Map<String,List<String>> authorizedUsers = new HashMap<>();
 
 	private Map<String, List<String>> testUser;
 
