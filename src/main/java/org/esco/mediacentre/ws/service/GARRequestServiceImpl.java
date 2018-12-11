@@ -35,6 +35,7 @@ import org.esco.mediacentre.ws.model.ressource.Ressource;
 import org.esco.mediacentre.ws.model.structure.Structure;
 import org.esco.mediacentre.ws.service.exception.AuthorizedResourceException;
 import org.esco.mediacentre.ws.service.exception.CustomRestRequestException;
+import org.esco.mediacentre.ws.service.exception.ListRequestErrorException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -113,6 +114,7 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 			final List<String> userAttrVals = userInfos.getOrDefault(userMappedAttributeToLoop, Lists.newArrayList());
 			if (!userAttrVals.isEmpty()) {
 				List<Ressource> ressources = new ArrayList<Ressource>();
+				List<HttpClientErrorException> exceptions = new ArrayList<>();
 				for (String attr : userAttrVals) {
 					if (userParamIdEtab.equalsIgnoreCase(authorizedAttrLoop)) {
 						userMappedIdEtab = attr;
@@ -131,7 +133,19 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 								"The user defined with theses attributes '{}' doesn't have attribute replacement possible on URI {}",
 								userInfos, uri);
                         throw new RestClientException("Mauvaise configuration de l'application.", e);
+					} catch (HttpClientErrorException e) {
+						// provinding the error stacktrace only on debug as the custom logged error should be suffisant.
+						exceptions.add(e);
 					}
+				}
+				if (!exceptions.isEmpty()) {
+					if (ressources.isEmpty()) {
+						ListRequestErrorException ex = new ListRequestErrorException();
+						ex.addAllException(exceptions);
+						log.error("The user gets only errors and no ressources:", ex.toString());
+						throw ex;
+					}
+					log.warn("The user get errors but some ressources will be shown !");
 				}
 				return ressources;
 			}
