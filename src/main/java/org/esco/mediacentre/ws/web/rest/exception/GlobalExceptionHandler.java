@@ -24,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.esco.mediacentre.ws.model.erreur.Erreur;
 import org.esco.mediacentre.ws.model.erreur.ErreurWrapper;
 import org.esco.mediacentre.ws.service.exception.AuthorizedResourceException;
+import org.esco.mediacentre.ws.service.exception.ListRequestErrorException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -52,6 +53,19 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 			erreurMsg = new ErreurWrapper(new Erreur(Integer.toString(e.getStatusCode().value()), e.getStatusText(), null));
 		}
 		return new ResponseEntity<ErreurWrapper>(erreurMsg, e.getStatusCode());
+	}
+
+	@ExceptionHandler(ListRequestErrorException.class)
+	@ResponseBody
+	ResponseEntity<ErreurWrapper> HandleListRequestErrorException(HttpServletRequest request, Throwable ex) {
+		final ListRequestErrorException e = (ListRequestErrorException) ex;
+
+		return new ResponseEntity<ErreurWrapper>(new ErreurWrapper(
+				new Erreur(
+						HttpStatus.BAD_REQUEST.getReasonPhrase(),
+						((ListRequestErrorException) ex).getAllMessages(),
+						null)
+		),HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(RestClientException.class)
