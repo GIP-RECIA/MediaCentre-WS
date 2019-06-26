@@ -31,29 +31,29 @@ import com.google.common.collect.Sets;
 import com.google.common.io.Files;
 import lombok.extern.slf4j.Slf4j;
 import org.esco.mediacentre.ws.model.structure.Structure;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * Created by jgribonvald on 12/06/17.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ActiveProfiles({"WITHOUT_STRUCT_REST", "test"})
 @Slf4j
-//@SpringBootTest(
-//        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-//        classes = WsRessourcesApplication.class)
+@SpringBootTest
 public class StructureRestClientTest {
 
     @Mock
@@ -61,22 +61,22 @@ public class StructureRestClientTest {
 
     private static final String ids = "0450822X,0377777U";
 
-    private HashMap<String, Structure> fileResult;
+    private static HashMap<String, Structure> fileResult;
 
-    @Before
-    public void setUp() throws IOException {
+    @BeforeAll
+    public static void setUp() throws IOException {
         ObjectMapper jsonMapper = new ObjectMapper();
         Resource jsonFile = new ClassPathResource("response-etabs.json");
 
         String ressourceContent = null;
         try {
-            ressourceContent = Files.toString(new File(jsonFile.getURI()), Charset.forName("UTF-8"));
+            ressourceContent = Files.asCharSource(new File(jsonFile.getURI()), Charset.forName("UTF-8")).read();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Assert.assertTrue("file in classPath 'response-etabs.json' doesn't exist!", ressourceContent != null);
-        Assert.assertTrue("file in classPath 'response-etabs.json' is Empty!", !ressourceContent.isEmpty());
-        log.debug("File content is : {}", Files.toString(jsonFile.getFile(), Charset.forName("UTF-8")));
+        Assertions.assertTrue(ressourceContent != null, "file in classPath 'response-etabs.json' doesn't exist!");
+        Assertions.assertTrue(!ressourceContent.isEmpty(), "file in classPath 'response-etabs.json' is Empty!");
+        log.debug("File content is : {}", Files.asCharSource(jsonFile.getFile(), Charset.forName("UTF-8")).read());
 
         TypeReference<HashMap<String, Structure>> typeRef = new TypeReference<HashMap<String,Structure>>(){};
 
@@ -97,7 +97,7 @@ public class StructureRestClientTest {
 
         Map<String, Structure> mapStructs = this.structureInfoRequestService.getStructuresInfos(idList);
 
-        Assert.assertEquals(mapStructs.keySet(), idList);
+        Assertions.assertEquals(mapStructs.keySet(), idList);
         log.debug("Test debug object of mapStruct {}", Lists.newArrayList(mapStructs.values()).get(1));
         assertThat(Lists.newArrayList(mapStructs.values()).get(1), org.hamcrest.Matchers.hasProperty("id"));
         assertThat(Lists.newArrayList(mapStructs.values()).get(1), org.hamcrest.Matchers.hasProperty("displayName"));

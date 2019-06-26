@@ -22,14 +22,9 @@ server:
 #management.context-path: /admin
 
 # http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints
-endpoints:
-  enabled: false
-  info:
-    enabled: true
-  health:
-    enabled: true
-  metrics:
-    enabled: true
+management:
+  endpoints:
+    enabled: false
 
 info:
   app:
@@ -56,14 +51,14 @@ requestConfig:
   conectTimeout: 5000
   socketTimeout: 2000
 
-#structureInfoRest:
-#  hostConfig:
-#    scheme: https
-#    host:
-#    port: 443
-#    maxPerRoute: 50
-#  uri:
-  # duration in second
+structureInfoRest:
+  hostConfig:
+    scheme: https
+    host: UNDEFINED
+    port: 443
+    maxPerRoute: 50
+  uri:
+   #duration in second
 #  expiringDataDuration: 7200
 
 ressources:
@@ -71,31 +66,32 @@ ressources:
     GAR:
       hostConfig:
         scheme: https
-        host:
+        host: UNDEFINED
         #port: 443
         maxPerRoute: 50
-#      headers:
-#        -
-#          param: Accept
-#          value: "application/xml"
-#        -
-#          param: Accept-Encoding
-#          value: "gzip, deflate"
-#      clientKeyAlias: GAR
+      headers:
+        -
+          param: Accept-Encoding
+          value: "gzip, deflate"
+        -
+          param: Accept-Charset
+          value: UTF-8
+      #      clientKeyAlias: GAR
       ressourceUri: "/ressources/{idENT}/{UAI}/{GARPersonIdentifiant}"
+      ressourceDiffusableUri: "/ressourcesDiffusables"
       # Bouclera sur cette attribut pour les requêtes, laisser à vide si pas de boucle
       attributeOnLoop: UAI
       # Nom de l'attribut mappant l'attribut User définissant l'idEtablissement
       attributeIdEtab: UAI
       # each uri Attributes must map with an app attribute or a user attribute
- #     appParams:
- #       -
- #         param: idENT
- #         value:
- #     userParams:
- #       -
- #         param: UAI
- #         value:
- #       -
- #         param: GARPersonIdentifiant
- #         value:
+      appParams:
+       -
+         param: idENT
+         value: UNDEFINED
+      userParams:
+       -
+         param: UAI
+         value: UNDEFINED
+       -
+         param: GARPersonIdentifiant
+         value: UNDEFINED

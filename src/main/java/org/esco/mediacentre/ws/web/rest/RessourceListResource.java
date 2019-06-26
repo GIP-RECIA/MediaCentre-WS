@@ -47,4 +47,15 @@ public class RessourceListResource {
 		log.trace("Returning for user {} these ressources {}", userInfos, ressources);
 		return ressources;
 	}
+
+	@RequestMapping(value = "/ressourcesDiffusables", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Ressource> getRessourcesDiffusablesGAR(@RequestBody Map<String, List<String>> userInfos) {
+		log.debug("Requesting ressources Diffusables GAR {}", userInfos);
+		List<Ressource> ressources = Lists.newArrayList();
+		for (IRemoteRequestService remote : remoteServices) {
+			ressources.addAll(remote.getRessources(userInfos));
+		}
+		log.trace("Returning these ressources {}", ressources);
+		return ressources;
+	}
 }

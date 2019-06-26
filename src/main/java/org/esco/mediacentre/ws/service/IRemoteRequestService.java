@@ -21,10 +21,13 @@ import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 import org.esco.mediacentre.ws.model.ressource.Ressource;
+import org.esco.mediacentre.ws.model.ressource.diffusion.RessourceDiffusable;
 
 public interface IRemoteRequestService {
 
 	List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos);
+
+	List<RessourceDiffusable> getRessourcesDiffusables();
 
 	boolean isUserAuthorized(@NotNull final Map<String, List<String>> userInfos);
 

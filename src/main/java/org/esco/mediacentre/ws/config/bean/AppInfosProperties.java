@@ -16,16 +16,15 @@
 package org.esco.mediacentre.ws.config.bean;
 
 import javax.annotation.PostConstruct;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.annotation.Validated;
 
-@Configuration
 @ConfigurationProperties(prefix = "info.app")
 @Validated
 @Data

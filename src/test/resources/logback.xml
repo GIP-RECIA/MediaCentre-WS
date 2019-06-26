@@ -20,38 +20,30 @@
 <configuration scan="true" scanPeriod="30 seconds">
     <contextName>mediacentre-ws</contextName>
 
-  <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
-  <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
-  <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
-  <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%1p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    <!-- | Expose the logback configuration via JMX + -->
+    <jmxConfigurator />
 
-  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-      <encoder>
-        <charset>utf-8</charset>
-        <Pattern>${CONSOLE_LOG_PATTERN}</Pattern>
-        </encoder>
-  </appender>
+    <!-- | Specify a local property that sets up the logging directory + -->
+    <!-- NOTE set -Dlogback.logfileDirectory=/PATH/ to override the default propety setted in pom.xml -->
+    <property scope="local" name="LOG_DIR" value="${logback.logfileDirectory:logs}" />
+
 
     <!-- The FILE and ASYNC appenders are here as examples for a production
         configuration -->
-<!--
-    <appender name="FILE"
-        class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logFile.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>90</maxHistory>
-        </rollingPolicy>
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+    <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <charset>utf-8</charset>
-            <Pattern>%d %-5level [%thread] %logger: %msg%n</Pattern>
+            <Pattern>${CONSOLE_LOG_PATTERN}</Pattern>
         </encoder>
     </appender>
-    -->
-    <!-- <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
-        <queueSize>512</queueSize> <appender-ref ref="FILE"/> </appender> -->
 
-    <logger name="com.mysema" level="DEBUG" />
+
+    <logger name="com.mysema" level="WARN" />
     <logger name="javax.activation" level="WARN" />
     <logger name="javax.validation" level="WARN" />
     <logger name="ch.qos.logback" level="WARN" />
@@ -61,17 +53,9 @@
     <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF" />
     <logger name="org.bson" level="WARN" />
     <logger name="org.springframework" level="WARN" />
-    <logger name="org.springframework.web" level="DEBUG" />
-    <logger name="org.springframework.security" level="INFO" />
-    <logger name="org.springframework.security.web" level="INFO" />
-    <logger name="org.springframework.security.web.util.matcher" level="INFO" />
-    <logger name="org.springframework.cache" level="WARN" />
 
-<!--    <logger name="javax.xml.bind" level="DEBUG" />-->
-<!--    <logger name="com.fasterxml.jackson" level="TRACE" />-->
-
-    <logger name="org.springframework.web.client" level="TRACE" />
-    <logger name="org.apache.http" level="TRACE" />
+    <!-- <logger name="javax.xml.bind" level="DEBUG"/> -->
+    <!-- <logger name="com.fasterxml.jackson" level="TRACE"/> -->
 
     <!-- for REST request debug -->
     <!--<logger name="org.springframework.security.web.util.matcher" level="DEBUG"
@@ -82,13 +66,14 @@
     <!--<logger name="org.springframework.security" level="DEBUG"/> -->
     <!--<logger name="org.springframework.http" level="DEBUG" /> -->
 
-    <logger name="org.esco.mediacentre.ws" level="DEBUG" />
+    <logger name="org.esco.mediacentre.ws" level="${logback.loglevel:DEBUG}" />
+
 
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
     </contextListener>
 
-    <root level="INFO">
+    <root level="${logback.loglevel:INFO}">
         <appender-ref ref="CONSOLE" />
     </root>
 

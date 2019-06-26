@@ -25,7 +25,7 @@
 
     <!-- | Specify a local property that sets up the logging directory + -->
     <!-- NOTE set -Dlogback.logfileDirectory=/PATH/ to override the default propety setted in pom.xml -->
-    <property scope="local" name="LOG_DIR" value="${logback.logfileDirectory}" />
+    <property scope="local" name="LOG_DIR" value="${logback.logfileDirectory:logs}" />
 
 
     <!-- The FILE and ASYNC appenders are here as examples for a production
@@ -70,14 +70,14 @@
     <!--<logger name="org.springframework.security" level="DEBUG"/> -->
     <!--<logger name="org.springframework.http" level="DEBUG" /> -->
 
-    <logger name="org.esco.mediacentre.ws" additivity="false" level="${logback.loglevel}" />
+    <logger name="org.esco.mediacentre.ws" additivity="false" level="${logback.loglevel:WARN}" />
 
 
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
     </contextListener>
 
-    <root level="${logback.loglevel}">
+    <root level="${logback.loglevel:WARN}">
         <appender-ref ref="FILE" />
     </root>
 

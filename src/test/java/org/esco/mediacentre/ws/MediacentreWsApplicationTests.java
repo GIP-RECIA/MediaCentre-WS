@@ -13,27 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.esco.mediacentre.ws.config.bean;
+package org.esco.mediacentre.ws;
 
-import javax.validation.constraints.NotNull;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.validation.annotation.Validated;
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
+@ActiveProfiles("test")
+class MediacentreWsApplicationTests {
 
-/**
- * Created by jgribonvald on 15/06/17.
- */
-@ConfigurationProperties(prefix = "structure-info-rest")
-@Data
-@Validated
-public class StructureInfosRestProperties {
-
-    @NotNull
-    private HttpHostProperties hostConfig;
-
-    @NotNull
-    private String uri;
+	@Test
+	void contextLoads() {
+	}
 
 }

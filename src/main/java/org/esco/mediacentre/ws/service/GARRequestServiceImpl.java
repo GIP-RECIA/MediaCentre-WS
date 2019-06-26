@@ -32,6 +32,8 @@ import org.esco.mediacentre.ws.config.bean.RessourceProperties;
 import org.esco.mediacentre.ws.model.ressource.IdEtablissement;
 import org.esco.mediacentre.ws.model.ressource.ListeRessourcesWrapper;
 import org.esco.mediacentre.ws.model.ressource.Ressource;
+import org.esco.mediacentre.ws.model.ressource.diffusion.ListeRessourcesDiffusablesWrapper;
+import org.esco.mediacentre.ws.model.ressource.diffusion.RessourceDiffusable;
 import org.esco.mediacentre.ws.model.structure.Structure;
 import org.esco.mediacentre.ws.service.exception.AuthorizedResourceException;
 import org.esco.mediacentre.ws.service.exception.CustomRestRequestException;
@@ -41,6 +43,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -65,6 +68,17 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 
 	@Setter
 	private IStructureInfoService structureInfoService;
+
+	public List<RessourceDiffusable> getRessourcesDiffusables() {
+		String uri = garConfiguration.getRessourceDiffusableUri();
+		try {
+			return getRessourcesDiffusables(uri);
+		} catch (CustomRestRequestException e) {
+		log.error(
+				"Error on constructing the URL to request", uri);
+		throw new RestClientException("Mauvaise configuration de l'application.", e);
+	}
+	}
 
 	public List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos) {
         if (!this.isUserAuthorized(userInfos)) {
@@ -127,7 +141,7 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 						if (log.isDebugEnabled()) {
 							log.debug("userMappedIdEtab value is {} from {}", userMappedIdEtab, userParamIdEtab);
 						}
-						completeAndMergeRessourceInformations(ressources, runUriCall(req), getStructureWithFallBack(mapStructure, userMappedIdEtab));
+						completeAndMergeRessourceInformations(ressources, getRessources(req), getStructureWithFallBack(mapStructure, userMappedIdEtab));
 					} catch (CustomRestRequestException e) {
 						log.error(
 								"The user defined with theses attributes '{}' doesn't have attribute replacement possible on URI {}",
@@ -157,7 +171,7 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 				log.debug("userMappedIdEtab value is {} from {}", userMappedIdEtab, userParamIdEtab);
 			}
 
-			completeAndMergeRessourceInformations(ressources, runUriCall(uri), getStructureWithFallBack(mapStructure, userMappedIdEtab));
+			completeAndMergeRessourceInformations(ressources, getRessources(uri), getStructureWithFallBack(mapStructure, userMappedIdEtab));
 			return ressources;
 		} catch (CustomRestRequestException e) {
 			log.error(
@@ -167,22 +181,34 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 		}
 	}
 
-	private List<Ressource> runUriCall(final String uri) throws CustomRestRequestException, RestClientException {
+	private List<Ressource> getRessources(final String uri) throws CustomRestRequestException, RestClientException  {
+		this.httpHeaders.put("Accept", Lists.newArrayList(MediaType.APPLICATION_JSON_VALUE));
+		ListeRessourcesWrapper ressourcesObj = runUriCall(uri, new ParameterizedTypeReference<ListeRessourcesWrapper>(){}, this.httpHeaders);
+		return (ressourcesObj != null && ressourcesObj.getListeRessources() != null) ? ressourcesObj.getListeRessources().getRessource() : Lists.newArrayList();
+	}
+
+	private List<RessourceDiffusable> getRessourcesDiffusables(final String uri) throws CustomRestRequestException, RestClientException  {
+		this.httpHeaders.put("Accept", Lists.newArrayList(MediaType.APPLICATION_XML_VALUE));
+		ListeRessourcesDiffusablesWrapper ressourcesObj = runUriCall(uri, new ParameterizedTypeReference<ListeRessourcesDiffusablesWrapper>(){}, this.httpHeaders);
+		return (ressourcesObj != null && ressourcesObj.getListeRessourcesDiffusables() != null) ? ressourcesObj.getListeRessourcesDiffusables().getRessourceDiffusable() : Lists.newArrayList();
+	}
+
+	private <T> T runUriCall(final String uri, final ParameterizedTypeReference<T> responseType, final HttpHeaders headers) throws CustomRestRequestException, RestClientException {
 		if (uri.matches(".*\\{.*\\}.*")) {
 			throw new CustomRestRequestException();
 		}
-		ListeRessourcesWrapper ressourcesObj = null;
-		final String rootURL = garConfiguration.getHostConfig().getScheme() + "://" + garConfiguration.getHostConfig().getHost() +
-				(garConfiguration.getHostConfig().getPort() > 0 ? ":" + garConfiguration.getHostConfig().getPort() : "");
+		final String rootURL = getWSRootURL();
 		try {
-			final URI uriConstructed =  new URI(rootURL + uri);
+			final URI uriConstructed =  new URI( rootURL + uri);
 
 			if (log.isDebugEnabled()) {
 				log.debug("Requesting uri {}", uriConstructed.toString());
 			}
-			HttpEntity<String> httpEntity = new HttpEntity<>(null, httpHeaders);
 
-			final ResponseEntity<ListeRessourcesWrapper> response = remoteAccessTemplate.exchange(uriConstructed, HttpMethod.GET, httpEntity, new ParameterizedTypeReference<ListeRessourcesWrapper>(){});
+			HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
+
+			final ResponseEntity<T> response = (ResponseEntity<T>) remoteAccessTemplate.exchange(uriConstructed, HttpMethod.GET, httpEntity, responseType);
+
 			if (log.isDebugEnabled()) {
 				log.debug("Requesting GAR ressources on {} returned a response with status {} and \n" +
 								"\nresponse{}\n",
@@ -196,7 +222,8 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 						uriConstructed, responseTrace.getStatusCode(), responseTrace.getBody());
 			}
 
-			ressourcesObj = response.getBody();
+			return (T)response.getBody();
+
 		} catch (URISyntaxException e) {
             log.error("Error to construct the URI {}", rootURL + uri, e);
             throw new CustomRestRequestException(e);
@@ -217,7 +244,12 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
             }
             throw e;
         }
-		return (ressourcesObj != null && ressourcesObj.getListeRessources() != null) ? ressourcesObj.getListeRessources().getRessource() : Lists.newArrayList();
+
+	}
+
+	private String getWSRootURL() {
+		return garConfiguration.getHostConfig().getScheme() + "://" + garConfiguration.getHostConfig().getHost() +
+				(garConfiguration.getHostConfig().getPort() > 0 ? ":" + garConfiguration.getHostConfig().getPort() : "");
 	}
 
 	protected void completeAndMergeRessourceInformations(@NotNull List<Ressource> initialRessources, @NotNull final List<Ressource> complementRessources, final Structure etablissement) {

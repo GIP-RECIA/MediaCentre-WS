@@ -13,27 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.esco.mediacentre.ws.config.bean;
+package org.esco.mediacentre.ws;
 
-import javax.validation.constraints.NotNull;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.validation.annotation.Validated;
+public class ServletInitializer extends SpringBootServletInitializer {
 
-/**
- * Created by jgribonvald on 15/06/17.
- */
-@ConfigurationProperties(prefix = "structure-info-rest")
-@Data
-@Validated
-public class StructureInfosRestProperties {
-
-    @NotNull
-    private HttpHostProperties hostConfig;
-
-    @NotNull
-    private String uri;
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(MediacentreWsApplication.class);
+	}
 
 }

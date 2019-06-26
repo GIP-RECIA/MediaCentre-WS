@@ -1,0 +1,97 @@
+#
+# Copyright (C) 2017 GIP-RECIA https://www.recia.fr/
+# @Author (C) 2017 Julien Gribonvald <julien.gribonvald@recia.fr>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#                 http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+server:
+  port: ${appPort:8080}
+
+# Spring MVC actuator endpoints available via /admin/info, /admin/health, ...
+#server.servlet-path: /
+#management.context-path: /admin
+
+# http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints
+management:
+  endpoints:
+    enabled: false
+
+info:
+  app:
+    name: @project.artifactId@
+    version: @project.version@
+
+logging:
+  config: "classpath:logback.xml"
+
+app:
+  security:
+    authorizedIPAccess:
+      - 127.0.0.1
+
+httpClient:
+  maxTotal: 200
+  defaultMaxPerRoute: 50
+#  keyStoreType: "JKS"
+#  keyStorePath:
+#  keyStorePassword:
+
+requestConfig:
+  connectionRequestTimeout: 5000
+  conectTimeout: 5000
+  socketTimeout: 2000
+
+structureInfoRest:
+  hostConfig:
+    scheme: https
+    host: localhost
+    port: 443
+    maxPerRoute: 50
+  uri:
+   #duration in second
+#  expiringDataDuration: 7200
+
+ressources:
+  configurations:
+    GAR:
+      hostConfig:
+        scheme: https
+        host: localhost
+        #port: 443
+        maxPerRoute: 50
+      headers:
+        -
+          param: Accept-Encoding
+          value: "gzip, deflate"
+        -
+          param: Accept-Charset
+          value: UTF-8
+      #      clientKeyAlias: GAR
+      ressourceUri: "/ressources/{idENT}/{UAI}/{GARPersonIdentifiant}"
+      ressourceDiffusableUri: "/ressourcesDiffusables"
+      # Bouclera sur cette attribut pour les requêtes ressourceUri, laisser à vide si pas de boucle
+      attributeOnLoop: UAI
+      # Nom de l'attribut mappant l'attribut User définissant l'idEtablissement
+      attributeIdEtab: UAI
+      # each uri Attributes must map with an app attribute or a user attribute
+      appParams:
+       -
+         param: idENT
+         value: UNDEFINED
+      userParams:
+       -
+         param: UAI
+         value: UNDEFINED
+       -
+         param: GARPersonIdentifiant
+         value: UNDEFINED

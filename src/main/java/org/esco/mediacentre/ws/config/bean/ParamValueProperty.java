@@ -16,7 +16,8 @@
 package org.esco.mediacentre.ws.config.bean;
 
 import lombok.Data;
-import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotBlank;
 
 @Data
 public class ParamValueProperty {

@@ -19,34 +19,42 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.StreamSupport;
 
 import javax.annotation.PostConstruct;
 
 import com.google.common.collect.Lists;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;;
+import org.esco.mediacentre.ws.SystemPropertyIncludeProfileResolver;
 import org.esco.mediacentre.ws.config.GARClientConfiguration;
 import org.esco.mediacentre.ws.service.GARRequestServiceImpl;
 import org.esco.mediacentre.ws.service.IRemoteRequestService;
 import org.esco.mediacentre.ws.service.MockedRequestServiceImpl;
 import org.esco.mediacentre.ws.web.rest.exception.GlobalExceptionHandler;
 import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.hamcrest.collection.IsIn;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.env.AbstractEnvironment;
+import org.springframework.core.env.EnumerablePropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.MutablePropertySources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -55,10 +63,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 /**
  * Created by jgribonvald on 12/06/17.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
-@ActiveProfiles("test")
+@ExtendWith(SpringExtension.class)
+@ActiveProfiles(value = "test,WITHOUT_GAR,WITHOUT_STRUCT_REST,USER_MAPPING", resolver= SystemPropertyIncludeProfileResolver.class)
 @Slf4j
+@SpringBootTest
 public class RessourceListeResourceTest {
 
     @Autowired
@@ -72,6 +80,7 @@ public class RessourceListeResourceTest {
 //    private MockRestServiceServer mockGARServer;
 
     private MockMvc mockListRessourcesMvc;
+    private MockMvc mockListRessourcesDiffMvc;
 
     @Autowired
     private Environment environment;
@@ -89,6 +98,20 @@ public class RessourceListeResourceTest {
             }
         }
 
+        log.info("====== Environment and configuration ======");
+        log.info("Active profiles: {}", Arrays.toString(environment.getActiveProfiles()));
+        final MutablePropertySources sources = ((AbstractEnvironment) environment).getPropertySources();
+        StreamSupport.stream(sources.spliterator(), false).forEach(val -> log.info("source {}", val.getName()));
+        StreamSupport.stream(sources.spliterator(), false)
+                .filter(ps -> ps instanceof EnumerablePropertySource)
+                .map(ps -> ((EnumerablePropertySource) ps).getPropertyNames())
+                .flatMap(Arrays::stream)
+                .distinct()
+                .filter(prop -> !(prop.contains("credentials") || prop.contains("password")))
+                .filter(prop-> prop.contains("ressources"))
+                .forEach(prop -> log.info("{}: {}", prop, environment.getProperty(prop)));
+        log.info("===========================================");
+
         RessourceListResource restListRessources = new RessourceListResource();
 
         ReflectionTestUtils.setField(restListRessources,
@@ -102,7 +125,7 @@ public class RessourceListeResourceTest {
     private MockedRequestServiceImpl getMockedService() {
         for (IRemoteRequestService rrs : remoteServices) {
             if (rrs instanceof MockedRequestServiceImpl ) {
-                log.debug("Using MockedReequestServiceImpl !");
+                log.debug("Using MockedRequestServiceImpl !");
                 return (MockedRequestServiceImpl) rrs;
             }
         }
@@ -120,16 +143,18 @@ public class RessourceListeResourceTest {
 
             mockListRessourcesMvc.perform(post("/api/ressources")
                     .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                    .content(TestUtil.convertObjectToJsonBytes(userInfos)))
+                    .content(TestUtil.convertObjectToJsonBytes(userInfos))
+                    .characterEncoding("UTF-8"))
                     .andDo(MockMvcResultHandlers.print())
                     .andExpect(status().isOk())
-                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                    .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                    //.andExpect(content().encoding("UTF-8"))
                     .andExpect(jsonPath("$.*", Matchers.hasSize(3)))
                     .andExpect(jsonPath("$.[0]", Matchers.hasKey("idRessource")))
                     .andExpect(jsonPath("$.[0]", Matchers.hasKey("idEtablissement")))
                     .andExpect(jsonPath("$.[0].idEtablissement", Matchers.hasSize(1)))
                     .andExpect(jsonPath("$.[0].idEtablissement.[0]", Matchers.hasKey("UAI")))
-                    .andExpect(jsonPath("$.[0].idEtablissement.[0].UAI").value(Matchers.isIn(Lists.newArrayList("0450822X", "0377777U"))));
+                    .andExpect(jsonPath("$.[0].idEtablissement.[0].UAI").value(IsIn.in(Lists.newArrayList("0450822X", "0377777U"))));
         } else {
 //            userinfos are setted from configuration file
 //            userInfos.put("uid",  Lists.newArrayList("F1600m19"));
@@ -148,10 +173,12 @@ public class RessourceListeResourceTest {
 
             mockListRessourcesMvc.perform(post("/api/ressources")
                     .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                    .content(TestUtil.convertObjectToJsonBytes(configUser)))
+                    .content(TestUtil.convertObjectToJsonBytes(configUser))
+                    .accept(TestUtil.APPLICATION_JSON_UTF8))
                     .andDo(MockMvcResultHandlers.print())
                     .andExpect(status().isOk())
-                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                    .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
+                    .andExpect(content().encoding("UTF-8"))
                     .andExpect(jsonPath("$.*", Matchers.notNullValue()))
                     .andExpect(jsonPath("$.[0]", Matchers.hasKey("idRessource")))
                     .andExpect(jsonPath("$.[0]", Matchers.hasKey("idEtablissement")))
@@ -172,10 +199,12 @@ public class RessourceListeResourceTest {
 
         mockListRessourcesMvc.perform(post("/api/ressources")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(userInfos)))
+                .content(TestUtil.convertObjectToJsonBytes(userInfos))
+                .accept(TestUtil.APPLICATION_JSON_UTF8))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isBadRequest())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
+                .andExpect(content().encoding("UTF-8"))
                 .andExpect(jsonPath("$", Matchers.hasKey("Erreur")))
                 .andExpect(jsonPath("$.Erreur", Matchers.hasKey("Code")))
                 .andExpect(jsonPath("$.Erreur.Code", Matchers.equalToIgnoringCase(HttpStatus.BAD_REQUEST.getReasonPhrase())))
@@ -197,10 +226,12 @@ public class RessourceListeResourceTest {
 
         mockListRessourcesMvc.perform(post("/api/ressources")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(userInfos)))
+                .content(TestUtil.convertObjectToJsonBytes(userInfos))
+                .accept(TestUtil.APPLICATION_JSON_UTF8))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isBadRequest())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
+                .andExpect(content().encoding("UTF-8"))
                 .andExpect(jsonPath("$", Matchers.hasKey("Erreur")))
                 .andExpect(jsonPath("$.Erreur", Matchers.hasKey("Code")))
                 .andExpect(jsonPath("$.Erreur.Code", Matchers.equalToIgnoringCase(HttpStatus.BAD_REQUEST.getReasonPhrase())))
@@ -208,5 +239,35 @@ public class RessourceListeResourceTest {
                 .andExpect(jsonPath("$.Erreur.Message", Matchers.equalTo(GARRequestServiceImpl.UN_AUTHORIZED_MESSAGE)))
                 .andExpect(jsonPath("$.Erreur", Matchers.hasKey("Resource")))
         ;
+    }
+
+    @Test
+    public void testRessourcesDiffusables() throws Exception {
+
+        if (isWithoutGAR) {
+//            mockListRessourcesMvc.perform(get("/api/ressourcesDiffusables")
+//                    .contentType(MediaType.APPLICATION_XML)
+//                    .accept(MediaType.APPLICATION_XML))
+//                    .andDo(MockMvcResultHandlers.print())
+//                    .andExpect(status().isOk())
+//                    .andExpect(content().contentType(MediaType.APPLICATION_XML))
+//                    .andExpect(content().encoding("UTF-8"));
+        }
+//        } else {
+//            mockListRessourcesMvc.perform(get("/api/ressourcesDiffusables")
+//                    .contentType(MediaType.APPLICATION_XML)
+//                    .content(new String())
+//                    .accept(MediaType.APPLICATION_XML))
+//                    .andDo(MockMvcResultHandlers.print())
+//                    .andExpect(status().isOk())
+//                    .andExpect(content().contentType(MediaType.APPLICATION_XML))
+//                    .andExpect(content().encoding("UTF-8"))
+//                    .andExpect(jsonPath("$.*", Matchers.notNullValue()))
+//                    .andExpect(jsonPath("$.[0]", Matchers.hasKey("idRessource")))
+//                    .andExpect(jsonPath("$.[0]", Matchers.hasKey("nomRessource")))
+//                    .andExpect(jsonPath("$.[0]", Matchers.hasKey("idEditeur")))
+//                    .andExpect(jsonPath("$.[0]", Matchers.hasKey("nomEditeur")));
+//
+//        }
     }
 }

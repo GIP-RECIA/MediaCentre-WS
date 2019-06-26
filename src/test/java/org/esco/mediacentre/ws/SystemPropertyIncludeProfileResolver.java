@@ -13,31 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.esco.mediacentre.ws.config.bean;
+package org.esco.mediacentre.ws;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotNull;
-
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.test.context.ActiveProfilesResolver;
+import org.springframework.test.context.support.DefaultActiveProfilesResolver;
 
-@ConfigurationProperties(prefix = "ressources")
-@Validated
-@Data
 @Slf4j
-public class RessourcesProperties {
+public class SystemPropertyIncludeProfileResolver implements ActiveProfilesResolver {
+    private final DefaultActiveProfilesResolver defaultActiveProfilesResolver = new DefaultActiveProfilesResolver();
 
-	@NotNull
-	private Map<RessourceType, RessourceProperties> configurations = new HashMap<RessourceType, RessourceProperties>();
+    @Override
+    public String[] resolve(Class<?> testClass) {
+        final String springProfileKey = "spring.profiles.active";
 
-	@PostConstruct
-	public void debug() {
-		log.debug("Liste des ressources configurées {}", configurations);
-	}
+        return System.getProperties().containsKey(springProfileKey)
+                ? System.getProperty(springProfileKey).split("\\s*,\\s*")
+                : defaultActiveProfilesResolver.resolve(testClass);
+    }
 }

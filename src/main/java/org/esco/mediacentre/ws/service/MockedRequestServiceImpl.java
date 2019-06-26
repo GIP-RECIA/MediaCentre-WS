@@ -34,6 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.esco.mediacentre.ws.model.erreur.ErreurWrapper;
 import org.esco.mediacentre.ws.model.ressource.ListeRessourcesWrapper;
 import org.esco.mediacentre.ws.model.ressource.Ressource;
+import org.esco.mediacentre.ws.model.ressource.diffusion.RessourceDiffusable;
 import org.esco.mediacentre.ws.model.structure.Structure;
 import org.esco.mediacentre.ws.service.exception.AuthorizedResourceException;
 import org.springframework.beans.factory.InitializingBean;
@@ -67,9 +68,9 @@ public class MockedRequestServiceImpl implements IRemoteRequestService, Initiali
 		String ressourceContent2 = null;
 		String ressourceContent3 = null;
 		try {
-			ressourceContent = Files.toString(new File(resources0377777U.getURI()), Charset.forName("UTF-8"));
-			ressourceContent2 = Files.toString(new File(resources0450822X.getURI()), Charset.forName("UTF-8"));
-			ressourceContent3 = Files.toString(new File(resourceErreur.getURI()), Charset.forName("UTF-8"));
+			ressourceContent = Files.asCharSource(new File(resources0377777U.getURI()), Charset.forName("UTF-8")).read();
+			ressourceContent2 = Files.asCharSource(new File(resources0450822X.getURI()), Charset.forName("UTF-8")).read();
+			ressourceContent3 = Files.asCharSource(new File(resourceErreur.getURI()), Charset.forName("UTF-8")).read();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -93,6 +94,10 @@ public class MockedRequestServiceImpl implements IRemoteRequestService, Initiali
 		}
 		Assert.state(structure0450822X != null, "The Rest Service to obtain structures informations returned a null Structure for UAI '0450822X' !");
 		Assert.state(structure0377777U != null, "The Rest Service to obtain structures informations returned a null Structure for UAI '0377777U' !");
+	}
+
+	public List<RessourceDiffusable> getRessourcesDiffusables() {
+		return null;
 	}
 
 	public List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos) {
