@@ -114,9 +114,9 @@
 			<testResource>
 				<directory>src/test/resources</directory>
 				<filtering>false</filtering>
-								<includes>
-									<include>response-etabs.json</include>
-								</includes>
+				<includes>
+					<include>response-etabs.json</include>
+				</includes>
 			</testResource>
 			<testResource>
 				<directory>src/test/resources</directory>

@@ -9,3 +9,6 @@
 
 # in production mainly set in system properties the property for log directory else it will log in $catalina_base
 -Dlogback.logfileDirectory=/PATH/
+
+# to run test :
+./mvnw clean test -Dlogback.logfileDirectory=LOGS -Dspring.profiles.active=USER_MAPPING,test,WITHOUT_STRUCT_REST
