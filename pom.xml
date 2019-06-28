@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>org.esco.mediacentre.ws</groupId>
 	<artifactId>esco-mediacentre-ws</artifactId>
-	<version>0.2.1</version>
+	<version>0.2.2-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>esco-mediacentre-ws</name>
 	<description>Application REST Web-service permettant de requêter un ensemble de services externes afin d'obtenir la liste des ressources numériques d'un utilisateur</description>
@@ -35,7 +35,7 @@
 		<connection>scm:git:ssh://git@github.com/GIP-RECIA/MediaCentre-WS.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/GIP-RECIA/MediaCentre-WS.git</developerConnection>
 		<url>https://github.com/GIP-RECIA/MediaCentre-WS.git</url>
-		<tag>esco-mediacentre-ws-0.2.1</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<dependencies>
