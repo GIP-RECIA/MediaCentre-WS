@@ -81,7 +81,7 @@
     <logger name="org.springframework.web.client" level="TRACE" />
     <logger name="org.apache.http" level="INFO" />
 
-    <logger name="org.esco.mediacentre.ws" level="DEBUG" />
+    <logger name="fr.recia.mediacentre.ws" level="DEBUG" />
 
     <!-- for REST request debug -->
     <!--<logger name="org.springframework.security.web.util.matcher" level="DEBUG" />-->

@@ -7,7 +7,7 @@
 		<version>2.2.0.M4</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>org.esco.mediacentre.ws</groupId>
+	<groupId>fr.recia.mediacentre.ws</groupId>
 	<artifactId>esco-mediacentre-ws</artifactId>
 	<version>0.2.2-SNAPSHOT</version>
 	<packaging>war</packaging>

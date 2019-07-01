@@ -82,7 +82,7 @@
     <!--<logger name="org.springframework.security" level="DEBUG"/> -->
     <!--<logger name="org.springframework.http" level="DEBUG" /> -->
 
-    <logger name="org.esco.mediacentre.ws" level="DEBUG" />
+    <logger name="fr.recia.mediacentre.ws" level="DEBUG" />
 
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>

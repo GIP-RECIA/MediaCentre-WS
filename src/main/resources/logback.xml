@@ -70,7 +70,7 @@
     <!--<logger name="org.springframework.security" level="DEBUG"/> -->
     <!--<logger name="org.springframework.http" level="DEBUG" /> -->
 
-    <logger name="org.esco.mediacentre.ws" additivity="false" level="${logback.loglevel:WARN}" />
+    <logger name="fr.recia.mediacentre.ws" additivity="false" level="${logback.loglevel:WARN}" />
 
 
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
