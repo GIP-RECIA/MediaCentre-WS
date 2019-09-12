@@ -50,7 +50,7 @@ public class RessourceListResource {
 		return ressources;
 	}
 
-	@RequestMapping(value = "/ressourcesDiffusables", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/ressourcesDiffusables", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public List<ListeRessourcesDiffusables> getRessourcesDiffusablesGAR() {
 		log.debug("Requesting ressources Diffusables GAR");
 		List<ListeRessourcesDiffusables> ressources = Lists.newArrayList();

@@ -23,6 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -211,7 +212,7 @@ public class RessourceListeResourceTest {
                 .andExpect(jsonPath("$.Erreur", Matchers.hasKey("Message")))
                 .andExpect(jsonPath("$.Erreur.Message", Matchers.notNullValue()))
                 .andExpect(jsonPath("$.Erreur", Matchers.hasKey("Resource")))
-                ;
+        ;
     }
 
     @Test
@@ -242,7 +243,7 @@ public class RessourceListeResourceTest {
     }
 
     @Test
-    public void testRessourcesDiffusables() throws Exception {
+    public void testJsonRessourcesDiffusables() throws Exception {
 
         if (isWithoutGAR) {
             mockListRessourcesMvc.perform(get("/api/ressourcesDiffusables")
@@ -305,6 +306,23 @@ public class RessourceListeResourceTest {
                     .andExpect(jsonPath("$.[0].ressourceDiffusable.[0]", Matchers.hasKey("diffusable")))
                     .andExpect(jsonPath("$..ressourceDiffusable.[?(@.mereFamille)]").isNotEmpty())
                     .andExpect(jsonPath("$..ressourceDiffusable.[?(@.membreFamille)]").isNotEmpty());
+        }
+    }
+
+    @Test
+    public void testXmlRessourcesDiffusables() throws Exception {
+
+        if (isWithoutGAR) {
+            mockListRessourcesMvc.perform(get("/api/ressourcesDiffusables")
+                    .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                    .accept(TestUtil.APPLICATION_XML_UTF8))
+                    .andDo(MockMvcResultHandlers.print())
+                    .andExpect(status().isOk())
+                    .andExpect(content().contentType(TestUtil.APPLICATION_XML_UTF8))
+                    .andExpect(content().encoding("UTF-8"))
+                    .andExpect(xpath("/List/item[%s]", 1).exists())
+                    .andExpect(xpath("/List/item[%s]/ressourceDiffusable", 1).exists());
+
         }
     }
 }
