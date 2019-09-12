@@ -19,6 +19,8 @@ package fr.recia.mediacentre.ws.model.ressource.diffusion;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
@@ -38,29 +40,48 @@ import java.util.List;
     "distributeurTech",
     "nomDistributeurTech",
     "affichable",
-    "diffusable"
+    "diffusable",
+    "mereFamille",
+    "membreFamille"
 })
 @ToString
 @EqualsAndHashCode
 public class RessourceDiffusable implements Serializable {
 
     @NonNull
-    public String distributeurTech;
+    @JacksonXmlProperty(localName = "distributeurTech")
+    private String distributeurTech;
     @NonNull
-    public String nomDistributeurTech;
+    @JacksonXmlProperty(localName = "nomDistributeurTech")
+    private String nomDistributeurTech;
     @NonNull
-    public String idEditeur;
+    @JacksonXmlProperty(localName = "idEditeur")
+    private String idEditeur;
     @NonNull
-    public String idRessource;
+    @JacksonXmlProperty(localName = "idRessource")
+    private String idRessource;
     @NonNull
-    public String nomEditeur;
+    @JacksonXmlProperty(localName = "nomEditeur")
+    private String nomEditeur;
     @NonNull
-    public String nomRessource;
-    public boolean affichable;
-    public boolean diffusable;
+    @JacksonXmlProperty(localName = "nomRessource")
+    private String nomRessource;
+    @JacksonXmlProperty(localName = "affichable")
+    private boolean affichable;
+    @JacksonXmlProperty(localName = "diffusable")
+    private boolean diffusable;
     @NonNull
     @Valid
-    public List<DistributeurCom> distributeursCom = new ArrayList<DistributeurCom>();
+    @JacksonXmlElementWrapper(localName = "distributeursCom" ,useWrapping = false)
+    @JacksonXmlProperty(localName = "distributeursCom")
+    private List<DistributeurCom> distributeursCom = new ArrayList<DistributeurCom>();
+
+    @JacksonXmlProperty(localName = "mereFamille")
+    public String mereFamille;
+
+    @JacksonXmlProperty(localName = "membreFamille")
+    public String membreFamille;
+
 
     /**
      * No args constructor for use in serialization
@@ -73,7 +94,7 @@ public class RessourceDiffusable implements Serializable {
     public RessourceDiffusable(@NonNull final String distributeurTech, @NonNull final String nomDistributeurTech,
                                @NonNull final String idEditeur, @NonNull final String idRessource, @NonNull final String nomEditeur,
                                @NonNull final String nomRessource, final boolean affichable, final boolean diffusable,
-                               @NonNull @Valid final List<DistributeurCom> distributeursCom) {
+                               @NonNull @Valid final List<DistributeurCom> distributeursCom, final String mereFamille, final String membreFamille) {
         this.distributeurTech = distributeurTech;
         this.nomDistributeurTech = nomDistributeurTech;
         this.idEditeur = idEditeur;
@@ -83,6 +104,8 @@ public class RessourceDiffusable implements Serializable {
         this.affichable = affichable;
         this.diffusable = diffusable;
         this.distributeursCom = distributeursCom;
+        this.mereFamille = mereFamille;
+        this.membreFamille = membreFamille;
     }
 
     @JsonProperty(value = "distributeurTech", required = true)
@@ -116,11 +139,13 @@ public class RessourceDiffusable implements Serializable {
     }
 
     @JsonProperty(value = "idRessource", required = true)
+    @JacksonXmlProperty(localName = "idRessource")
     public String getIdRessource() {
         return idRessource;
     }
 
     @JsonProperty(value = "idRessource", required = true)
+    @JacksonXmlProperty(localName = "idRessource")
     public void setIdRessource(String idRessource) {
         this.idRessource = idRessource;
     }
@@ -175,5 +200,23 @@ public class RessourceDiffusable implements Serializable {
         this.distributeursCom = distributeursCom;
     }
 
+    @JsonProperty(value = "mereFamille")
+    public String getMereFamille() {
+        return mereFamille;
+    }
 
+    @JsonProperty(value = "mereFamille")
+    public void setMereFamille(String mereFamille) {
+        this.mereFamille = mereFamille;
+    }
+
+    @JsonProperty(value = "membreFamille")
+    public String getMembreFamille() {
+        return membreFamille;
+    }
+
+    @JsonProperty(value = "membreFamille")
+    public void setMembreFamille(String membreFamille) {
+        this.membreFamille = membreFamille;
+    }
 }

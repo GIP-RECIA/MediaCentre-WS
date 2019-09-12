@@ -15,6 +15,8 @@
  */
 package fr.recia.mediacentre.ws.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -23,10 +25,14 @@ import java.util.Map;
 
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.google.common.collect.Lists;
 import fr.recia.mediacentre.ws.model.ressource.IdEtablissement;
 import fr.recia.mediacentre.ws.model.ressource.ListeRessourcesWrapper;
 import fr.recia.mediacentre.ws.model.ressource.Ressource;
+import fr.recia.mediacentre.ws.model.ressource.diffusion.ListeRessourcesDiffusables;
 import fr.recia.mediacentre.ws.model.ressource.diffusion.ListeRessourcesDiffusablesWrapper;
 import fr.recia.mediacentre.ws.model.ressource.diffusion.RessourceDiffusable;
 import fr.recia.mediacentre.ws.model.structure.Structure;
@@ -46,6 +52,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
+import org.springframework.util.StreamUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
@@ -69,7 +76,7 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 	@Setter
 	private IStructureInfoService structureInfoService;
 
-	public List<RessourceDiffusable> getRessourcesDiffusables() {
+	public ListeRessourcesDiffusables getRessourcesDiffusables() {
 		String uri = garConfiguration.getRessourceDiffusableUri();
 		try {
 			return getRessourcesDiffusables(uri);
@@ -187,10 +194,9 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 		return (ressourcesObj != null && ressourcesObj.getListeRessources() != null) ? ressourcesObj.getListeRessources().getRessource() : Lists.newArrayList();
 	}
 
-	private List<RessourceDiffusable> getRessourcesDiffusables(final String uri) throws CustomRestRequestException, RestClientException  {
+	private ListeRessourcesDiffusables getRessourcesDiffusables(final String uri) throws CustomRestRequestException, RestClientException  {
 		this.httpHeaders.put("Accept", Lists.newArrayList(MediaType.APPLICATION_XML_VALUE));
-		ListeRessourcesDiffusablesWrapper ressourcesObj = runUriCall(uri, new ParameterizedTypeReference<ListeRessourcesDiffusablesWrapper>(){}, this.httpHeaders);
-		return (ressourcesObj != null && ressourcesObj.getListeRessourcesDiffusables() != null) ? ressourcesObj.getListeRessourcesDiffusables().getRessourceDiffusable() : Lists.newArrayList();
+		return runUriCall(uri, new ParameterizedTypeReference<ListeRessourcesDiffusables>(){}, this.httpHeaders);
 	}
 
 	private <T> T runUriCall(final String uri, final ParameterizedTypeReference<T> responseType, final HttpHeaders headers) throws CustomRestRequestException, RestClientException {
@@ -207,23 +213,22 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 
 			HttpEntity<String> httpEntity = new HttpEntity<>(null, headers);
 
-			final ResponseEntity<T> response = (ResponseEntity<T>) remoteAccessTemplate.exchange(uriConstructed, HttpMethod.GET, httpEntity, responseType);
-
-			if (log.isDebugEnabled()) {
-				log.debug("Requesting GAR ressources on {} returned a response with status {} and \n" +
-								"\nresponse{}\n",
-						uriConstructed, response.getStatusCode(), response);
-			}
+			final ResponseEntity<T> response = remoteAccessTemplate.exchange(uriConstructed, HttpMethod.GET, httpEntity, responseType);
 
 			if (log.isTraceEnabled()) {
 				final ResponseEntity<String> responseTrace = remoteAccessTemplate.exchange(uriConstructed, HttpMethod.GET, httpEntity, String.class);
+				String resp = responseTrace.getBody() != null && responseTrace.getBody().toString().length() > 10000 ? responseTrace.getBody().substring(1,10000) : responseTrace.getBody();
 				log.trace("Requesting GAR ressources on {} returned a response with status {} and \n" +
 								"\nresponse{}\n",
-						uriConstructed, responseTrace.getStatusCode(), responseTrace.getBody());
+						uriConstructed, responseTrace.getStatusCode(), resp);
+			}
+			if (log.isDebugEnabled()) {
+				log.debug("Requesting GAR ressources on {} returned a response with status {} and \n" +
+								"\nresponse{}\n",
+						uriConstructed, response.getStatusCode(), response.getHeaders());
 			}
 
 			return (T)response.getBody();
-
 		} catch (URISyntaxException e) {
             log.error("Error to construct the URI {}", rootURL + uri, e);
             throw new CustomRestRequestException(e);

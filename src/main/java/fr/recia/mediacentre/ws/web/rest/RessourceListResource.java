@@ -20,6 +20,8 @@ import java.util.Map;
 
 import com.google.common.collect.Lists;
 import fr.recia.mediacentre.ws.model.ressource.Ressource;
+import fr.recia.mediacentre.ws.model.ressource.diffusion.ListeRessourcesDiffusables;
+import fr.recia.mediacentre.ws.model.ressource.diffusion.RessourceDiffusable;
 import fr.recia.mediacentre.ws.service.IRemoteRequestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,11 +51,11 @@ public class RessourceListResource {
 	}
 
 	@RequestMapping(value = "/ressourcesDiffusables", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Ressource> getRessourcesDiffusablesGAR(@RequestBody Map<String, List<String>> userInfos) {
-		log.debug("Requesting ressources Diffusables GAR {}", userInfos);
-		List<Ressource> ressources = Lists.newArrayList();
+	public List<ListeRessourcesDiffusables> getRessourcesDiffusablesGAR() {
+		log.debug("Requesting ressources Diffusables GAR");
+		List<ListeRessourcesDiffusables> ressources = Lists.newArrayList();
 		for (IRemoteRequestService remote : remoteServices) {
-			ressources.addAll(remote.getRessources(userInfos));
+			ressources.add(remote.getRessourcesDiffusables());
 		}
 		log.trace("Returning these ressources {}", ressources);
 		return ressources;

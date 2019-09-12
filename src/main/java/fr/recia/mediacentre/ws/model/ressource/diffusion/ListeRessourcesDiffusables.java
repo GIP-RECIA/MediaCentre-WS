@@ -19,6 +19,9 @@ package fr.recia.mediacentre.ws.model.ressource.diffusion;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -29,13 +32,20 @@ import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+        "dateGeneration",
         "ressourceDiffusable"
 })
 @ToString
 @EqualsAndHashCode
+@JacksonXmlRootElement(localName = "listeRessourcesDiffusables" )
 public class ListeRessourcesDiffusables implements Serializable {
 
+    @JacksonXmlProperty(localName = "dateGeneration")
+    private String dateGeneration;
+
     @Valid
+    @JacksonXmlElementWrapper(localName = "ressourceDiffusable",useWrapping = false)
+    @JacksonXmlProperty(localName = "ressourceDiffusable")
     private List<RessourceDiffusable> ressourceDiffusable = new ArrayList<RessourceDiffusable>();
 
     /**
@@ -64,6 +74,17 @@ public class ListeRessourcesDiffusables implements Serializable {
     public void setRessourceDiffusable(List<RessourceDiffusable> ressourceDiffusable) {
         this.ressourceDiffusable = ressourceDiffusable;
     }
+
+    @JsonProperty("dateGeneration")
+    public String getDateGeneration() {
+        return dateGeneration;
+    }
+
+    @JsonProperty("dateGeneration")
+    public void setDateGeneration(String dateGeneration) {
+        this.dateGeneration = dateGeneration;
+    }
+
 
 }
 

@@ -43,19 +43,20 @@
     </appender>
 
 
-    <logger name="com.mysema" level="WARN" />
-    <logger name="javax.activation" level="WARN" />
-    <logger name="javax.validation" level="WARN" />
-    <logger name="ch.qos.logback" level="WARN" />
-    <logger name="com.sun.xml.internal.bind" level="INFO" />
-    <logger name="net.sf.ehcache" level="WARN" />
-    <logger name="org.apache" level="WARN" />
-    <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF" />
-    <logger name="org.bson" level="WARN" />
-    <logger name="org.springframework" level="WARN" />
+<!--    <logger name="com.mysema" level="WARN" />-->
+<!--    <logger name="javax.activation" level="WARN" />-->
+<!--    <logger name="javax.validation" level="WARN" />-->
+<!--    <logger name="ch.qos.logback" level="WARN" />-->
+<!--    <logger name="com.sun.xml.internal.bind" level="INFO" />-->
+<!--    <logger name="net.sf.ehcache" level="WARN" />-->
+    <logger name="org.apache" level="DEBUG" />
+    <logger name="org.apache.http.wire" level="INFO" />
+<!--    <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF" />-->
+<!--    <logger name="org.bson" level="WARN" />-->
+<!--    <logger name="org.springframework" level="WARN" />-->
 
-    <!-- <logger name="javax.xml.bind" level="DEBUG"/> -->
-    <!-- <logger name="com.fasterxml.jackson" level="TRACE"/> -->
+<!--     <logger name="javax.xml.bind" level="DEBUG"/>-->
+<!--     <logger name="com.fasterxml.jackson" level="TRACE"/>-->
 
     <!-- for REST request debug -->
     <!--<logger name="org.springframework.security.web.util.matcher" level="DEBUG"
@@ -65,8 +66,10 @@
     <!--<logger name="org.springframework.security.web" level="DEBUG"/> -->
     <!--<logger name="org.springframework.security" level="DEBUG"/> -->
     <!--<logger name="org.springframework.http" level="DEBUG" /> -->
+<!--    <logger name="org.springframework.web" level="TRACE" />-->
 
     <logger name="fr.recia.mediacentre.ws" level="${logback.loglevel:DEBUG}" />
+<!--    <logger name="fr.recia.mediacentre.ws.service.GARRequestServiceImpl" level="TRACE" />-->
 
 
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">

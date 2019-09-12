@@ -21,13 +21,14 @@ import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 import fr.recia.mediacentre.ws.model.ressource.Ressource;
+import fr.recia.mediacentre.ws.model.ressource.diffusion.ListeRessourcesDiffusables;
 import fr.recia.mediacentre.ws.model.ressource.diffusion.RessourceDiffusable;
 
 public interface IRemoteRequestService {
 
 	List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos);
 
-	List<RessourceDiffusable> getRessourcesDiffusables();
+	ListeRessourcesDiffusables getRessourcesDiffusables();
 
 	boolean isUserAuthorized(@NotNull final Map<String, List<String>> userInfos);
 

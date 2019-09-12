@@ -19,6 +19,7 @@ package fr.recia.mediacentre.ws.model.ressource.diffusion;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

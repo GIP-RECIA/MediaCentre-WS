@@ -25,10 +25,12 @@ import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
 import fr.recia.mediacentre.ws.model.ressource.Ressource;
+import fr.recia.mediacentre.ws.model.ressource.diffusion.ListeRessourcesDiffusables;
 import fr.recia.mediacentre.ws.service.exception.AuthorizedResourceException;
 import lombok.Getter;
 import lombok.Setter;
@@ -53,6 +55,8 @@ public class MockedRequestServiceImpl implements IRemoteRequestService, Initiali
 	private Resource resources0450822X;
 	@Getter
 	private Resource resourceErreur;
+	@Getter
+	private Resource ressourcesDiff;
 
 	@Setter
 	private IStructureInfoService structureInfoService;
@@ -64,22 +68,27 @@ public class MockedRequestServiceImpl implements IRemoteRequestService, Initiali
 		resources0377777U = new ClassPathResource("/json/gar_reponse_0377777U.json");
 		resources0450822X = new ClassPathResource("/json/gar_reponse_0450822X.json");
 		resourceErreur = new ClassPathResource("/json/gar_reponse_erreur.json");
+		ressourcesDiff = new ClassPathResource("/xml/gar_ressourcesDiffusables_response.xml");
 		String ressourceContent = null;
 		String ressourceContent2 = null;
 		String ressourceContent3 = null;
+		String ressourceContent4 = null;
 		try {
 			ressourceContent = Files.asCharSource(new File(resources0377777U.getURI()), Charset.forName("UTF-8")).read();
 			ressourceContent2 = Files.asCharSource(new File(resources0450822X.getURI()), Charset.forName("UTF-8")).read();
 			ressourceContent3 = Files.asCharSource(new File(resourceErreur.getURI()), Charset.forName("UTF-8")).read();
+			ressourceContent4 = Files.asCharSource(new File(ressourcesDiff.getURI()), Charset.forName("UTF-8")).read();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		Assert.state(ressourceContent != null, "file in classPath '/json/gar_reponse_0450822X.json' doesn't exist!");
 		Assert.state(ressourceContent2 != null, "file in classPath '/json/gar_reponse_0377777U.json' doesn't exist!");
 		Assert.state(ressourceContent3 != null, "file in classPath '/json/gar_reponse_erreur.json' doesn't exist!");
+		Assert.state(ressourceContent4 != null, "file in classPath '/xml/gar_ressourcesDiffusables_response.xml' doesn't exist!");
 		Assert.state(!ressourceContent.isEmpty(), "file in classPath '/json/gar_reponse_0450822X.json' is Empty!");
 		Assert.state(!ressourceContent2.isEmpty(), "file in classPath '/json/gar_reponse_0377777U.json' is Empty!");
 		Assert.state(!ressourceContent3.isEmpty(), "file in classPath '/json/gar_reponse_erreur.json' is Empty!");
+		Assert.state(!ressourceContent4.isEmpty(), "file in classPath '/xml/gar_ressourcesDiffusables_response.xml' is Empty!");
 	}
 
 	private void init(){
@@ -96,8 +105,15 @@ public class MockedRequestServiceImpl implements IRemoteRequestService, Initiali
 		Assert.state(structure0377777U != null, "The Rest Service to obtain structures informations returned a null Structure for UAI '0377777U' !");
 	}
 
-	public List<RessourceDiffusable> getRessourcesDiffusables() {
-		return null;
+	public ListeRessourcesDiffusables getRessourcesDiffusables() {
+		ObjectMapper mapper = new XmlMapper();
+
+		try {
+			return mapper.readValue(ressourcesDiff.getInputStream(), ListeRessourcesDiffusables.class);
+		} catch (IOException e) {
+			log.error("During mocking an error occured while reading json datas on files /json/gar_response_*.json", e);
+			return new ListeRessourcesDiffusables();
+		}
 	}
 
 	public List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos) {

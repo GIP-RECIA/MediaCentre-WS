@@ -19,6 +19,7 @@ package fr.recia.mediacentre.ws.model.ressource.diffusion;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
@@ -35,8 +36,10 @@ import java.io.Serializable;
 public class DistributeurCom implements Serializable {
 
     @NonNull
+    @JacksonXmlProperty(localName = "distributeurCom")
     public String distributeurCom;
     @NonNull
+    @JacksonXmlProperty(localName = "nomDistributeurCom")
     public String nomDistributeurCom;
 
     /**
@@ -47,7 +50,7 @@ public class DistributeurCom implements Serializable {
         super();
     }
 
-    public DistributeurCom(final String distributeurCom, final String nomDistributeurCom) {
+    public DistributeurCom(@NonNull final String distributeurCom, @NonNull final String nomDistributeurCom) {
         this.distributeurCom = distributeurCom;
         this.nomDistributeurCom = nomDistributeurCom;
     }

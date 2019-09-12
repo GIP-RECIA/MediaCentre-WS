@@ -1,0 +1,1537 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<listeRessourcesDiffusables xmlns="http://gar.education.fr/schemas/init/0/1/">
+  <dateGeneration>2019-04-17T02:15:13Z</dateGeneration>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/1/CAS/Agronomie_2pro</idRessource>
+    <nomRessource>MOA-1-CAS_Agronomie_2pro</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/1/CAS/Allemand_5</idRessource>
+    <nomRessource>MOA-1-CAS_Allemand_5</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/1/CAS/Anglais_Cyc2</idRessource>
+    <nomRessource>MOA-1-CAS_Anglais_Cyc2</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/1/CAS/Atlas</idRessource>
+    <nomRessource>MOA-1-CAS_Atlas</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/1/CAS/Maths_2</idRessource>
+    <nomRessource>MOA-1-CAS_Maths_2</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/1/CAS/Maths_Cyc3</idRessource>
+    <nomRessource>MOA-1-CAS_Maths_Cyc3</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/1/CAS/Orientation_3</idRessource>
+    <nomRessource>MOA-1-CAS_Orientation_3</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/1/CAS/Zootechnie_2pro</idRessource>
+    <nomRessource>MOA-1-CAS_Zootechnie_2pro</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/1/SAML/FLetMFNVArm_4</idRessource>
+    <nomRessource>MOA-1-SAML-FamilleLesLettres-MFNV_ArmoirePédagogiqueLettres_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+    <mereFamille>true</mereFamille>
+    <membreFamille>ark:/49591/MOA/1/SAML/FLetMFNVArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/1/SAML/FamilleLesLettres_Français_4</idRessource>
+    <nomRessource>MOA-1-SAML-FamilleLesLettres_Français_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+    <membreFamille>ark:/49591/MOA/1/SAML/FLetMFNVArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/1/SAML/FamilleLesLettres_Theatre_4</idRessource>
+    <nomRessource>MOA-1-SAML-FamilleLesLettres_Théatre_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <membreFamille>ark:/49591/MOA/1/SAML/FLetMFNVArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/1/SAML/Philosophie_ter</idRessource>
+    <nomRessource>MOA-1-SAML_Philosophie_ter</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/2/CAS/Allemand_5</idRessource>
+    <nomRessource>MOA-2-CAS_Allemand_5</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/2/CAS/Atlas</idRessource>
+    <nomRessource>MOA-2-CAS_Atlas</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/2/CAS/Maths_Cyc3</idRessource>
+    <nomRessource>MOA-2-CAS_Maths_Cyc3</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/2/CAS/Physique-chimie_1</idRessource>
+    <nomRessource>MOA-2-CAS_Pysique-chimie_1</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/2/CAS/Zootechnie_2pro</idRessource>
+    <nomRessource>MOA-2-CAS_Zootechnie_2pro</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/2/SAML/FLetMFArm_4</idRessource>
+    <nomRessource>MOA-2-SAML-FamilleLesLettres-MF_ArmoirePédagogiqueLettres_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <mereFamille>true</mereFamille>
+    <membreFamille>ark:/49591/MOA/2/SAML/FLetMFArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/2/SAML/FamilleLesLettres_Français_4</idRessource>
+    <nomRessource>MOA-2-SAML-FamilleLesLettres_Français_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <membreFamille>ark:/49591/MOA/2/SAML/FLetMFArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/2/SAML/FamilleLesLettres_Theatre_4</idRessource>
+    <nomRessource>MOA-2-SAML-FamilleLesLettres_Théatre_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <membreFamille>ark:/49591/MOA/2/SAML/FLetMFArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/2/SAML/Philosophie_ter</idRessource>
+    <nomRessource>MOA-2-SAML_Philosophie_ter</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/3/CAS/Allemand_5</idRessource>
+    <nomRessource>MOA-3-CAS_Allemand_5</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/3/CAS/Anglais_Cyc2</idRessource>
+    <nomRessource>MOA-3-CAS_Anglais_Cyc2</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/3/CAS/Atlas</idRessource>
+    <nomRessource>MOA-3-CAS_Atlas</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/3/CAS/Maths_2</idRessource>
+    <nomRessource>MOA-3-CAS_Maths_2</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/3/CAS/Maths_Cyc3</idRessource>
+    <nomRessource>MOA-3-CAS_Maths_Cyc3</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/3/CAS/Orientation_3</idRessource>
+    <nomRessource>MOA-3-CAS_Orientation_3</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/3/CAS/Zootechnie_2pro</idRessource>
+    <nomRessource>MOA-3-CAS_Zootechnie_2pro</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/3/SAML/FLetMFNVArm_4</idRessource>
+    <nomRessource>MOA-3-SAML-FamilleLesLettres-MFNV_ArmoirePédagogiqueLettres_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+    <mereFamille>true</mereFamille>
+    <membreFamille>ark:/49591/MOA/3/SAML/FLetMFNVArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/3/SAML/FamilleLesLettres_Theatre_4</idRessource>
+    <nomRessource>MOA-3-SAML-FamilleLesLettres_Théatre_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <membreFamille>ark:/49591/MOA/3/SAML/FLetMFNVArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/4/CAS/Allemand_5</idRessource>
+    <nomRessource>MOA-4-CAS_Allemand_5</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/4/CAS/Atlas</idRessource>
+    <nomRessource>MOA-4-CAS_Atlas</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/4/CAS/Chanter_Cyc2</idRessource>
+    <nomRessource>MOA-4-CAS_Chanter_Cyc2</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/4/CAS/Orientation_3</idRessource>
+    <nomRessource>MOA-4-CAS_Orientation_3</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/4/CAS/Physique-chimie_1</idRessource>
+    <nomRessource>MOA-4-CAS_Pysique-chimie_1</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/4/CAS/Zootechnie_2pro</idRessource>
+    <nomRessource>MOA-4-CAS_Zootechnie_2pro</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/4/SAML/FLetMFArm_4</idRessource>
+    <nomRessource>MOA-4-CAS-FamilleLesLettres-MF_ArmoirePédagogiqueLettres_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <mereFamille>true</mereFamille>
+    <membreFamille>ark:/49591/MOA/4/SAML/FLetMFArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/4/SAML/FamilleLesLettres_Français_4</idRessource>
+    <nomRessource>MOA-4-SAML-FamilleLesLettres_Français_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <membreFamille>ark:/49591/MOA/4/SAML/FLetMFArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/4/SAML/FamilleLesLettres_Theatre_4</idRessource>
+    <nomRessource>MOA-4-SAML-FamilleLesLettres_Théatre_4</nomRessource>
+    <idEditeur>180089013_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <membreFamille>ark:/49591/MOA/4/SAML/FLetMFArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/4/SAML/Philosophie_ter</idRessource>
+    <nomRessource>MOA-4-SAML_Philosophie_ter</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/5/CAS/Allemand_5</idRessource>
+    <nomRessource>MOA-5-CAS_Allemand_5</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/5/CAS/Anglais_Cyc2</idRessource>
+    <nomRessource>MOA-5-CAS_Anglais_Cyc2</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/5/CAS/Atlas</idRessource>
+    <nomRessource>MOA-5-CAS_Atlas</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/5/CAS/Maths_2</idRessource>
+    <nomRessource>MOA-5-CAS_Maths_2</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/5/CAS/Maths_Cyc3</idRessource>
+    <nomRessource>MOA-5-CAS_Maths_Cyc3</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/5/CAS/Orientation_3</idRessource>
+    <nomRessource>MOA-5-CAS_Orientation_3</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/5/CAS/Zootechnie_2pro</idRessource>
+    <nomRessource>MOA-5-CAS_Zootechnie_2pro</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/5/SAML/FLetMFNVArm_4</idRessource>
+    <nomRessource>MOA-5-SAML-FamilleLesLettres-MFNV_ArmoirePédagogiqueLettres_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+    <mereFamille>true</mereFamille>
+    <membreFamille>ark:/49591/MOA/5/SAML/FLetMFNVArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/5/SAML/FamilleLesLettres_Theatre_4</idRessource>
+    <nomRessource>MOA-5-SAML-FamilleLesLettres_Théatre_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <membreFamille>ark:/49591/MOA/5/SAML/FLetMFNVArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/5/SAML/Philosophie_ter</idRessource>
+    <nomRessource>MOA-5-SAML_Philosophie_ter</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/6/CAS/Allemand_5</idRessource>
+    <nomRessource>MOA-6-CAS_Allemand_5</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/6/CAS/Atlas</idRessource>
+    <nomRessource>MOA-6-CAS_Atlas</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/6/CAS/Maths_Cyc3</idRessource>
+    <nomRessource>MOA-6-CAS_Maths_Cyc3</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/6/CAS/Orientation_3</idRessource>
+    <nomRessource>MOA-6-CAS_Orientation_3</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/6/CAS/Physique-chimie_1</idRessource>
+    <nomRessource>MOA-6-CAS_Pysique-chimie_1</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/6/CAS/Zootechnie_2pro</idRessource>
+    <nomRessource>MOA-6-CAS_Zootechnie_2pro</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/6/SAML/FLetMFArm_4</idRessource>
+    <nomRessource>MOA-6-SAML-FamilleLesLettres-MF_ArmoirePédagogiqueLettres_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <mereFamille>true</mereFamille>
+    <membreFamille>ark:/49591/MOA/6/SAML/FLetMFArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/6/SAML/FamilleLesLettres_Theatre_4</idRessource>
+    <nomRessource>MOA-6-SAML-FamilleLesLettres_Théatre_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <membreFamille>ark:/49591/MOA/6/SAML/FLetMFArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/7/CAS/Allemand_5</idRessource>
+    <nomRessource>MOA-7-CAS_Allemand_5</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/7/CAS/Anglais_Cyc2</idRessource>
+    <nomRessource>MOA-7-CAS_Anglais_Cyc2</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/7/CAS/Atlas</idRessource>
+    <nomRessource>MOA-7-CAS_Atlas</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/7/CAS/Maths_2</idRessource>
+    <nomRessource>MOA-7-CAS_Maths_2</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/7/CAS/Orientation_3</idRessource>
+    <nomRessource>MOA-7-CAS_Orientation_3</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/7/CAS/Zootechnie_2pro</idRessource>
+    <nomRessource>MOA-7-CAS_Zootechnie_2pro</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/7/SAML/FLetMFNVArm_4</idRessource>
+    <nomRessource>MOA-7-SAML-FamilleLesLettres-MFNV_ArmoirePédagogiqueLettres_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+    <mereFamille>true</mereFamille>
+    <membreFamille>ark:/49591/MOA/7/SAML/FLetMFNVArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/7/SAML/FamilleLesLettres_Français_4</idRessource>
+    <nomRessource>MOA-7-SAML-FamilleLesLettres_Français_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <membreFamille>ark:/49591/MOA/7/SAML/FLetMFNVArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/7/SAML/Philosophie_ter</idRessource>
+    <nomRessource>MOA-7-SAML_Philosophie_ter</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/8/CAS/Allemand_5</idRessource>
+    <nomRessource>MOA-8-CAS_Allemand_5</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/8/CAS/Atlas</idRessource>
+    <nomRessource>MOA-8-CAS_Atlas</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/8/CAS/Chanter_Cyc2</idRessource>
+    <nomRessource>MOA-8-CAS_Chanter_Cyc2</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/8/CAS/Maths_Cyc3</idRessource>
+    <nomRessource>MOA-8-CAS_Maths_Cyc3</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/8/CAS/Orientation_3</idRessource>
+    <nomRessource>MOA-8-CAS_Orientation_3</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/8/CAS/Physique-chimie_1</idRessource>
+    <nomRessource>MOA-8-CAS_Pysique-chimie_1</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/8/CAS/Zootechnie_2pro</idRessource>
+    <nomRessource>MOA-8-CAS_Zootechnie_2pro</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/8/SAML/FLetMFArm_4</idRessource>
+    <nomRessource>MOA-8-SAML-FamilleLesLettres-MF_ArmoirePédagogiqueLettres_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <mereFamille>true</mereFamille>
+    <membreFamille>ark:/49591/MOA/8/SAML/FLetMFArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/8/SAML/FamilleLesLettres_Theatre_4</idRessource>
+    <nomRessource>MOA-8-SAML-FamilleLesLettres_Théatre_4</nomRessource>
+    <idEditeur>602060147_0000000000000000</idEditeur>
+    <nomEditeur>EditeurTestKne</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>602060147_0000000000000000</distributeurCom>
+      <nomDistributeurCom>EditeurTestKne</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>602060147_0000000000000000</distributeurTech>
+    <nomDistributeurTech>EditeurTestKne</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <membreFamille>ark:/49591/MOA/8/SAML/FLetMFArm_4</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/Commun/CAS/Dictionnaire_Français</idRessource>
+    <nomRessource>MOA-Commun-CAS_Dictionnaire_Français</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/Commun/CAS/Espagnol_1</idRessource>
+    <nomRessource>MOA-Commun-CAS_Espagnol_1</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/Commun/CAS/Français_Cyc2</idRessource>
+    <nomRessource>MOA-Commun-CAS_Français_Cyc2</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/Commun/CAS/Orientation_3</idRessource>
+    <nomRessource>MOA-Commun-CAS_Orientation_3</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>ark:/49591/MOA/Commun/CAS/SVT_Cyc4</idRessource>
+    <nomRessource>MOA-Commun-CAS_SVT_Cyc4</nomRessource>
+    <idEditeur>180089013_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>180089013_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>180089013_0000000000000000</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/ACCCAS</idRessource>
+    <nomRessource>Accès REN_CAS_PFV</nomRessource>
+    <idEditeur>194351539_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>194351539_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>000000000_0000000000000001</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/ACCCAS_DEPLOIEMENT</idRessource>
+    <nomRessource>Accès REN_CAS_PFV_DEPLOIEMENT</nomRessource>
+    <idEditeur>194351539_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>194351539_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>000000000_0000000000000001</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/ACCCAS_P_MEL_DCP</idRessource>
+    <nomRessource>Accès REN_CAS_PFV_P_MEL_DCP</nomRessource>
+    <idEditeur>194351539_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>194351539_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>000000000_0000000000000001</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/ACCCASscolomfr30</idRessource>
+    <nomRessource>Accès REN_CAS_PFV_scolomfr3.0</nomRessource>
+    <idEditeur>194351539_0000239874563311</idEditeur>
+    <nomEditeur/>
+    <distributeursCom>
+      <distributeurCom>194351539_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>000000000_0000000000000001</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <mereFamille>true</mereFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/ACCSAML</idRessource>
+    <nomRessource>Accès REN_SAML_PFV</nomRessource>
+    <idEditeur>194351539_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>194351539_0000239874563311</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>000000000_0000000000000003</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/ACCSAML_DEPLOIEMENT</idRessource>
+    <nomRessource>Accès REN_SAML_PFV_DEPLOIEMENT</nomRessource>
+    <idEditeur>194351539_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>194351539_0000239874563311</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>000000000_0000000000000003</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/ACCSAMLn7</idRessource>
+    <nomRessource>Accès REN_SAML_shibboleth_PFV-n6</nomRessource>
+    <idEditeur>194351539_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>194351539_0000239874563311</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>000000000_0000000000000042</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/CGIDCP190319-063909</idRessource>
+    <nomRessource>Test CGI_AUTO_DCP_190319-063909</nomRessource>
+    <idEditeur>194351539_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>194351539_0000239874563311</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>000000000_0000000000000001</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/RESS_LL_MOIERR</idRessource>
+    <nomRessource>RESS_LL_MOIERR-CAS-FAMILLE-FILLE</nomRessource>
+    <idEditeur>194351539_0000000000000000</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>194351539_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>000000000_0000000000000003</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/RESS_L_MOIERR</idRessource>
+    <nomRessource>RESS_L_MOIERR_CAS_FAMILLE_MERE</nomRessource>
+    <idEditeur>194351539_0000000000000000</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>194351539_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>000000000_0000000000000003</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <mereFamille>true</mereFamille>
+    <membreFamille>http://n2t.net/ark:/99999/RESS_L_MOIERR</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/RESS_MOI-FAM9_MCAS</idRessource>
+    <nomRessource>RESS_MOI-FAM9_MCAS-FAMILLE-FILLE2</nomRessource>
+    <idEditeur>194351539_0000239874563311</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>194351539_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>000000000_0000000000000001</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <membreFamille>http://n2t.net/ark:/99999/RESS_L_MOIERR</membreFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/RESS_SAML_FAMILLE_FILLE</idRessource>
+    <nomRessource>RESS_SAML_FAMILLE_FILLE</nomRessource>
+    <idEditeur>194351539_0000000000000000</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>194351539_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>000000000_0000000000000003</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/RESS_SAML_FAMILLE_MERE</idRessource>
+    <nomRessource>RESS_SAML_FAMILLE_MERE</nomRessource>
+    <idEditeur>194351539_0000000000000000</idEditeur>
+    <nomEditeur>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomEditeur>
+    <distributeursCom>
+      <distributeurCom>194351539_0000000000000000</distributeurCom>
+      <nomDistributeurCom>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurCom>
+    </distributeursCom>
+    <distributeurTech>000000000_0000000000000003</distributeurTech>
+    <nomDistributeurTech>ENCYCLOPAEDIA UNIVERSALIS FRANCE</nomDistributeurTech>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <mereFamille>true</mereFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/r1</idRessource>
+    <nomRessource>Ressource R1 validation CAS</nomRessource>
+    <idEditeur>999901946_0000000000000000</idEditeur>
+    <nomEditeur/>
+    <distributeursCom>
+      <distributeurCom>999901946_0000000000000000</distributeurCom>
+      <nomDistributeurCom/>
+    </distributeursCom>
+    <distributeurTech>999901946_0000000000000000</distributeurTech>
+    <nomDistributeurTech/>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/r101xxxxxxxx</idRessource>
+    <nomRessource>R101_MULTI_TOUT - Manuel numérique élève (100% numérique) - Multisupports (tablettes + PC/Mac)</nomRessource>
+    <idEditeur>999901946_0000000000000000</idEditeur>
+    <nomEditeur/>
+    <distributeursCom>
+      <distributeurCom>999901946_0000000000000000</distributeurCom>
+      <nomDistributeurCom/>
+    </distributeursCom>
+    <distributeurTech>999901946_0000000000000000</distributeurTech>
+    <nomDistributeurTech/>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <mereFamille>true</mereFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/r103</idRessource>
+    <nomRessource>Ressource R103 validation SAML</nomRessource>
+    <idEditeur>378901946_0000000000000000</idEditeur>
+    <nomEditeur/>
+    <distributeursCom>
+      <distributeurCom>378901946_0000000000000000</distributeurCom>
+      <nomDistributeurCom/>
+    </distributeursCom>
+    <distributeurTech>378901946_0000000000000000</distributeurTech>
+    <nomDistributeurTech/>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/r103xxxxxxxx</idRessource>
+    <nomRessource>R103_ELEVE_TOUT</nomRessource>
+    <idEditeur>378901946_0000000000000000</idEditeur>
+    <nomEditeur/>
+    <distributeursCom>
+      <distributeurCom>378901946_0000000000000000</distributeurCom>
+      <nomDistributeurCom/>
+    </distributeursCom>
+    <distributeurTech>378901946_0000000000000000</distributeurTech>
+    <nomDistributeurTech/>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/r1xxxxxxxx</idRessource>
+    <nomRessource>R01_MULTI_TOUT - Manuel numérique élève (100% numérique) - Multisupports (tablettes + PC/Mac)</nomRessource>
+    <idEditeur>378901946_0000000000000000</idEditeur>
+    <nomEditeur/>
+    <distributeursCom>
+      <distributeurCom>378901946_0000000000000000</distributeurCom>
+      <nomDistributeurCom/>
+    </distributeursCom>
+    <distributeurTech>378901946_0000000000000000</distributeurTech>
+    <nomDistributeurTech/>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/r_unicite_url_1</idRessource>
+    <nomRessource>Ressource test unicité url 1</nomRessource>
+    <idEditeur>378901946_0000000000000000</idEditeur>
+    <nomEditeur/>
+    <distributeursCom>
+      <distributeurCom>378901946_0000000000000000</distributeurCom>
+      <nomDistributeurCom/>
+    </distributeursCom>
+    <distributeurTech>378901946_0000000000000000</distributeurTech>
+    <nomDistributeurTech/>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/r_unicite_url_2</idRessource>
+    <nomRessource>Ressource test unicité url 2</nomRessource>
+    <idEditeur>378901946_0000000000000000</idEditeur>
+    <nomEditeur/>
+    <distributeursCom>
+      <distributeurCom>378901946_0000000000000000</distributeurCom>
+      <nomDistributeurCom/>
+    </distributeursCom>
+    <distributeurTech>378901946_0000000000000000</distributeurTech>
+    <nomDistributeurTech/>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/ressource_SAML_MOB_Fille1</idRessource>
+    <nomRessource>Ressource SAML Mobilite Fille1</nomRessource>
+    <idEditeur>378901946_0000000000000000</idEditeur>
+    <nomEditeur/>
+    <distributeursCom>
+      <distributeurCom>378901946_0000000000000000</distributeurCom>
+      <nomDistributeurCom/>
+    </distributeursCom>
+    <distributeurTech>378901946_0000000000000000</distributeurTech>
+    <nomDistributeurTech/>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/ressource_SAML_MOB_Fille2</idRessource>
+    <nomRessource>Ressource SAML Mobilite Fille2</nomRessource>
+    <idEditeur>378901946_0000000000000000</idEditeur>
+    <nomEditeur/>
+    <distributeursCom>
+      <distributeurCom>378901946_0000000000000000</distributeurCom>
+      <nomDistributeurCom/>
+    </distributeursCom>
+    <distributeurTech>378901946_0000000000000000</distributeurTech>
+    <nomDistributeurTech/>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/rnotiferreurxxxxxxxx</idRessource>
+    <nomRessource>R150</nomRessource>
+    <idEditeur>378901946_0000000000000000</idEditeur>
+    <nomEditeur/>
+    <distributeursCom>
+      <distributeurCom>378901946_0000000000000000</distributeurCom>
+      <nomDistributeurCom/>
+    </distributeursCom>
+    <distributeurTech>378901946_0000000000000000</distributeurTech>
+    <nomDistributeurTech/>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <mereFamille>true</mereFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/scolomfr30</idRessource>
+    <nomRessource>R154</nomRessource>
+    <idEditeur>378901946_0000000000000000</idEditeur>
+    <nomEditeur/>
+    <distributeursCom>
+      <distributeurCom>378901946_0000000000000000</distributeurCom>
+      <nomDistributeurCom/>
+    </distributeursCom>
+    <distributeurTech>378901946_0000000000000000</distributeurTech>
+    <nomDistributeurTech/>
+    <affichable>true</affichable>
+    <diffusable>true</diffusable>
+    <mereFamille>true</mereFamille>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/scolomfr32</idRessource>
+    <nomRessource>Ma ressource exemple scolomfr3.2</nomRessource>
+    <idEditeur>378901946_0000000000000000</idEditeur>
+    <nomEditeur/>
+    <distributeursCom>
+      <distributeurCom>378901946_0000000000000000</distributeurCom>
+      <nomDistributeurCom/>
+    </distributeursCom>
+    <distributeurTech>378901946_0000000000000000</distributeurTech>
+    <nomDistributeurTech/>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+  <ressourceDiffusable>
+    <idRessource>http://n2t.net/ark:/99999/scolomfr40</idRessource>
+    <nomRessource>Ma ressource exemple scolomfr4.0</nomRessource>
+    <idEditeur>378901946_0000000000000000</idEditeur>
+    <nomEditeur/>
+    <distributeursCom>
+      <distributeurCom>378901946_0000000000000000</distributeurCom>
+      <nomDistributeurCom/>
+    </distributeursCom>
+    <distributeurTech>378901946_0000000000000000</distributeurTech>
+    <nomDistributeurTech/>
+    <affichable>false</affichable>
+    <diffusable>true</diffusable>
+  </ressourceDiffusable>
+</listeRessourcesDiffusables>
