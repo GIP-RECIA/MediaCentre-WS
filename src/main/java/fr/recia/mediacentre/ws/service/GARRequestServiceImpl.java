@@ -284,7 +284,7 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 	private Structure getStructureWithFallBack(final Map<String, Structure> mapStructure, final String id) {
 		Structure structure = mapStructure.get(id);
 		if (structure == null) {
-			log.warn("An error occured ! it can't get the structure informations with the identifier {}, so we make a limited fallback !", id);
+			log.warn("An error occured ! it can't get the structure information with the identifier {}, so we make a limited fallback !", id);
 			structure = new Structure();
 			structure.setCode(id);
 			structure.setDisplayName(id);
@@ -292,7 +292,7 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 		return structure;
 	}
 
-	public boolean isUserAuthorized(@NotNull final Map<String, List<String>> userInfos) {
+	protected boolean isUserAuthorized(@NotNull final Map<String, List<String>> userInfos) {
 		final Map<String,List<String>> userProps = garConfiguration.getAuthorizedUsers();
 		if (userProps.isEmpty()) return true;
 		for (Map.Entry<String, List<String>> entry : userProps.entrySet()) {
@@ -308,9 +308,9 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		Assert.notNull(this.garConfiguration, "The GAR configuration bean wasn't setted !");
-		Assert.notNull(this.remoteAccessTemplate, "The RestTemplate bean wasn't setted !");
-		Assert.notNull(this.structureInfoService, "The StructureInfoService bean wasn't setted !");
-		Assert.notNull(this.httpHeaders, "The httpHeaders bean wasn't setted !");
+		Assert.notNull(this.garConfiguration, "The GAR configuration bean wasn't set!");
+		Assert.notNull(this.remoteAccessTemplate, "The RestTemplate bean wasn't set!");
+		Assert.notNull(this.structureInfoService, "The StructureInfoService bean wasn't set!");
+		Assert.notNull(this.httpHeaders, "The httpHeaders bean wasn't set!");
 	}
 }

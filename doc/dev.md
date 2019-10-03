@@ -11,10 +11,16 @@
 -Dlogback.logfileDirectory=/PATH/
 
 # to run test:
-./mvnw clean test -Dlogback.logfileDirectory=LOGS -Dspring.profiles.active=USER_MAPPING,test,WITHOUT_STRUCT_REST
+# locally without any REST API (activated profiles are test,WITHOUT_GAR,WITHOUT_STRUCT_REST,USER_MAPPING - expect on test class declaration)
+./mvnw clean test -Dlogback.logfileDirectory=LOGS -Dlogback.loglevel=INFO
 
 # with config context:
 export MAVEN_OPTS="-Xms1G -Xmx2G" # could be needed in case of using a context - requesting on real datas
 export PORTAL_HOME=.....
 ./mvnw clean test -Dlogback.logfileDirectory=LOGS -Dspring.profiles.active=USER_MAPPING,test,WITHOUT_STRUCT_REST -Dspring.config.additional-location=${PORTAL_HOME}/mediacentre-ws.yml
+
+# pour la récupération de la liste des ressources diffusable
+`curl -X GET 'xxxxxxxx/mediacentre-ws/api/ressourcesDiffusables/' -H 'Accept: application/json' -H 'Content-Type: application/json' --compressed -H 'Pragma: no-cache' -H 'Cache-Control: no-cache' -k -v --tlsv1.2`
+ou en xml
+`curl -X GET 'xxxxxxxx/mediacentre-ws/api/ressourcesDiffusables/' -H 'Accept: application/xml' -H 'Content-Type: application/json' --compressed -H 'Pragma: no-cache' -H 'Cache-Control: no-cache' -k -v --tlsv1.2`
 

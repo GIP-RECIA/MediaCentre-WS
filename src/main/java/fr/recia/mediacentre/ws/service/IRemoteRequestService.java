@@ -29,7 +29,4 @@ public interface IRemoteRequestService {
 	List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos);
 
 	ListeRessourcesDiffusables getRessourcesDiffusables();
-
-	boolean isUserAuthorized(@NotNull final Map<String, List<String>> userInfos);
-
 }

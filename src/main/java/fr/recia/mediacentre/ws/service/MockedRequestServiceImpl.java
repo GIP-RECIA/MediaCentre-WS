@@ -109,7 +109,9 @@ public class MockedRequestServiceImpl implements IRemoteRequestService, Initiali
 		ObjectMapper mapper = new XmlMapper();
 
 		try {
-			return mapper.readValue(ressourcesDiff.getInputStream(), ListeRessourcesDiffusables.class);
+			final ListeRessourcesDiffusables lrd = mapper.readValue(ressourcesDiff.getInputStream(), ListeRessourcesDiffusables.class);
+			log.info("Liste Ressources Diffusable returned {}", lrd);
+			return lrd;
 		} catch (IOException e) {
 			log.error("During mocking an error occured while reading json datas on files /json/gar_response_*.json", e);
 			return new ListeRessourcesDiffusables();

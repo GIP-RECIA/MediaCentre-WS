@@ -81,7 +81,6 @@ public class RessourceListeResourceTest {
 //    private MockRestServiceServer mockGARServer;
 
     private MockMvc mockListRessourcesMvc;
-    private MockMvc mockListRessourcesDiffMvc;
 
     @Autowired
     private Environment environment;
@@ -150,7 +149,7 @@ public class RessourceListeResourceTest {
                     .andExpect(status().isOk())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                     //.andExpect(content().encoding("UTF-8"))
-                    .andExpect(jsonPath("$.*", Matchers.hasSize(3)))
+                    .andExpect(jsonPath("$.*", Matchers.not(Matchers.emptyArray())))
                     .andExpect(jsonPath("$.[0]", Matchers.hasKey("idRessource")))
                     .andExpect(jsonPath("$.[0]", Matchers.hasKey("idEtablissement")))
                     .andExpect(jsonPath("$.[0].idEtablissement", Matchers.hasSize(1)))
@@ -255,7 +254,7 @@ public class RessourceListeResourceTest {
                     .andExpect(content().encoding("UTF-8"))
                     .andExpect(jsonPath("$", Matchers.notNullValue()))
                     .andExpect(jsonPath("$").isArray())
-                    .andExpect(jsonPath("$", Matchers.hasSize(1)))
+                    .andExpect(jsonPath("$", Matchers.not(Matchers.emptyArray())))
                     .andExpect(jsonPath("$.[0]", Matchers.hasKey("dateGeneration")))
                     .andExpect(jsonPath("$.[0]", Matchers.hasKey("ressourceDiffusable")))
                     .andExpect(jsonPath("$.[0].ressourceDiffusable").isArray())
