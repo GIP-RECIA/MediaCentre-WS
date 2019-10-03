@@ -19,8 +19,11 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import fr.recia.mediacentre.ws.config.bean.LocalRessourceProperties;
 import fr.recia.mediacentre.ws.service.IRemoteRequestService;
 import fr.recia.mediacentre.ws.service.IStructureInfoService;
+import fr.recia.mediacentre.ws.service.InternalFileServiceImpl;
+import fr.recia.mediacentre.ws.service.LocalRessourceLoader;
 import fr.recia.mediacentre.ws.service.MockedRequestServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import fr.recia.mediacentre.ws.service.GARRequestServiceImpl;
@@ -36,6 +39,9 @@ public class RemoteRequestServiceConfiguration {
 
 	@Autowired(required = false)
 	private GARClientConfiguration garClientConfiguration;
+
+	@Autowired(required = false)
+	private LocalRessourceProperties localRessourceProperties;
 
 	@Autowired
 	private IStructureInfoService structureInfoService;
@@ -57,6 +63,22 @@ public class RemoteRequestServiceConfiguration {
 		MockedRequestServiceImpl mockedService = new MockedRequestServiceImpl();
 		mockedService.setStructureInfoService(structureInfoService);
 		return mockedService;
+	}
+
+	@Bean
+	public LocalRessourceLoader getLocalRessourceLoader() {
+		LocalRessourceLoader loader = new LocalRessourceLoader();
+		loader.setLocalRSConfiguration(localRessourceProperties);
+		return loader;
+	}
+
+	@Bean
+	public IRemoteRequestService getLocalRessourceService() {
+		InternalFileServiceImpl rs = new InternalFileServiceImpl();
+		rs.setLocalRSConfiguration(localRessourceProperties);
+		rs.setStructureInfoService(structureInfoService);
+		rs.setLoader(getLocalRessourceLoader());
+		return rs;
 	}
 
 	@Autowired

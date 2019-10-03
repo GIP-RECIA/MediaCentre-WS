@@ -95,3 +95,8 @@ ressources:
        -
          param: GARPersonIdentifiant
          value: UNDEFINED
+localRessources:
+  ressourcePathDirectory: "/home/jgribonvald/Travail/workspace-sts/mediacentre-ws/src/main/resources/json/LocalRessources"
+  refreshTimeOfPathDirectory: 5000
+  userAttributeIdEtab: ESCOUAI
+  userAttributeId: uid

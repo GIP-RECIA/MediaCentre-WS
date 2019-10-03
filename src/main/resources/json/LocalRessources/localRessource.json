@@ -1,0 +1,84 @@
+{
+    "listeRessources": {
+        "ressource": [
+            {
+                "distributeurTech": "Région Centre-Val de Loire",
+                "domaineEnseignement": [
+                ],
+                "idEditeur": "editeurId1",
+                "idRessource": "ressourceId1",
+                "idType": "typeId1",
+                "niveauEducatif": [
+                ],
+                "nomEditeur": "Nom long d'un éditeur car il y en a et des très long",
+                "nomRessource": "Nom de la ressource 1 avec encore un titre long mais cette fois ci il est pompeux, et il y en a beaucoup des comme ça, voir une quantité importante ! Ce qui fait que les titres ont plus l'air d'une description",
+                "nomSourceEtiquetteGar": "RECIA",
+                "typePedagogique": [
+                ],
+                "typePresentation":
+                    {
+                        "code": "MUL",
+                        "nom": "ressources d'enseignement multimédias"
+                    },
+                "typologieDocument": [
+                ],
+                "urlAccesRessource": "https://lycees.netocentre.fr/aide/AideENT/",
+                "urlSourceEtiquette": "http://gar.education.fr/assets/images/logo-gar.svg",
+                "urlVignette": "https://lycees.netocentre.fr/aide/AideENT/images/accesFavoris.jpg",
+                "validateurTech": "validateurTech1",
+                "filtreDroit": [
+                    {
+                        "attribut": "isMemberOf",
+                        "pattern": "^esco:Etablissements:.*"
+                    }
+                ],
+                "extractEtablissement": [
+                    {
+                        "attribut": "isMemberOf",
+                        "matcher": "^esco:Applications:Ressources_Editoriales:generation_5:[\\p{L}\\s-]+_([0-9]{7}[a-zA-Z]{1})",
+                        "group": "1"
+                    }
+                ]
+            },
+            {
+                "distributeurTech": "distributeurTech2",
+                "domaineEnseignement": [
+                ],
+                "idEditeur": "editeurId2",
+                "idRessource": "ressourceId2",
+                "idType": "typeId1",
+                "niveauEducatif": [
+                ],
+                "nomEditeur": "Nom d'un éditeur2",
+                "nomRessource": "Nom de la ressource 3",
+                "nomSourceEtiquetteGar": "RECIA",
+                "typePedagogique": [
+                ],
+                "typePresentation":
+                {
+                    "code": "MUL",
+                    "nom": "ressources d'enseignement multimédias"
+                },
+                "typologieDocument": [
+                ],
+                "urlAccesRessource": "https://lycees.netocentre.fr/aide/AideENT/",
+                "urlSourceEtiquette": "http://gar.education.fr/assets/images/logo-gar.svg",
+                "urlVignette": "https://lycees.netocentre.fr/aide/AideENT/images/accesChangementEtablissement.jpg",
+                "validateurTech": "validateurTech2",
+                "filtreDroit": [
+                    {
+                        "attribut": "uid",
+                        "pattern": ".*"
+                    }
+                ],
+                "extractEtablissement": [
+                    {
+                        "attribut": "isMemberOf",
+                        "matcher": "^((esco)|(clg37)):Etablissements:[\\p{L}0-9\\s-]+_([0-9]{7}[a-zA-Z]{1}):.*",
+                        "group": "4"
+                    }
+                ]
+            }
+        ]
+    }
+}
