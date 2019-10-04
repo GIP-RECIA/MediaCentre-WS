@@ -15,35 +15,20 @@
  */
 package fr.recia.mediacentre.ws.service;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.google.common.collect.Lists;
+import fr.recia.mediacentre.ws.config.bean.ParamValueProperty;
+import fr.recia.mediacentre.ws.config.bean.RessourceProperties;
 import fr.recia.mediacentre.ws.model.ressource.IdEtablissement;
 import fr.recia.mediacentre.ws.model.ressource.ListeRessourcesWrapper;
 import fr.recia.mediacentre.ws.model.ressource.Ressource;
 import fr.recia.mediacentre.ws.model.ressource.diffusion.ListeRessourcesDiffusables;
-import fr.recia.mediacentre.ws.model.ressource.diffusion.ListeRessourcesDiffusablesWrapper;
-import fr.recia.mediacentre.ws.model.ressource.diffusion.RessourceDiffusable;
 import fr.recia.mediacentre.ws.model.structure.Structure;
 import fr.recia.mediacentre.ws.service.exception.AuthorizedResourceException;
 import fr.recia.mediacentre.ws.service.exception.CustomRestRequestException;
+import fr.recia.mediacentre.ws.service.exception.ListRequestErrorException;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import fr.recia.mediacentre.ws.config.bean.ParamValueProperty;
-import fr.recia.mediacentre.ws.config.bean.RessourceProperties;
-import fr.recia.mediacentre.ws.service.exception.ListRequestErrorException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -52,11 +37,17 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
-import org.springframework.util.StreamUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+
+import javax.validation.constraints.NotNull;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @NoArgsConstructor
 @Slf4j
@@ -87,7 +78,7 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 	}
 	}
 
-	public List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos) {
+	public List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos) throws ListRequestErrorException {
         if (!this.isUserAuthorized(userInfos)) {
             log.warn("The user isn't allowed to obtain resources from the GAR !");
             throw new AuthorizedResourceException(UN_AUTHORIZED_MESSAGE);

@@ -15,18 +15,17 @@
  */
 package fr.recia.mediacentre.ws.service;
 
+import fr.recia.mediacentre.ws.model.ressource.Ressource;
+import fr.recia.mediacentre.ws.model.ressource.diffusion.ListeRessourcesDiffusables;
+import fr.recia.mediacentre.ws.service.exception.ListRequestErrorException;
+
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.constraints.NotNull;
-
-import fr.recia.mediacentre.ws.model.ressource.Ressource;
-import fr.recia.mediacentre.ws.model.ressource.diffusion.ListeRessourcesDiffusables;
-import fr.recia.mediacentre.ws.model.ressource.diffusion.RessourceDiffusable;
-
 public interface IRemoteRequestService {
 
-	List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos);
+	List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos) throws ListRequestErrorException;
 
 	ListeRessourcesDiffusables getRessourcesDiffusables();
 }
