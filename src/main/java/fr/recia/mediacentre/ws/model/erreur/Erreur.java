@@ -16,14 +16,14 @@
 
 package fr.recia.mediacentre.ws.model.erreur;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -37,10 +37,10 @@ public class Erreur implements Serializable
 {
 
     @JsonProperty(value = "Code", required = true)
-    @NotEmpty
+    @NotBlank
     private String code;
     @JsonProperty(value = "Message", required = true)
-    @NotEmpty
+    @NotBlank
     private String message;
     @JsonProperty("Resource")
     @JsonInclude(JsonInclude.Include.ALWAYS)
@@ -59,7 +59,7 @@ public class Erreur implements Serializable
      * @param message Message de l'erreur.
      * @param resource URL/URI Rest de la request.
      */
-    public Erreur(@NotEmpty final String code, @NotEmpty final String message, final String resource) {
+    public Erreur(@NotBlank final String code, @NotBlank final String message, final String resource) {
         this.code = code;
         this.message = message;
         this.resource = resource;
@@ -71,7 +71,7 @@ public class Erreur implements Serializable
     }
 
     @JsonProperty("Code")
-    public void setCode(@NotEmpty final String code) {
+    public void setCode(@NotBlank final String code) {
         this.code = code;
     }
 
@@ -81,7 +81,7 @@ public class Erreur implements Serializable
     }
 
     @JsonProperty("Message")
-    public void setMessage(@NotEmpty final String message) {
+    public void setMessage(@NotBlank final String message) {
         this.message = message;
     }
 

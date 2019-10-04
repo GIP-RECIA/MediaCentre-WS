@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
 import java.util.regex.Pattern;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -19,10 +19,10 @@ import java.util.regex.Pattern;
 @EqualsAndHashCode
 public class FiltreDroitOnPattern{
 
-    @NonNull
+    @NotBlank
     public String attribut;
 
-    @NonNull
+    @NotBlank
     public String pattern;
 
     @Getter
@@ -33,7 +33,7 @@ public class FiltreDroitOnPattern{
         super();
     }
 
-    public FiltreDroitOnPattern(@NonNull final String attribut, @NonNull final String pattern) {
+    public FiltreDroitOnPattern(@NotBlank final String attribut, @NotBlank final String pattern) {
         this.attribut = attribut;
         this.pattern = pattern;
         compilePattern();
@@ -45,7 +45,7 @@ public class FiltreDroitOnPattern{
     }
 
     @JsonProperty(value = "attribut", required = true)
-    public void setAttribut(String attribut) {
+    public void setAttribut(@NotBlank String attribut) {
         this.attribut = attribut;
     }
 
@@ -55,7 +55,7 @@ public class FiltreDroitOnPattern{
     }
 
     @JsonProperty(value = "pattern", required = true)
-    public void setPattern(String pattern) {
+    public void setPattern(@NotBlank String pattern) {
         this.pattern = pattern;
         compilePattern();
     }

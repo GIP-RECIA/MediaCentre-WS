@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
 import java.util.regex.Pattern;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -20,10 +20,10 @@ import java.util.regex.Pattern;
 @EqualsAndHashCode
 public class ExtractEtablissementOnPattern {
 
-    @NonNull
+    @NotBlank
     public String attribut;
 
-    @NonNull
+    @NotBlank
     public String matcher;
 
     public int group;
@@ -35,7 +35,7 @@ public class ExtractEtablissementOnPattern {
         super();
     }
 
-    public ExtractEtablissementOnPattern(@NonNull final String attribut, @NonNull final String matcher, final int group) {
+    public ExtractEtablissementOnPattern(@NotBlank  final String attribut, @NotBlank  final String matcher, final int group) {
         this.attribut = attribut;
         this.matcher = matcher;
         this.group = group;
@@ -48,7 +48,7 @@ public class ExtractEtablissementOnPattern {
     }
 
     @JsonProperty(value = "attribut", required = true)
-    public void setAttribut(String attribut) {
+    public void setAttribut(@NotBlank String attribut) {
         this.attribut = attribut;
     }
 
@@ -58,7 +58,7 @@ public class ExtractEtablissementOnPattern {
     }
 
     @JsonProperty(value = "matcher", required = true)
-    public void setMatcher(String matcher) {
+    public void setMatcher(@NotBlank String matcher) {
         this.matcher = matcher;
         compilePattern();
     }
