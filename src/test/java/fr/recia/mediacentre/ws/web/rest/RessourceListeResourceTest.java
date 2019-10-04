@@ -15,32 +15,14 @@
  */
 package fr.recia.mediacentre.ws.web.rest;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.StreamSupport;
-
-import javax.annotation.PostConstruct;
-
 import com.google.common.collect.Lists;
+import fr.recia.mediacentre.ws.SystemPropertyIncludeProfileResolver;
+import fr.recia.mediacentre.ws.config.GARClientConfiguration;
 import fr.recia.mediacentre.ws.service.GARRequestServiceImpl;
 import fr.recia.mediacentre.ws.service.IRemoteRequestService;
 import fr.recia.mediacentre.ws.service.MockedRequestServiceImpl;
 import fr.recia.mediacentre.ws.web.rest.exception.GlobalExceptionHandler;
-import lombok.extern.slf4j.Slf4j;;
-import fr.recia.mediacentre.ws.SystemPropertyIncludeProfileResolver;
-import fr.recia.mediacentre.ws.config.GARClientConfiguration;
+import lombok.extern.slf4j.Slf4j;
 import org.hamcrest.Matchers;
 import org.hamcrest.collection.IsIn;
 import org.junit.jupiter.api.Test;
@@ -61,6 +43,25 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import javax.annotation.PostConstruct;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.StreamSupport;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
+
+;
+
 /**
  * Created by jgribonvald on 12/06/17.
  */
@@ -73,7 +74,7 @@ public class RessourceListeResourceTest {
     @Autowired
     List<IRemoteRequestService> remoteServices;
 
-    @Autowired(required = false)
+    @Autowired(required = true)
     private GARClientConfiguration garClientConfiguration;
 
 //    private RestTemplate restTemplate;
@@ -130,6 +131,13 @@ public class RessourceListeResourceTest {
             }
         }
         return null;
+    }
+
+    @Test
+    public void testAuthorizedUsersConf() {
+        assertThat(garClientConfiguration.getGARProperties().getAuthorizedUsers(), Matchers.not(Matchers.nullValue()));
+        assertThat(garClientConfiguration.getGARProperties().getAuthorizedUsers().getOperator(), Matchers.not(Matchers.nullValue()));
+        assertThat(garClientConfiguration.getGARProperties().getAuthorizedUsers().getFiltreDroitType(), Matchers.not(Matchers.emptyIterable()));
     }
 
     @Test

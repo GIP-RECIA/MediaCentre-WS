@@ -18,6 +18,7 @@ package fr.recia.mediacentre.ws.service;
 import com.google.common.collect.Lists;
 import fr.recia.mediacentre.ws.config.bean.ParamValueProperty;
 import fr.recia.mediacentre.ws.config.bean.RessourceProperties;
+import fr.recia.mediacentre.ws.model.ressource.FiltreDroit;
 import fr.recia.mediacentre.ws.model.ressource.IdEtablissement;
 import fr.recia.mediacentre.ws.model.ressource.ListeRessourcesWrapper;
 import fr.recia.mediacentre.ws.model.ressource.Ressource;
@@ -66,6 +67,8 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 
 	@Setter
 	private IStructureInfoService structureInfoService;
+
+	private EvaluatorDroit evaluatorDroit = new EvaluatorDroit();
 
 	public ListeRessourcesDiffusables getRessourcesDiffusables() {
 		String uri = garConfiguration.getRessourceDiffusableUri();
@@ -284,17 +287,8 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 	}
 
 	protected boolean isUserAuthorized(@NotNull final Map<String, List<String>> userInfos) {
-		final Map<String,List<String>> userProps = garConfiguration.getAuthorizedUsers();
-		if (userProps.isEmpty()) return true;
-		for (Map.Entry<String, List<String>> entry : userProps.entrySet()) {
-			log.debug("test user contains authorized values {} from users-info {} ", entry.getValue(), userInfos.get(entry.getKey()));
-			if (userInfos.containsKey(entry.getKey())) {
-				for (final String authorized: entry.getValue()) {
-					if (userInfos.get(entry.getKey()).contains(authorized)) return true;
-				}
-			}
-		}
-		return false;
+		final FiltreDroit droits = garConfiguration.getAuthorizedUsers();
+		return evaluatorDroit.evaluate(droits, userInfos);
 	}
 
 	@Override

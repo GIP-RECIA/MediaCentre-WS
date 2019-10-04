@@ -15,15 +15,14 @@
  */
 package fr.recia.mediacentre.ws.config.bean;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import fr.recia.mediacentre.ws.model.ressource.FiltreDroit;
+import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
-import lombok.Data;
+import java.util.List;
+import java.util.Map;
 
 @Data
 public class RessourceProperties {
@@ -43,7 +42,7 @@ public class RessourceProperties {
 
 	private String clientKeyAlias;
 
-	private Map<String,List<String>> authorizedUsers = new HashMap<>();
+	private FiltreDroit authorizedUsers;
 
 	private Map<String, List<String>> testUser;
 

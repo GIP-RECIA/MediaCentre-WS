@@ -10,4 +10,9 @@ public enum OperatorDroit implements Serializable {
     OR,
     AND;
 
+    @Override
+    public String toString() {
+        return this.name();
+    }
+
 }

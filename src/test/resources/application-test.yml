@@ -95,6 +95,13 @@ ressources:
        -
          param: GARPersonIdentifiant
          value: UNDEFINED
+      authorizedUsers:
+        operator: AND
+        filtreDroitType:
+          - attribut: ENTPersonProfils
+            pattern: ".*"
+          - attribut: isMemberOf
+            pattern: ".*"
 localRessources:
   ressourcePathDirectory: "/home/jgribonvald/Travail/workspace-sts/mediacentre-ws/src/main/resources/json/LocalRessources"
   refreshTimeOfPathDirectory: 5000
