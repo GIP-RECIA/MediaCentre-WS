@@ -15,39 +15,21 @@
  */
 package fr.recia.mediacentre.ws.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.google.common.collect.Lists;
-import com.google.common.io.Files;
 import fr.recia.mediacentre.ws.config.bean.LocalRessourceProperties;
 import fr.recia.mediacentre.ws.model.ressource.LocalRessource;
 import fr.recia.mediacentre.ws.model.ressource.Ressource;
-import fr.recia.mediacentre.ws.model.ressource.diffusion.ListeRessourcesDiffusables;
-import fr.recia.mediacentre.ws.model.ressource.diffusion.RessourceDiffusable;
 import lombok.extern.slf4j.Slf4j;
-import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matchers;
 import org.hamcrest.text.IsEmptyString;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -151,7 +133,10 @@ public class InternalRessourceImplTest {
     @Test
     public void testWithAllRS() {
         List<Ressource> ressources =  this.internalFileService.getRessources(userInfos);
-        
+
+        log.info("ressource 0: {}", ((LocalRessource)ressources.get(0)).getFiltreDroit());
+        log.info("ressource 1: {}", ((LocalRessource)ressources.get(1)).getFiltreDroit());
+
         assertThat(ressources, Matchers.hasSize(2));
         
         assertThat(ressources.get(1), Matchers.hasProperty("idRessource"));
@@ -172,6 +157,8 @@ public class InternalRessourceImplTest {
         assertThat(ressources.get(1).getUrlSourceEtiquette(), Matchers.not(IsEmptyString.emptyOrNullString()));
         assertThat(ressources.get(1), Matchers.hasProperty("urlVignette"));
         assertThat(ressources.get(1).getUrlVignette(), Matchers.not(IsEmptyString.emptyOrNullString()));
+        assertThat(ressources.get(1), Matchers.hasProperty("description"));
+        assertThat(ressources.get(1).getDescription(), Matchers.not(IsEmptyString.emptyOrNullString()));
         assertThat(ressources.get(1), Matchers.hasProperty("idEtablissement"));
         assertThat(ressources.get(1).getIdEtablissement(), Matchers.hasSize(2));
         assertThat(ressources.get(1).getIdEtablissement().get(0), Matchers.hasProperty("UAI"));
@@ -179,20 +166,23 @@ public class InternalRessourceImplTest {
         assertThat(ressources.get(1).getIdEtablissement().get(0), Matchers.hasProperty("nom"));
         assertThat(ressources.get(1).getIdEtablissement().get(0).getNom(), Matchers.not(IsEmptyString.emptyOrNullString()));
 
-        assertThat((LocalRessource)ressources.get(1), Matchers.hasProperty("filtreDroit"));
-        assertThat(((LocalRessource)ressources.get(1)).getFiltreDroit(), Matchers.hasSize(1));
-        assertThat(((LocalRessource)ressources.get(1)).getFiltreDroit().get(0), Matchers.hasProperty("attribut"));
-        assertThat(((LocalRessource)ressources.get(1)).getFiltreDroit().get(0).getAttribut(), Matchers.not(IsEmptyString.emptyOrNullString()));
-        assertThat(((LocalRessource)ressources.get(1)).getFiltreDroit().get(0), Matchers.hasProperty("pattern"));
-        assertThat(((LocalRessource)ressources.get(1)).getFiltreDroit().get(0).getPattern(), Matchers.not(IsEmptyString.emptyOrNullString()));
-        assertThat((LocalRessource)ressources.get(1), Matchers.hasProperty("extractEtablissement"));
-        assertThat(((LocalRessource)ressources.get(1)).getExtractEtablissement(), Matchers.hasSize(1));
-        assertThat(((LocalRessource)ressources.get(1)).getExtractEtablissement().get(0), Matchers.hasProperty("attribut"));
-        assertThat(((LocalRessource)ressources.get(1)).getExtractEtablissement().get(0).getAttribut(), Matchers.not(IsEmptyString.emptyOrNullString()));
-        assertThat(((LocalRessource)ressources.get(1)).getExtractEtablissement().get(0), Matchers.hasProperty("matcher"));
-        assertThat(((LocalRessource)ressources.get(1)).getExtractEtablissement().get(0).getAttribut(), Matchers.not(IsEmptyString.emptyOrNullString()));
-        assertThat(((LocalRessource)ressources.get(1)).getExtractEtablissement().get(0), Matchers.hasProperty("group"));
-        assertThat(((LocalRessource)ressources.get(1)).getExtractEtablissement().get(0).getAttribut(), Matchers.not(IsEmptyString.emptyOrNullString()));
+        assertThat((LocalRessource)ressources.get(0), Matchers.hasProperty("filtreDroit"));
+        assertThat(((LocalRessource)ressources.get(0)).getFiltreDroit(), Matchers.hasProperty("operator"));
+        assertThat(((LocalRessource)ressources.get(0)).getFiltreDroit().getOperator(),  Matchers.not(Matchers.nullValue()));
+        assertThat(((LocalRessource)ressources.get(0)).getFiltreDroit(), Matchers.hasProperty("filtreDroitType"));
+        assertThat(((LocalRessource)ressources.get(0)).getFiltreDroit().getFiltreDroitType(), Matchers.hasSize(1));
+        assertThat(((LocalRessource)ressources.get(0)).getFiltreDroit().getFiltreDroitType().get(0), Matchers.hasProperty("attribut"));
+        assertThat(((LocalRessource)ressources.get(0)).getFiltreDroit().getFiltreDroitType().get(0).getAttribut(), Matchers.not(IsEmptyString.emptyOrNullString()));
+        assertThat(((LocalRessource)ressources.get(0)).getFiltreDroit().getFiltreDroitType().get(0), Matchers.hasProperty("pattern"));
+        assertThat(((LocalRessource)ressources.get(0)).getFiltreDroit().getFiltreDroitType().get(0).getPattern(), Matchers.not(IsEmptyString.emptyOrNullString()));
+        assertThat((LocalRessource)ressources.get(0), Matchers.hasProperty("extractEtablissement"));
+        assertThat(((LocalRessource)ressources.get(0)).getExtractEtablissement(), Matchers.hasSize(1));
+        assertThat(((LocalRessource)ressources.get(0)).getExtractEtablissement().get(0), Matchers.hasProperty("attribut"));
+        assertThat(((LocalRessource)ressources.get(0)).getExtractEtablissement().get(0).getAttribut(), Matchers.not(IsEmptyString.emptyOrNullString()));
+        assertThat(((LocalRessource)ressources.get(0)).getExtractEtablissement().get(0), Matchers.hasProperty("matcher"));
+        assertThat(((LocalRessource)ressources.get(0)).getExtractEtablissement().get(0).getAttribut(), Matchers.not(IsEmptyString.emptyOrNullString()));
+        assertThat(((LocalRessource)ressources.get(0)).getExtractEtablissement().get(0), Matchers.hasProperty("group"));
+        assertThat(((LocalRessource)ressources.get(0)).getExtractEtablissement().get(0).getAttribut(), Matchers.not(IsEmptyString.emptyOrNullString()));
     }
 
     @Test

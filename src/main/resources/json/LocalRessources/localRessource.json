@@ -26,12 +26,16 @@
                 "urlSourceEtiquette": "http://gar.education.fr/assets/images/logo-gar.svg",
                 "urlVignette": "https://lycees.netocentre.fr/aide/AideENT/images/accesFavoris.jpg",
                 "validateurTech": "validateurTech1",
-                "filtreDroit": [
-                    {
-                        "attribut": "isMemberOf",
-                        "pattern": "^esco:Etablissements:.*"
-                    }
-                ],
+                "description": "Une description de ressource Locale assez longue pour tester la longueur de chaîne",
+                "filtreDroit": {
+                    "operator": "OR",
+                    "filtreDroitType": [
+                        {
+                            "attribut": "isMemberOf",
+                            "pattern": "^esco:Etablissements:.*"
+                        }
+                    ]
+                },
                 "extractEtablissement": [
                     {
                         "attribut": "isMemberOf",
@@ -65,12 +69,8 @@
                 "urlSourceEtiquette": "http://gar.education.fr/assets/images/logo-gar.svg",
                 "urlVignette": "https://lycees.netocentre.fr/aide/AideENT/images/accesChangementEtablissement.jpg",
                 "validateurTech": "validateurTech2",
-                "filtreDroit": [
-                    {
-                        "attribut": "uid",
-                        "pattern": ".*"
-                    }
-                ],
+                "description": "Une description de ressource Locale assez longue pour tester la longueur de chaîne",
+                "filtreDroit": {},
                 "extractEtablissement": [
                     {
                         "attribut": "isMemberOf",

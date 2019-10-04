@@ -19,7 +19,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import fr.recia.mediacentre.ws.config.bean.LocalRessourceProperties;
 import fr.recia.mediacentre.ws.model.ressource.ExtractEtablissementOnPattern;
-import fr.recia.mediacentre.ws.model.ressource.FiltreDroitOnPattern;
 import fr.recia.mediacentre.ws.model.ressource.IdEtablissement;
 import fr.recia.mediacentre.ws.model.ressource.LocalRessource;
 import fr.recia.mediacentre.ws.model.ressource.Ressource;
@@ -51,6 +50,8 @@ public class InternalFileServiceImpl implements IRemoteRequestService, Initializ
 	@Setter
 	private LocalRessourceLoader loader;
 
+	private EvaluatorDroit evaluatorDroit = new EvaluatorDroit();
+
 	public ListeRessourcesDiffusables getRessourcesDiffusables() {
 		return null;
 	}
@@ -74,6 +75,8 @@ public class InternalFileServiceImpl implements IRemoteRequestService, Initializ
 				} else {
 					log.debug("La ressource {} a été filtrée car aucun établissement authorisé n'a été trouvé !");
 				}
+			} else {
+				log.debug("L'utilisateur {} n'est pas autorisé à accéder à la ressource {}", userInfos.get(this.localRSConfiguration.getUserAttributeId()), rs);
 			}
 		}
 
@@ -139,18 +142,8 @@ public class InternalFileServiceImpl implements IRemoteRequestService, Initializ
 	}
 
 	private boolean isUserAuthorized(@NotNull final LocalRessource ressource, @NotNull final Map<String, List<String>> userInfos) {
-		if (ressource.getFiltreDroit() != null && !ressource.getFiltreDroit().isEmpty()) {
-			for (FiltreDroitOnPattern filtre: ressource.getFiltreDroit()) {
-				final List<String> userPropValues = userInfos.getOrDefault(filtre.getAttribut(), new ArrayList<>());
-				for (String value: userPropValues) {
-					Matcher matcher = filtre.getCompiledPattern().matcher(value);
-					if (matcher.matches()) {
-						return true;
-					}
-				}
-			}
-			log.debug("L'utilisateur {} n'est pas autorisé à accéder à la ressource {}", userInfos.get("id"), ressource);
-			return false;
+		if (ressource.getFiltreDroit() != null && !ressource.getFiltreDroit().getFiltreDroitType().isEmpty()) {
+			return evaluatorDroit.evaluate(ressource.filtreDroit, userInfos);
 		}
 		// si la liste des filtres est vide cela signifie qu'il n'y a pas de filtrage.
 		return true;

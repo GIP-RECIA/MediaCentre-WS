@@ -38,7 +38,7 @@ import java.util.List;
 public class LocalRessource extends Ressource {
 
     @Valid
-    public List<FiltreDroitOnPattern> filtreDroit = new ArrayList<>();
+    public FiltreDroit filtreDroit;
 
     @Valid
     public List<ExtractEtablissementOnPattern> extractEtablissement = new ArrayList<>();
@@ -50,7 +50,7 @@ public class LocalRessource extends Ressource {
     public LocalRessource(final String distributeurTech, final String validateurTech, final String sourceEtiquette, final List<UriDescription> domaineEnseignement, final String idEditeur, final String idRessource,
                           final List<IdEtablissement> idEtablissement, final String idType, final List<UriDescription> niveauEducatif, final String nomEditeur, final String nomRessource, final List<UriDescription> typePedagogique,
                           final TypePresentation typePresentation, final List<UriDescription> typologieDocument, final String urlAccesRessource, final String urlSourceEtiquette, final String urlVignette, final String description,
-                          final List<FiltreDroitOnPattern> filtreDroit, final List<ExtractEtablissementOnPattern> extractEtablissement) {
+                          final FiltreDroit filtreDroit, final List<ExtractEtablissementOnPattern> extractEtablissement) {
         super(distributeurTech, validateurTech, sourceEtiquette, domaineEnseignement, idEditeur, idRessource, idEtablissement, idType, niveauEducatif, nomEditeur, nomRessource, typePedagogique, typePresentation, typologieDocument,
                 urlAccesRessource, urlSourceEtiquette, urlVignette, description);
         this.filtreDroit = filtreDroit;
@@ -58,11 +58,11 @@ public class LocalRessource extends Ressource {
     }
 
     @JsonProperty("filtreDroit")
-    public List<FiltreDroitOnPattern> getFiltreDroit() {
+    public FiltreDroit getFiltreDroit() {
         return filtreDroit;
     }
     @JsonProperty("filtreDroit")
-    public void setFiltreDroit(List<FiltreDroitOnPattern> filtreDroit) {
+    public void setFiltreDroit(FiltreDroit filtreDroit) {
         this.filtreDroit = filtreDroit;
     }
     @JsonProperty("extractEtablissement")
