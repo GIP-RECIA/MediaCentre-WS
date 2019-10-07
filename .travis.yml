@@ -8,4 +8,4 @@ matrix:
       sudo: false
       jdk: openjdk8
 
-script: ./mvnw clean test
+script: ./mvnw clean test -DlocalRessources.ressourcePathDirectory=`pwd`/src/main/resources/json/LocalRessources
