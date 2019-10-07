@@ -8,4 +8,11 @@ matrix:
       sudo: false
       jdk: openjdk8
 
+# For maven projects, the default installation phase can be skipped
+install: true
+
+cache:
+  directories:
+    - $HOME/.m2/repository
+
 script: ./mvnw clean test -DlocalRessources.ressourcePathDirectory=`pwd`/src/main/resources/json/LocalRessources
