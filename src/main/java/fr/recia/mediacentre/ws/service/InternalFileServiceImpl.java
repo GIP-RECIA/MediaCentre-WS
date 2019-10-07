@@ -16,7 +16,6 @@
 package fr.recia.mediacentre.ws.service;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import fr.recia.mediacentre.ws.config.bean.LocalRessourceProperties;
 import fr.recia.mediacentre.ws.model.ressource.ExtractEtablissementOnPattern;
 import fr.recia.mediacentre.ws.model.ressource.IdEtablissement;
@@ -69,7 +68,10 @@ public class InternalFileServiceImpl implements IRemoteRequestService, Initializ
 		for(LocalRessource rs: ressourceList) {
 			if (isUserAuthorized(rs, userInfos)) {
 				final List<IdEtablissement> authorizedEtabs = getAuthorizedEtablissement(rs, userInfos, mapEtablissement);
-				if (!authorizedEtabs.isEmpty()) {
+				if (authorizedEtabs == null) {
+					// cas où aucun filtrage sur la ressource par établissement
+					authoredRessources.add(rs);
+				} else if (!authorizedEtabs.isEmpty()) {
 					rs.setIdEtablissement(authorizedEtabs);
 					authoredRessources.add(rs);
 				} else {
@@ -88,6 +90,7 @@ public class InternalFileServiceImpl implements IRemoteRequestService, Initializ
 															 @NotNull final Map<String, List<String>> userInfos,
 															 @NotNull  Map<String, IdEtablissement> mapEtablissement) {
 		final Set<String> authorizedEtablissements = extractAuthorizedEtablissement(ressource, userInfos);
+		if (authorizedEtablissements == null) return null;
 		List<IdEtablissement> returnedIdEtabs = new ArrayList<>();
 		for (String etabCode: authorizedEtablissements) {
 			final IdEtablissement etab = mapEtablissement.get(etabCode);
@@ -128,8 +131,8 @@ public class InternalFileServiceImpl implements IRemoteRequestService, Initializ
 			return ids;
 		}
 		// retourne par défaut la liste de tous les établissements de l'utilisateur
-		log.debug("Liste des établissements {} où l'utilisateur à le service {}", userInfos.getOrDefault(localRSConfiguration.getUserAttributeIdEtab(), Lists.newArrayList()), ressource);
-		return Sets.newHashSet(userInfos.getOrDefault(localRSConfiguration.getUserAttributeIdEtab(), Lists.newArrayList()));
+		log.debug("Aucun filtrage, la liste autorisée des établissements n'est pas paramétrée!");
+		return null;
 	}
 
 	private Structure getStructureWithFallBack(final Map<String, Structure> mapStructure, final String id) {
