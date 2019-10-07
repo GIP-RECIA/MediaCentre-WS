@@ -15,27 +15,18 @@
  */
 package fr.recia.mediacentre.ws.service;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.io.Files;
-import lombok.extern.slf4j.Slf4j;
 import fr.recia.mediacentre.ws.model.structure.Structure;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -45,6 +36,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by jgribonvald on 12/06/17.
@@ -91,7 +91,7 @@ public class StructureRestClientTest {
         ResponseEntity<HashMap<String, Structure>> response = new ResponseEntity<HashMap<String, Structure>>(fileResult, HttpStatus.ACCEPTED);
 
         Mockito.when(this.structureInfoRequestService.getStructuresInfos(
-                Matchers.anySet())).thenReturn(fileResult);
+                ArgumentMatchers.anySet())).thenReturn(fileResult);
 
 
         Map<String, Structure> mapStructs = this.structureInfoRequestService.getStructuresInfos(idList);

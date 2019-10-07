@@ -16,43 +16,56 @@
 
 package fr.recia.mediacentre.ws.model.ressource;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
 import lombok.ToString;
+
+import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "UAI"
+    "id",
+    "UAI",
+    "nom"
 })
 @ToString
 @EqualsAndHashCode
 public class IdEtablissement implements Serializable {
 
-    @NonNull
+    @NotBlank
+    public String id;
+
     public String UAI;
 
-    @NonNull
+    @NotBlank
     public String nom;
 
     public IdEtablissement() {
         super();
     }
 
-    public IdEtablissement(final String UAI, final String nom) {
+    public IdEtablissement(@NotBlank final String id, final String UAI, @NotBlank final String nom) {
+        this.id = id;
         this.UAI = UAI;
         this.nom = nom;
     }
 
-    @JsonProperty(value = "UAI", required = true)
+    @JsonProperty(value = "id", required = true)
+    public String getId() {
+        return id;
+    }
+    @JsonProperty(value = "id", required = true)
+    public void setId(String id) {
+        this.id = id;
+    }
+    @JsonProperty(value = "UAI")
     public String getUAI() {
         return UAI;
     }
-    @JsonProperty(value = "UAI", required = true)
+    @JsonProperty(value = "UAI")
     public void setUAI(String UAI) {
         this.UAI = UAI;
     }

@@ -104,7 +104,7 @@ public class InternalFileServiceImpl implements IRemoteRequestService, Initializ
 		if (!userEtabs.isEmpty()) {
 			for (String etabId: userEtabs) {
 				@NotNull Structure etablissement = getStructureWithFallBack(mapStructure, etabId);
-				mapEtablissement.put(etabId, new IdEtablissement(etablissement.getCode(), etablissement.getDisplayName()));
+				mapEtablissement.put(etabId, new IdEtablissement(etablissement.getId(), etablissement.getCode(), etablissement.getDisplayName()));
 			}
 		}
 
@@ -138,6 +138,7 @@ public class InternalFileServiceImpl implements IRemoteRequestService, Initializ
 			log.warn("An error occured ! it can't get the structure information with the identifier {}, so we make a limited fallback !", id);
 			structure = new Structure();
 			structure.setCode(id);
+			structure.setId(id);
 			structure.setDisplayName(id);
 		}
 		return structure;

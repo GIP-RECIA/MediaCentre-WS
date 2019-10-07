@@ -256,7 +256,7 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 	protected void completeAndMergeRessourceInformations(@NotNull List<Ressource> initialRessources, @NotNull final List<Ressource> complementRessources, final Structure etablissement) {
 		IdEtablissement idEtab = new IdEtablissement();
 		if (etablissement != null) {
-			idEtab = new IdEtablissement(etablissement.getCode(), etablissement.getDisplayName());
+			idEtab = new IdEtablissement(etablissement.getId(), etablissement.getCode(), etablissement.getDisplayName());
 		}
 		for (Ressource newRS : complementRessources) {
 			boolean found = false;
@@ -282,6 +282,7 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 		if (structure == null) {
 			log.warn("An error occured ! it can't get the structure information with the identifier {}, so we make a limited fallback !", id);
 			structure = new Structure();
+			structure.setId(id);
 			structure.setCode(id);
 			structure.setDisplayName(id);
 		}
