@@ -74,8 +74,9 @@ public class RessourceListeResourceTest {
     @Autowired
     List<IRemoteRequestService> remoteServices;
 
-    @Autowired(required = true)
-    private GARClientConfiguration garClientConfiguration;
+    // required false car uniquement nécessaire quand profile WITHOUT_GAR n'est pas actif.
+    @Autowired(required = false)
+    GARClientConfiguration garClientConfiguration;
 
 //    private RestTemplate restTemplate;
 //
@@ -135,9 +136,11 @@ public class RessourceListeResourceTest {
 
     @Test
     public void testAuthorizedUsersConf() {
-        assertThat(garClientConfiguration.getGARProperties().getAuthorizedUsers(), Matchers.not(Matchers.nullValue()));
-        assertThat(garClientConfiguration.getGARProperties().getAuthorizedUsers().getOperator(), Matchers.not(Matchers.nullValue()));
-        assertThat(garClientConfiguration.getGARProperties().getAuthorizedUsers().getFiltreDroitType(), Matchers.not(Matchers.emptyIterable()));
+        if (!isWithoutGAR) {
+            assertThat(garClientConfiguration.getGARProperties().getAuthorizedUsers(), Matchers.not(Matchers.nullValue()));
+            assertThat(garClientConfiguration.getGARProperties().getAuthorizedUsers().getOperator(), Matchers.not(Matchers.nullValue()));
+            assertThat(garClientConfiguration.getGARProperties().getAuthorizedUsers().getFiltreDroitType(), Matchers.not(Matchers.emptyIterable()));
+        }
     }
 
     @Test

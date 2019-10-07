@@ -84,7 +84,9 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 	public List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos) throws ListRequestErrorException {
         if (!this.isUserAuthorized(userInfos)) {
             log.warn("The user isn't allowed to obtain resources from the GAR !");
-            throw new AuthorizedResourceException(UN_AUTHORIZED_MESSAGE);
+			ListRequestErrorException lree = new ListRequestErrorException();
+			lree.addException(new AuthorizedResourceException(UN_AUTHORIZED_MESSAGE));
+            throw lree;
         }
 		String uri = garConfiguration.getRessourceUri();
 		// in app param we don't have user multiple values

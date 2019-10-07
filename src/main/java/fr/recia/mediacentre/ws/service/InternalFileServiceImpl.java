@@ -73,7 +73,7 @@ public class InternalFileServiceImpl implements IRemoteRequestService, Initializ
 					rs.setIdEtablissement(authorizedEtabs);
 					authoredRessources.add(rs);
 				} else {
-					log.debug("La ressource {} a été filtrée car aucun établissement authorisé n'a été trouvé !");
+					log.debug("La ressource {} a été filtrée car aucun établissement authorisé n'a été trouvé !", rs);
 				}
 			} else {
 				log.debug("L'utilisateur {} n'est pas autorisé à accéder à la ressource {}", userInfos.get(this.localRSConfiguration.getUserAttributeId()), rs);
@@ -90,7 +90,9 @@ public class InternalFileServiceImpl implements IRemoteRequestService, Initializ
 		final Set<String> authorizedEtablissements = extractAuthorizedEtablissement(ressource, userInfos);
 		List<IdEtablissement> returnedIdEtabs = new ArrayList<>();
 		for (String etabCode: authorizedEtablissements) {
-			returnedIdEtabs.add(mapEtablissement.get(etabCode));
+			final IdEtablissement etab = mapEtablissement.get(etabCode);
+			if (etab != null)
+				returnedIdEtabs.add(mapEtablissement.get(etabCode));
 		}
 		return returnedIdEtabs;
 	}
