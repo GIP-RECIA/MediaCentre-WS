@@ -83,13 +83,13 @@
 <!--    <logger name="org.springframework.http" level="DEBUG" />-->
 
     <logger name="fr.recia.mediacentre.ws" level="DEBUG" />
-    <logger name="fr.recia.mediacentre.ws.service.GARRequestServiceImpl" level="INFO" />
+<!--    <logger name="fr.recia.mediacentre.ws.service.GARRequestServiceImpl" level="INFO" />-->
 
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
     </contextListener>
 
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="CONSOLE" />
     </root>
 
