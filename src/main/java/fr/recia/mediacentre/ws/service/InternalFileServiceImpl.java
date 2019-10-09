@@ -82,7 +82,7 @@ public class InternalFileServiceImpl implements IRemoteRequestService, Initializ
 			}
 		}
 
-		log.debug("L'utilisateur {} aura la liste des ressources attribuées {}", userInfos.get(this.localRSConfiguration.getUserAttributeId()), ressourceList);
+		log.debug("L'utilisateur {} aura la liste des ressources attribuées {}", userInfos.get(this.localRSConfiguration.getUserAttributeId()), authoredRessources);
 		return authoredRessources;
 	}
 
