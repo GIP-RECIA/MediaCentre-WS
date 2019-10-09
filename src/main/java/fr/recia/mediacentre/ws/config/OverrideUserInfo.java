@@ -15,9 +15,6 @@
  */
 package fr.recia.mediacentre.ws.config;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import fr.recia.mediacentre.ws.model.ressource.IdEtablissement;
@@ -28,6 +25,9 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jgribonvald on 24/07/17.
@@ -44,21 +44,21 @@ public class OverrideUserInfo {
     private static Map<String, List<String>> collelv;
     private static Map<String, List<String>> collprof;
     static {
-        lycelv = ImmutableMap.of("uid", Lists.newArrayList("F1700ivg"),"ESCOUAI", Lists.newArrayList("0290009C"),"ESCOUAICourant",
+        lycelv = ImmutableMap.of("uid", Lists.newArrayList("F1800lsy"),"ESCOUAI", Lists.newArrayList("0290009C"),"ESCOUAICourant",
                 Lists.newArrayList("0290009C"), "ENTPersonProfils", Lists.newArrayList("National_ELV"), "ENTPersonGARIdentifiant",
-                Lists.newArrayList("5a6c685b-9f00-4cf9-ba84-5c29f8acd6f5"));
-        collelv = ImmutableMap.of("uid", Lists.newArrayList("F1700jef"),"ESCOUAI", Lists.newArrayList("0291595B"),"ESCOUAICourant",
+                Lists.newArrayList("8f7b8af4-69d1-4972-81c6-0062375a2e1a"));
+        collelv = ImmutableMap.of("uid", Lists.newArrayList("F1800me5"),"ESCOUAI", Lists.newArrayList("0291595B"),"ESCOUAICourant",
                 Lists.newArrayList("0291595B"), "ENTPersonProfils", Lists.newArrayList("National_ELV"), "ENTPersonGARIdentifiant",
-                Lists.newArrayList("5c9f5a97-56ec-4218-8cfc-7916dab37e7a"));
-        lycprof = ImmutableMap.of("uid", Lists.newArrayList("F1700k0b"),"ESCOUAI", Lists.newArrayList("0290009C"),"ESCOUAICourant",
+                Lists.newArrayList("b194fef1-1de9-44e8-ab77-e34113950702"));
+        lycprof = ImmutableMap.of("uid", Lists.newArrayList("F1800mlt"),"ESCOUAI", Lists.newArrayList("0290009C","0291595B"),"ESCOUAICourant",
                 Lists.newArrayList("0290009C"), "ENTPersonProfils", Lists.newArrayList("National_ENS"), "ENTPersonGARIdentifiant",
-                Lists.newArrayList("7e0f273f-ad5d-43cd-b63d-ae6c3f8b6451"));
-        collprof = ImmutableMap.of("uid", Lists.newArrayList("F1700k0o"),"ESCOUAI", Lists.newArrayList("0291595B"),"ESCOUAICourant",
+                Lists.newArrayList("e2ebef58-a342-4229-a3ab-401cb6c1095a"));
+        collprof = ImmutableMap.of("uid", Lists.newArrayList("F1800mod"),"ESCOUAI", Lists.newArrayList("0291595B"),"ESCOUAICourant",
                 Lists.newArrayList("0291595B"), "ENTPersonProfils", Lists.newArrayList("National_ENS"), "ENTPersonGARIdentifiant",
-                Lists.newArrayList("b6ffca54-5f54-4bfe-b0e8-504e2f0a2722"));
-        lycpers = ImmutableMap.of("uid", Lists.newArrayList("F1700k17"),"ESCOUAI", Lists.newArrayList("0290009C","0291595B"),"ESCOUAICourant",
-                Lists.newArrayList("0290009C"), "ENTPersonProfils", Lists.newArrayList("National_DOC"), "ENTPersonGARIdentifiant",
-                Lists.newArrayList("68fc7ecd-1a51-4005-b5fd-bb20375d6528"));
+                Lists.newArrayList("6a2c1e64-ec79-4799-a649-af0aef9d6773"));
+        lycpers = ImmutableMap.of("uid", Lists.newArrayList("F1800mms"),"ESCOUAI", Lists.newArrayList("0291595B"),"ESCOUAICourant",
+                Lists.newArrayList("0291595B"), "ENTPersonProfils", Lists.newArrayList("National_DOC"), "ENTPersonGARIdentifiant",
+                Lists.newArrayList("1ce97574-aff4-490b-bd9a-a44bc1cf27c2"));
     }
 
     @Around("execution(* fr.recia.mediacentre.ws.web.rest.RessourceListResource.getRessources(..)) && args(userInfos)")
