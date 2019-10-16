@@ -44,21 +44,47 @@ public class OverrideUserInfo {
     private static Map<String, List<String>> collelv;
     private static Map<String, List<String>> collprof;
     static {
-        lycelv = ImmutableMap.of("uid", Lists.newArrayList("F1800lsy"),"ESCOUAI", Lists.newArrayList("0290009C"),"ESCOUAICourant",
-                Lists.newArrayList("0290009C"), "ENTPersonProfils", Lists.newArrayList("National_ELV"), "ENTPersonGARIdentifiant",
-                Lists.newArrayList("8f7b8af4-69d1-4972-81c6-0062375a2e1a"));
-        collelv = ImmutableMap.of("uid", Lists.newArrayList("F1800me5"),"ESCOUAI", Lists.newArrayList("0291595B"),"ESCOUAICourant",
-                Lists.newArrayList("0291595B"), "ENTPersonProfils", Lists.newArrayList("National_ELV"), "ENTPersonGARIdentifiant",
-                Lists.newArrayList("b194fef1-1de9-44e8-ab77-e34113950702"));
-        lycprof = ImmutableMap.of("uid", Lists.newArrayList("F1800mlt"),"ESCOUAI", Lists.newArrayList("0290009C","0291595B"),"ESCOUAICourant",
-                Lists.newArrayList("0290009C"), "ENTPersonProfils", Lists.newArrayList("National_ENS"), "ENTPersonGARIdentifiant",
-                Lists.newArrayList("e2ebef58-a342-4229-a3ab-401cb6c1095a"));
-        collprof = ImmutableMap.of("uid", Lists.newArrayList("F1800mod"),"ESCOUAI", Lists.newArrayList("0291595B"),"ESCOUAICourant",
-                Lists.newArrayList("0291595B"), "ENTPersonProfils", Lists.newArrayList("National_ENS"), "ENTPersonGARIdentifiant",
-                Lists.newArrayList("6a2c1e64-ec79-4799-a649-af0aef9d6773"));
-        lycpers = ImmutableMap.of("uid", Lists.newArrayList("F1800mms"),"ESCOUAI", Lists.newArrayList("0291595B"),"ESCOUAICourant",
-                Lists.newArrayList("0291595B"), "ENTPersonProfils", Lists.newArrayList("National_DOC"), "ENTPersonGARIdentifiant",
-                Lists.newArrayList("1ce97574-aff4-490b-bd9a-a44bc1cf27c2"));
+        lycelv = ImmutableMap.<String, List<String>>builder()
+                .put("uid", Lists.newArrayList("F1800lsy"))
+                .put("ESCOUAI", Lists.newArrayList("0290009C"))
+                .put("ESCOUAICourant",Lists.newArrayList("0290009C"))
+                .put("ENTPersonProfils", Lists.newArrayList("National_ELV"))
+                .put( "ENTPersonGARIdentifiant", Lists.newArrayList("8f7b8af4-69d1-4972-81c6-0062375a2e1a"))
+                .put("isMemberOf", Lists.newArrayList("esco:Etablissements:FICTIF_0290009C:Eleves"))
+                .build();
+        collelv = ImmutableMap.<String, List<String>>builder()
+                .put("uid", Lists.newArrayList("F1800me5"))
+                .put("ESCOUAI", Lists.newArrayList("0291595B"))
+                .put("ESCOUAICourant", Lists.newArrayList("0291595B"))
+                .put("ENTPersonProfils", Lists.newArrayList("National_ELV"))
+                .put("ENTPersonGARIdentifiant", Lists.newArrayList("b194fef1-1de9-44e8-ab77-e34113950702"))
+                .put("isMemberOf", Lists.newArrayList("esco:Etablissements:FICTIF_0291595B:Eleves"))
+                .build();
+        lycprof = ImmutableMap.<String, List<String>>builder()
+                .put("uid", Lists.newArrayList("F1800mlt"))
+                .put("ESCOUAI", Lists.newArrayList("0290009C","0291595B"))
+                .put("ESCOUAICourant", Lists.newArrayList("0290009C"))
+                .put("ENTPersonProfils", Lists.newArrayList("National_ENS"))
+                .put("ENTPersonGARIdentifiant", Lists.newArrayList("e2ebef58-a342-4229-a3ab-401cb6c1095a"))
+                .put("isMemberOf", Lists.newArrayList("esco:Etablissements:FICTIF_0291595B:Profs", "esco:Etablissements:FICTIF_0290009C:Profs",
+                        "esco:Applications:Ressources_Editoriales:generation_5:FICTIF_0291595B"))
+                .build();
+        collprof = ImmutableMap.<String, List<String>>builder()
+                .put("uid", Lists.newArrayList("F1800mod"))
+                .put("ESCOUAI", Lists.newArrayList("0291595B"))
+                .put("ESCOUAICourant", Lists.newArrayList("0291595B"))
+                .put("ENTPersonProfils", Lists.newArrayList("National_ENS"))
+                .put("ENTPersonGARIdentifiant", Lists.newArrayList("6a2c1e64-ec79-4799-a649-af0aef9d6773"))
+                .put("isMemberOf", Lists.newArrayList("esco:Etablissements:FICTIF_0291595B:Profs", "esco:Applications:Ressources_Editoriales:generation_5:FICTIF_0291595B"))
+                .build();
+        lycpers = ImmutableMap.<String, List<String>>builder()
+                .put("uid", Lists.newArrayList("F1800mms"))
+                .put("ESCOUAI", Lists.newArrayList("0291595B"))
+                .put("ESCOUAICourant", Lists.newArrayList("0291595B"))
+                .put("ENTPersonProfils", Lists.newArrayList("National_DOC"))
+                .put("ENTPersonGARIdentifiant", Lists.newArrayList("1ce97574-aff4-490b-bd9a-a44bc1cf27c2"))
+                .put("isMemberOf", Lists.newArrayList("esco:Etablissements:FICTIF_0291595B:Enseignements:DOCUMENTATION"))
+                .build();
     }
 
     @Around("execution(* fr.recia.mediacentre.ws.web.rest.RessourceListResource.getRessources(..)) && args(userInfos)")
