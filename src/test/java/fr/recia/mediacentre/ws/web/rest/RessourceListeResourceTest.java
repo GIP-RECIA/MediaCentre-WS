@@ -285,7 +285,9 @@ public class RessourceListeResourceTest {
                     .andExpect(jsonPath("$.[0].ressourceDiffusable.[0]", Matchers.hasKey("diffusable")))
                     .andExpect(jsonPath("$..ressourceDiffusable.[?(@.mereFamille)]").isNotEmpty())
                     .andExpect(jsonPath("$..ressourceDiffusable.[?(@.membreFamille)]").isNotEmpty());
-        } else {
+        } /*
+        pas de json compatible avec le GAR !
+        else {
             mockListRessourcesMvc.perform(get("/api/ressourcesDiffusables")
                     .contentType(TestUtil.APPLICATION_JSON_UTF8)
                     .content(new String())
@@ -316,13 +318,11 @@ public class RessourceListeResourceTest {
                     .andExpect(jsonPath("$.[0].ressourceDiffusable.[0]", Matchers.hasKey("diffusable")))
                     .andExpect(jsonPath("$..ressourceDiffusable.[?(@.mereFamille)]").isNotEmpty())
                     .andExpect(jsonPath("$..ressourceDiffusable.[?(@.membreFamille)]").isNotEmpty());
-        }
+        }*/
     }
 
     @Test
     public void testXmlRessourcesDiffusables() throws Exception {
-
-        if (isWithoutGAR) {
             mockListRessourcesMvc.perform(get("/api/ressourcesDiffusables")
                     .contentType(TestUtil.APPLICATION_JSON_UTF8)
                     .accept(TestUtil.APPLICATION_XML_UTF8))
@@ -332,7 +332,5 @@ public class RessourceListeResourceTest {
                     .andExpect(content().encoding("UTF-8"))
                     .andExpect(xpath("/List/item[%s]", 1).exists())
                     .andExpect(xpath("/List/item[%s]/ressourceDiffusable", 1).exists());
-
-        }
     }
 }
