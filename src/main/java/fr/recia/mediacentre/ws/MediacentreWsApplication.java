@@ -18,6 +18,7 @@ package fr.recia.mediacentre.ws;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.core.env.EnumerablePropertySource;
@@ -28,6 +29,7 @@ import java.util.Arrays;
 import java.util.stream.StreamSupport;
 
 @SpringBootApplication
+@ConfigurationPropertiesScan
 @Slf4j
 public class MediacentreWsApplication {
 
