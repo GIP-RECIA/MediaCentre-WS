@@ -15,6 +15,14 @@
  */
 package fr.recia.mediacentre.ws.service;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.validation.constraints.NotNull;
+
 import com.google.common.collect.Lists;
 import fr.recia.mediacentre.ws.config.bean.ParamValueProperty;
 import fr.recia.mediacentre.ws.config.bean.RessourceProperties;
@@ -42,13 +50,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-
-import javax.validation.constraints.NotNull;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 @NoArgsConstructor
 @Slf4j
@@ -259,18 +260,8 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 			idEtab = new IdEtablissement(etablissement.getId(), etablissement.getCode(), etablissement.getDisplayName());
 		}
 		for (Ressource newRS : complementRessources) {
-			boolean found = false;
-			for (Ressource rs : initialRessources) {
-				if (rs.getIdRessource().equals(newRS.getIdRessource())) {
-					rs.getIdEtablissement().add(idEtab);
-					found = true;
-					break;
-				}
-			}
-			if (!found) {
-				newRS.setIdEtablissement(Lists.newArrayList(idEtab));
-				initialRessources.add(newRS);
-			}
+			newRS.setIdEtablissement(Lists.newArrayList(idEtab));
+			initialRessources.add(newRS);
 		}
 		if (log.isDebugEnabled()) {
 			log.debug("completeAndMergeRessourceInformations returned {}", initialRessources);
