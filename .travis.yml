@@ -4,7 +4,7 @@ matrix:
   fast_finish: true
   include:
     - os: linux
-      dist: trusty
+      dist: xenial
       sudo: false
       jdk: openjdk8
 
