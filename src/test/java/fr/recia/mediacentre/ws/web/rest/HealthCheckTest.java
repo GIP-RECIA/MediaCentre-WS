@@ -16,11 +16,10 @@
 package fr.recia.mediacentre.ws.web.rest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.head;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import fr.recia.mediacentre.ws.SystemPropertyIncludeProfileResolver;
+import javax.annotation.PostConstruct;
+
 import fr.recia.mediacentre.ws.web.rest.exception.GlobalExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -29,15 +28,12 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import javax.annotation.PostConstruct;
-
 @ExtendWith(SpringExtension.class)
-@ActiveProfiles(value = "test,WITHOUT_GAR,WITHOUT_STRUCT_REST,USER_MAPPING", resolver= SystemPropertyIncludeProfileResolver.class)
+@ActiveProfiles({"test","WITHOUT_GAR","WITHOUT_STRUCT_REST","USER_MAPPING"})
 @Slf4j
 @SpringBootTest
 public class HealthCheckTest {

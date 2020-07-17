@@ -15,8 +15,25 @@
  */
 package fr.recia.mediacentre.ws.web.rest;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.StreamSupport;
+
+import javax.annotation.PostConstruct;
+
 import com.google.common.collect.Lists;
-import fr.recia.mediacentre.ws.SystemPropertyIncludeProfileResolver;
 import fr.recia.mediacentre.ws.config.GARClientConfiguration;
 import fr.recia.mediacentre.ws.service.GARRequestServiceImpl;
 import fr.recia.mediacentre.ws.service.IRemoteRequestService;
@@ -43,30 +60,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import javax.annotation.PostConstruct;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.StreamSupport;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
-
 ;
 
 /**
  * Created by jgribonvald on 12/06/17.
  */
 @ExtendWith(SpringExtension.class)
-@ActiveProfiles(value = "test,WITHOUT_GAR,WITHOUT_STRUCT_REST,USER_MAPPING", resolver= SystemPropertyIncludeProfileResolver.class)
+@ActiveProfiles({"test","WITHOUT_GAR","WITHOUT_STRUCT_REST","USER_MAPPING"})
 @Slf4j
 @SpringBootTest
 public class RessourceListeResourceTest {
@@ -94,6 +94,7 @@ public class RessourceListeResourceTest {
         MockitoAnnotations.initMocks(this);
 
         for(String profile : environment.getActiveProfiles()){
+            log.debug("Runing with actived profile {}", profile);
             if ("WITHOUT_GAR".equals(profile)){
                 this.isWithoutGAR = true;
                 log.debug("Runing in Without GAR mode !");
