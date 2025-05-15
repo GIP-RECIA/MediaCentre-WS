@@ -18,10 +18,8 @@ package fr.recia.mediacentre.ws.config;
 import java.io.File;
 import java.io.FileInputStream;
 import java.security.KeyStore;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.net.ssl.SSLContext;
@@ -33,7 +31,6 @@ import fr.recia.mediacentre.ws.config.bean.RessourceProperties;
 import fr.recia.mediacentre.ws.config.bean.RessourceType;
 import fr.recia.mediacentre.ws.config.bean.RessourcesProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.Header;
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.config.Registry;
@@ -45,7 +42,6 @@ import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
-import org.apache.http.message.BasicHeader;
 import org.apache.http.ssl.PrivateKeyStrategy;
 import org.apache.http.ssl.SSLContexts;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -166,15 +162,9 @@ public class GARClientConfiguration {
 					.register("https", sslConnectionFactory)
 					.build();
 
-			List<Header> headers = new ArrayList<Header>();
-			for (ParamValueProperty prop : getGARProperties().getHeaders()) {
-				headers.add(new BasicHeader(prop.getParam(), prop.getValue()));
-			}
-			headers.add(new BasicHeader("Date", new Date().toString()));
-
 			return HttpClientBuilder.create().setConnectionManagerShared(true)
 					.setConnectionManager(GARConnectionManager(registry)).setSSLSocketFactory(sslConnectionFactory)
-					.setDefaultRequestConfig(requestConfig).setDefaultHeaders(headers).build();
+					.setDefaultRequestConfig(requestConfig).build();
 		} catch (Exception e) {
 			log.error("Could not create HttpClient ! {}", e.getMessage(), e);
 			return null;
