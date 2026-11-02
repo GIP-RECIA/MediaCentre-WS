@@ -219,11 +219,9 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 			final ResponseEntity<T> response = remoteAccessTemplate.exchange(uriConstructed, HttpMethod.GET, httpEntity, responseType);
 
 			if (log.isTraceEnabled()) {
-				final ResponseEntity<String> responseTrace = remoteAccessTemplate.exchange(uriConstructed, HttpMethod.GET, httpEntity, String.class);
-				String resp = responseTrace.getBody() != null && responseTrace.getBody().toString().length() > 10000 ? responseTrace.getBody().substring(1,10000) : responseTrace.getBody();
 				log.trace("Requesting GAR ressources on {} returned a response with status {} and \n" +
 								"\nresponse{}\n",
-						uriConstructed, responseTrace.getStatusCode(), resp);
+						uriConstructed, response.getStatusCode(), response.getBody());
 			}
 			if (log.isDebugEnabled()) {
 				log.debug("Requesting GAR ressources on {} returned a response with status {} and \n" +
