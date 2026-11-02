@@ -106,7 +106,6 @@ public class GARClientConfiguration {
         for (ParamValueProperty prop : getGARProperties().getHeaders()) {
             headers.add(prop.getParam(), prop.getValue());
         }
-        headers.add("Date", new Date().toString());
         return headers;
     }
 

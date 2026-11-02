@@ -18,6 +18,7 @@ package fr.recia.mediacentre.ws.service;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -187,6 +188,7 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 	private List<Ressource> getRessources(final String uri) throws CustomRestRequestException, RestClientException {
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.putAll(this.httpHeaders);
+		requestHeaders.set("Date", new Date().toString());
 		requestHeaders.put("Accept", Lists.newArrayList(MediaType.APPLICATION_JSON_VALUE));
 		ListeRessourcesWrapper ressourcesObj = runUriCall(uri, new ParameterizedTypeReference<ListeRessourcesWrapper>(){}, requestHeaders);
 		return (ressourcesObj != null && ressourcesObj.getListeRessources() != null) ? ressourcesObj.getListeRessources().getRessource() : Lists.newArrayList();
@@ -195,6 +197,7 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 	private ListeRessourcesDiffusables getRessourcesDiffusables(final String uri) throws CustomRestRequestException, RestClientException {
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.putAll(this.httpHeaders);
+		requestHeaders.set("Date", new Date().toString());
 		requestHeaders.put("Accept", Lists.newArrayList(MediaType.APPLICATION_XML_VALUE));
 		return runUriCall(uri, new ParameterizedTypeReference<ListeRessourcesDiffusables>(){}, requestHeaders);
 	}
