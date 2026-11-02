@@ -15,18 +15,9 @@
  */
 package fr.recia.mediacentre.ws.config;
 
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
 import fr.recia.mediacentre.ws.config.bean.LocalRessourceProperties;
-import fr.recia.mediacentre.ws.service.IRemoteRequestService;
-import fr.recia.mediacentre.ws.service.IStructureInfoService;
-import fr.recia.mediacentre.ws.service.InternalFileServiceImpl;
-import fr.recia.mediacentre.ws.service.LocalRessourceLoader;
-import fr.recia.mediacentre.ws.service.MockedRequestServiceImpl;
+import fr.recia.mediacentre.ws.service.*;
 import lombok.extern.slf4j.Slf4j;
-import fr.recia.mediacentre.ws.service.GARRequestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -80,13 +71,4 @@ public class RemoteRequestServiceConfiguration {
 		rs.setLoader(getLocalRessourceLoader());
 		return rs;
 	}
-
-	@Autowired
-	List<IRemoteRequestService> remoteServices;
-
-	@PostConstruct
-	public void debug() {
-		log.debug("Liste des Remote Service configurées {}", remoteServices);
-	}
-
 }

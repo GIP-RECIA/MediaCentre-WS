@@ -17,6 +17,7 @@ package fr.recia.mediacentre.ws.config;
 
 import javax.annotation.PostConstruct;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.config.RequestConfig;
 import fr.recia.mediacentre.ws.config.bean.HttpRequestTimeoutProperties;
@@ -24,28 +25,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 @Slf4j
 @Configuration
+@RequiredArgsConstructor
 public class HttpRequestConfiguration {
 
-	@Autowired
-	private HttpRequestTimeoutProperties httpRequestTimeoutConfiguration;
+	private final HttpRequestTimeoutProperties httpRequestTimeoutConfiguration;
 
 	@Bean
 	public RequestConfig requestConfig() {
-		RequestConfig result = RequestConfig.custom()
+		RequestConfig result = buildRequestConfig();
+		log.info("RequestConfig: {}", result);
+		return result;
+	}
+
+	private RequestConfig buildRequestConfig() {
+		return RequestConfig.custom()
 				.setConnectionRequestTimeout(httpRequestTimeoutConfiguration.getConnectionRequestTimeout())
 				.setConnectTimeout(httpRequestTimeoutConfiguration.getConectTimeout())
 				.setSocketTimeout(httpRequestTimeoutConfiguration.getSocketTimeout())
 				.build();
-		return result;
-	}
-
-	/**
-	 * Just for debug
-	 */
-	@PostConstruct
-	public void debug() {
-		log.info("RequestConfig: {}", requestConfig().toString());
 	}
 }

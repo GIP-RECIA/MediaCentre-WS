@@ -173,7 +173,7 @@ public class GARClientConfiguration {
 
 	@PostConstruct
 	public void debug() {
-		log.debug("GAR Configuration {}", getGARProperties());
+		log.debug("GAR Configuration {}", ressourcesConfiguration.getConfigurations().get(RessourceType.GAR));
 	}
 
 }
