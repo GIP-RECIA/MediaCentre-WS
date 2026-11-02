@@ -29,13 +29,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,10 +45,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * Created by jgribonvald on 12/06/17.
  */
-@ExtendWith(SpringExtension.class)
-@ActiveProfiles({"WITHOUT_STRUCT_REST", "test"})
+@ExtendWith(MockitoExtension.class)
 @Slf4j
-@SpringBootTest
 public class StructureRestClientTest {
 
     @Mock
@@ -73,8 +67,8 @@ public class StructureRestClientTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Assertions.assertTrue(ressourceContent != null, "file in classPath 'response-etabs.json' doesn't exist!");
-        Assertions.assertTrue(!ressourceContent.isEmpty(), "file in classPath 'response-etabs.json' is Empty!");
+        Assertions.assertNotNull(ressourceContent, "file in classPath 'response-etabs.json' doesn't exist!");
+        Assertions.assertFalse(ressourceContent.isEmpty(), "file in classPath 'response-etabs.json' is Empty!");
         log.debug("File content is : {}", Files.asCharSource(jsonFile.getFile(), Charset.forName("UTF-8")).read());
 
         TypeReference<HashMap<String, Structure>> typeRef = new TypeReference<HashMap<String,Structure>>(){};
@@ -85,14 +79,11 @@ public class StructureRestClientTest {
     }
 
     @Test
-    public void testRecuperation() throws Exception {
+    public void testRecuperation() {
         Set<String> idList = Sets.newHashSet(ids.split(","));
-
-        ResponseEntity<HashMap<String, Structure>> response = new ResponseEntity<HashMap<String, Structure>>(fileResult, HttpStatus.ACCEPTED);
 
         Mockito.when(this.structureInfoRequestService.getStructuresInfos(
                 ArgumentMatchers.anySet())).thenReturn(fileResult);
-
 
         Map<String, Structure> mapStructs = this.structureInfoRequestService.getStructuresInfos(idList);
 

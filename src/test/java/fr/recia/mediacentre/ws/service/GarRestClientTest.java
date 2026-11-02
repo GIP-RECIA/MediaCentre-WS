@@ -20,7 +20,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.google.common.io.Files;
 import fr.recia.mediacentre.ws.model.ressource.diffusion.ListeRessourcesDiffusables;
-import fr.recia.mediacentre.ws.model.ressource.diffusion.RessourceDiffusable;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -28,28 +27,22 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.List;
+import java.nio.charset.StandardCharsets;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by jgribonvald on 12/06/17.
  */
-@ExtendWith(SpringExtension.class)
-@ActiveProfiles({"WITHOUT_GAR", "test"})
+@ExtendWith(MockitoExtension.class)
 @Slf4j
-@SpringBootTest
 public class GarRestClientTest {
 
     @Mock
@@ -64,13 +57,13 @@ public class GarRestClientTest {
 
         String ressourceContent = null;
         try {
-            ressourceContent = Files.asCharSource(new File(xmlFile.getURI()), Charset.forName("UTF-8")).read();
+            ressourceContent = Files.asCharSource(new File(xmlFile.getURI()), StandardCharsets.UTF_8).read();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Assertions.assertTrue(ressourceContent != null, "file in classPath 'gar_ressourcesDiffusables_response.xml' doesn't exist!");
-        Assertions.assertTrue(!ressourceContent.isEmpty(), "file in classPath 'gar_ressourcesDiffusables_response.xml' is Empty!");
-        log.debug("File content is : {}", Files.asCharSource(xmlFile.getFile(), Charset.forName("UTF-8")).read());
+        Assertions.assertNotNull(ressourceContent, "file in classPath 'gar_ressourcesDiffusables_response.xml' doesn't exist!");
+        Assertions.assertFalse(ressourceContent.isEmpty(), "file in classPath 'gar_ressourcesDiffusables_response.xml' is Empty!");
+        log.debug("File content is : {}", Files.asCharSource(xmlFile.getFile(), StandardCharsets.UTF_8).read());
 
         TypeReference<ListeRessourcesDiffusables> typeRef = new TypeReference<ListeRessourcesDiffusables>(){};
 
@@ -80,11 +73,8 @@ public class GarRestClientTest {
     }
 
     @Test
-    public void testRecuperation() throws Exception {
-        ResponseEntity<List<RessourceDiffusable>> response = new ResponseEntity<List<RessourceDiffusable>>(fileResult.getRessourceDiffusable(), HttpStatus.ACCEPTED);
-
+    public void testRecuperation() {
         Mockito.when(this.garRequestService.getRessourcesDiffusables()).thenReturn(fileResult);
-
 
         ListeRessourcesDiffusables listRs = this.garRequestService.getRessourcesDiffusables();
 
