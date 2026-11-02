@@ -3,7 +3,7 @@ package fr.recia.mediacentre.ws.config;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import fr.recia.mediacentre.ws.config.bean.UserKeyMapping;
 import lombok.Data;

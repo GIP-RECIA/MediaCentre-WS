@@ -15,7 +15,7 @@
  */
 package fr.recia.mediacentre.ws.config.bean;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

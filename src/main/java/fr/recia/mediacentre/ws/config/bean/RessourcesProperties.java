@@ -18,8 +18,8 @@ package fr.recia.mediacentre.ws.config.bean;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotNull;
+import jakarta.annotation.PostConstruct;
+import jakarta.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

@@ -17,7 +17,7 @@
 package fr.recia.mediacentre.ws.model.ressource;
 
 import java.io.Serializable;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

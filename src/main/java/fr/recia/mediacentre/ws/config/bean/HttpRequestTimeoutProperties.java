@@ -15,7 +15,7 @@
  */
 package fr.recia.mediacentre.ws.config.bean;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

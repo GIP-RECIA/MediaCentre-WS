@@ -19,7 +19,7 @@ import fr.recia.mediacentre.ws.model.ressource.Ressource;
 import fr.recia.mediacentre.ws.model.ressource.diffusion.ListeRessourcesDiffusables;
 import fr.recia.mediacentre.ws.service.exception.ListRequestErrorException;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
 
