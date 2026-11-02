@@ -72,8 +72,19 @@ public class RessourceListResource {
 	public List<ListeRessourcesDiffusables> getRessourcesDiffusablesGAR() {
 		log.debug("Requesting ressources Diffusables GAR");
 		List<ListeRessourcesDiffusables> ressources = Lists.newArrayList();
+		ListRequestErrorException exceptions = null;
 		for (IRemoteRequestService remote : remoteServices) {
-			ressources.add(remote.getRessourcesDiffusables());
+			try {
+				ressources.add(remote.getRessourcesDiffusables());
+			} catch (RestClientException ex) {
+				if (exceptions == null) {
+					exceptions = new ListRequestErrorException();
+				}
+				exceptions.addException(ex);
+			}
+		}
+		if (ressources.isEmpty() && exceptions != null) {
+			throw exceptions;
 		}
 		log.trace("Returning these ressources {}", ressources);
 		return ressources;
