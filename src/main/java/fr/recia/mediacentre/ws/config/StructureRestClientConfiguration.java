@@ -19,20 +19,20 @@ import javax.net.ssl.SSLContext;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.HttpHost;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.config.Registry;
-import org.apache.http.config.RegistryBuilder;
-import org.apache.http.conn.routing.HttpRoute;
-import org.apache.http.conn.socket.ConnectionSocketFactory;
-import org.apache.http.conn.socket.PlainConnectionSocketFactory;
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
-import org.apache.http.ssl.SSLContexts;
+import org.apache.hc.core5.http.HttpHost;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.core5.http.config.Registry;
+import org.apache.hc.core5.http.config.RegistryBuilder;
+import org.apache.hc.client5.http.HttpRoute;
+import org.apache.hc.client5.http.socket.ConnectionSocketFactory;
+import org.apache.hc.client5.http.socket.PlainConnectionSocketFactory;
+import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
+import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
+import org.apache.hc.client5.http.ssl.TrustSelfSignedStrategy;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
+import org.apache.hc.core5.ssl.SSLContexts;
 import fr.recia.mediacentre.ws.config.bean.DefaultHttpClientProperties;
 import fr.recia.mediacentre.ws.config.bean.StructureInfosRestProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,8 +74,8 @@ public class StructureRestClientConfiguration {
 		// Default max per route is used in case it's not set for a specific route
 		ccm.setDefaultMaxPerRoute(defaultProperties.getDefaultMaxPerRoute());
 
-		final HttpHost host = new HttpHost(restProperties.getHostConfig().getHost(),restProperties
-				.getHostConfig().getPort(), restProperties.getHostConfig().getScheme());
+		final HttpHost host = new HttpHost(restProperties.getHostConfig().getScheme(), restProperties
+				.getHostConfig().getHost(), restProperties.getHostConfig().getPort());
 		// Max per route for a specific host route
 		ccm.setMaxPerRoute(new HttpRoute(host), restProperties.getHostConfig().getMaxPerRoute());
 		//ccm.setValidateAfterInactivity(250000);
@@ -102,7 +102,7 @@ public class StructureRestClientConfiguration {
 					.build();
 
 			return HttpClientBuilder.create().setConnectionManagerShared(true)
-					.setConnectionManager(StructureConnectionManager(registry)).setSSLSocketFactory(sslConnectionFactory)
+					.setConnectionManager(StructureConnectionManager(registry))
 					.setDefaultRequestConfig(requestConfig).build();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
