@@ -184,16 +184,19 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
             throw new RestClientException("Mauvaise configuration de l'application.", e);
 		}
 	}
-
-	private List<Ressource> getRessources(final String uri) throws CustomRestRequestException, RestClientException  {
-		this.httpHeaders.put("Accept", Lists.newArrayList(MediaType.APPLICATION_JSON_VALUE));
-		ListeRessourcesWrapper ressourcesObj = runUriCall(uri, new ParameterizedTypeReference<ListeRessourcesWrapper>(){}, this.httpHeaders);
+	private List<Ressource> getRessources(final String uri) throws CustomRestRequestException, RestClientException {
+		HttpHeaders requestHeaders = new HttpHeaders();
+		requestHeaders.putAll(this.httpHeaders);
+		requestHeaders.put("Accept", Lists.newArrayList(MediaType.APPLICATION_JSON_VALUE));
+		ListeRessourcesWrapper ressourcesObj = runUriCall(uri, new ParameterizedTypeReference<ListeRessourcesWrapper>(){}, requestHeaders);
 		return (ressourcesObj != null && ressourcesObj.getListeRessources() != null) ? ressourcesObj.getListeRessources().getRessource() : Lists.newArrayList();
 	}
 
-	private ListeRessourcesDiffusables getRessourcesDiffusables(final String uri) throws CustomRestRequestException, RestClientException  {
-		this.httpHeaders.put("Accept", Lists.newArrayList(MediaType.APPLICATION_XML_VALUE));
-		return runUriCall(uri, new ParameterizedTypeReference<ListeRessourcesDiffusables>(){}, this.httpHeaders);
+	private ListeRessourcesDiffusables getRessourcesDiffusables(final String uri) throws CustomRestRequestException, RestClientException {
+		HttpHeaders requestHeaders = new HttpHeaders();
+		requestHeaders.putAll(this.httpHeaders);
+		requestHeaders.put("Accept", Lists.newArrayList(MediaType.APPLICATION_XML_VALUE));
+		return runUriCall(uri, new ParameterizedTypeReference<ListeRessourcesDiffusables>(){}, requestHeaders);
 	}
 
 	private <T> T runUriCall(final String uri, final ParameterizedTypeReference<T> responseType, final HttpHeaders headers) throws CustomRestRequestException, RestClientException {
