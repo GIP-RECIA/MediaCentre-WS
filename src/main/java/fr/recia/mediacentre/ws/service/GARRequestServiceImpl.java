@@ -83,33 +83,56 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 	}
 	}
 
+
 	public List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos) throws ListRequestErrorException {
-        if (!this.isUserAuthorized(userInfos)) {
-            log.warn("The user isn't allowed to obtain resources from the GAR !");
+		checkUserAuthorized(userInfos);
+
+		UserRequestContext context = resolveUserRequestContext(userInfos);
+		final Map<String, Structure> mapStructure = structureInfoService.getStructuresInfosList(
+				userInfos.getOrDefault(context.idEtabAttributeMapped(), Lists.newArrayList()));
+
+		if (!StringUtils.isEmpty(context.loopAttribute())) {
+			final List<String> userAttrVals = userInfos.getOrDefault(context.loopAttribute(), Lists.newArrayList());
+			if (!userAttrVals.isEmpty()) {
+				return fetchRessourcesForEachAttribute(userInfos, context, userAttrVals, mapStructure);
+			}
+		}
+
+		return fetchRessourcesOnce(userInfos, context, mapStructure);
+	}
+
+	private void checkUserAuthorized(final Map<String, List<String>> userInfos) {
+		if (!this.isUserAuthorized(userInfos)) {
+			log.warn("The user isn't allowed to obtain resources from the GAR !");
 			ListRequestErrorException lree = new ListRequestErrorException();
 			lree.addException(new AuthorizedResourceException(UN_AUTHORIZED_MESSAGE));
-            throw lree;
-        }
+			throw lree;
+		}
+	}
+
+	private record UserRequestContext(String uri, String loopAttribute, String idEtabAttributeMapped, String mappedIdEtab) {}
+
+	private UserRequestContext resolveUserRequestContext(final Map<String, List<String>> userInfos) {
 		String uri = garConfiguration.getRessourceUri();
 		// in app param we don't have user multiple values
 		for (ParamValueProperty param : garConfiguration.getAppParams()) {
 			uri = uri.replaceAll("\\{" + param.getParam() + "\\}", param.getValue());
 		}
 
-		String userMappedAttributeToLoop = null;
+		String loopAttribute = null;
 		final String authorizedAttrLoop = garConfiguration.getAttributeOnLoop();
-		String userMappedIdEtab = null;
+		String mappedIdEtab = null;
 		final String userParamIdEtab = garConfiguration.getAttributeIdEtab();
-		String userParamIdEtabMapped = null;
+		String idEtabAttributeMapped = null;
 
 		// in user attributes we should manage multiple values and corresponding to autorized loop
 		for (ParamValueProperty param : garConfiguration.getUserParams()) {
 			if (!StringUtils.isEmpty(authorizedAttrLoop) && authorizedAttrLoop.equalsIgnoreCase(param.getParam())) {
-				userMappedAttributeToLoop = param.getValue();
-				if (authorizedAttrLoop.equals(userParamIdEtab)){
-					userParamIdEtabMapped = param.getValue();
+				loopAttribute = param.getValue();
+				if (authorizedAttrLoop.equals(userParamIdEtab)) {
+					idEtabAttributeMapped = param.getValue();
 				}
-				continue;// go to next loop
+				continue; // go to next loop
 			}
 			List<String> userVal = userInfos.getOrDefault(param.getValue(), Lists.newArrayList());
 			if (!userVal.isEmpty()) {
@@ -118,73 +141,76 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 				}
 				uri = uri.replaceAll("\\{" + param.getParam() + "\\}", userVal.get(0));
 				if (!StringUtils.isEmpty(userParamIdEtab) && userParamIdEtab.equalsIgnoreCase(param.getParam())) {
-					userMappedIdEtab = userVal.get(0);
-					userParamIdEtabMapped = param.getValue();
+					mappedIdEtab = userVal.get(0);
+					idEtabAttributeMapped = param.getValue();
 					if (log.isDebugEnabled()) {
-						log.debug("setting userMappedIdEtab with {} and userParamIdEtabMapped with {}", userMappedIdEtab, userParamIdEtabMapped);
+						log.debug("setting userMappedIdEtab with {} and userParamIdEtabMapped with {}", mappedIdEtab, idEtabAttributeMapped);
 					}
 				}
 			}
 		}
 
-		final Map<String, Structure> mapStructure = structureInfoService.getStructuresInfosList(userInfos.getOrDefault(userParamIdEtabMapped, Lists.newArrayList()));
+		return new UserRequestContext(uri, loopAttribute, idEtabAttributeMapped, mappedIdEtab);
+	}
 
-		if (!StringUtils.isEmpty(userMappedAttributeToLoop)) {
-			final List<String> userAttrVals = userInfos.getOrDefault(userMappedAttributeToLoop, Lists.newArrayList());
-			if (!userAttrVals.isEmpty()) {
-				List<Ressource> ressources = new ArrayList<Ressource>();
-				List<HttpClientErrorException> exceptions = new ArrayList<>();
-				for (String attr : userAttrVals) {
-					if (userParamIdEtab.equalsIgnoreCase(authorizedAttrLoop)) {
-						userMappedIdEtab = attr;
-					}
-					final String req = uri.replaceAll("\\{" + authorizedAttrLoop + "\\}", attr);
-					if (log.isDebugEnabled()) {
-						log.debug("Replacing in uri {} the attribute {} with value {}", uri, authorizedAttrLoop, attr);
-					}
-					try {
-						if (log.isDebugEnabled()) {
-							log.debug("userMappedIdEtab value is {} from {}", userMappedIdEtab, userParamIdEtab);
-						}
-						completeAndMergeRessourceInformations(ressources, getRessources(req), getStructureWithFallBack(mapStructure, userMappedIdEtab));
-					} catch (CustomRestRequestException e) {
-						log.error(
-								"The user defined with theses attributes '{}' doesn't have attribute replacement possible on URI {}",
-								userInfos, uri);
-                        throw new RestClientException("Mauvaise configuration de l'application.", e);
-					} catch (HttpClientErrorException e) {
-						// provinding the error stacktrace only on debug as the custom logged error should be suffisant.
-						exceptions.add(e);
-					}
-				}
-				if (!exceptions.isEmpty()) {
-					if (ressources.isEmpty()) {
-						ListRequestErrorException ex = new ListRequestErrorException();
-						ex.addAllException(exceptions);
-						log.error("The user gets only errors and no ressources:", ex.toString());
-						throw ex;
-					}
-					log.warn("The user get errors but some ressources will be shown !");
-				}
-				return ressources;
+	private List<Ressource> fetchRessourcesForEachAttribute(final Map<String, List<String>> userInfos, final UserRequestContext context,
+															final List<String> userAttrVals, final Map<String, Structure> mapStructure) {
+		final String authorizedAttrLoop = garConfiguration.getAttributeOnLoop();
+		final String userParamIdEtab = garConfiguration.getAttributeIdEtab();
+		String userMappedIdEtab = context.mappedIdEtab();
+
+		List<Ressource> ressources = new ArrayList<>();
+		List<RestClientException> exceptions = new ArrayList<>();
+		for (String attr : userAttrVals) {
+			if (userParamIdEtab.equalsIgnoreCase(authorizedAttrLoop)) {
+				userMappedIdEtab = attr;
 			}
-		}
-
-		try {
-			List<Ressource> ressources = new ArrayList<Ressource>();
+			final String req = context.uri().replaceAll("\\{" + authorizedAttrLoop + "\\}", attr);
 			if (log.isDebugEnabled()) {
-				log.debug("userMappedIdEtab value is {} from {}", userMappedIdEtab, userParamIdEtab);
+				log.debug("Replacing in uri {} the attribute {} with value {}", context.uri(), authorizedAttrLoop, attr);
 			}
+			try {
+				if (log.isDebugEnabled()) {
+					log.debug("userMappedIdEtab value is {} from {}", userMappedIdEtab, userParamIdEtab);
+				}
+				completeAndMergeRessourceInformations(ressources, getRessources(req), getStructureWithFallBack(mapStructure, userMappedIdEtab));
+			} catch (CustomRestRequestException e) {
+				log.error("The user defined with theses attributes '{}' doesn't have attribute replacement possible on URI {}",
+						userInfos, context.uri());
+				throw new RestClientException("Mauvaise configuration de l'application.", e);
+			} catch (RestClientException e) {
+				// provinding the error stacktrace only on debug as the custom logged error should be suffisant.
+				exceptions.add(e);
+			}
+		}
+		if (!exceptions.isEmpty()) {
+			if (ressources.isEmpty()) {
+				ListRequestErrorException ex = new ListRequestErrorException();
+				ex.addAllException(exceptions);
+				log.error("The user gets only errors and no ressources:", ex.toString());
+				throw ex;
+			}
+			log.warn("The user get errors but some ressources will be shown !");
+		}
+		return ressources;
+	}
 
-			completeAndMergeRessourceInformations(ressources, getRessources(uri), getStructureWithFallBack(mapStructure, userMappedIdEtab));
+	private List<Ressource> fetchRessourcesOnce(final Map<String, List<String>> userInfos, final UserRequestContext context,
+												final Map<String, Structure> mapStructure) {
+		try {
+			List<Ressource> ressources = new ArrayList<>();
+			if (log.isDebugEnabled()) {
+				log.debug("userMappedIdEtab value is {} from {}", context.mappedIdEtab(), garConfiguration.getAttributeIdEtab());
+			}
+			completeAndMergeRessourceInformations(ressources, getRessources(context.uri()), getStructureWithFallBack(mapStructure, context.mappedIdEtab()));
 			return ressources;
 		} catch (CustomRestRequestException e) {
-			log.error(
-					"The user defined with theses attributes '{}' doesn't have attribute replacement possible on URI {}",
-					userInfos, uri);
-            throw new RestClientException("Mauvaise configuration de l'application.", e);
+			log.error("The user defined with theses attributes '{}' doesn't have attribute replacement possible on URI {}",
+					userInfos, context.uri());
+			throw new RestClientException("Mauvaise configuration de l'application.", e);
 		}
 	}
+
 	private List<Ressource> getRessources(final String uri) throws CustomRestRequestException, RestClientException {
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.putAll(this.httpHeaders);
