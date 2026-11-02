@@ -21,9 +21,9 @@ import java.security.KeyStore;
 import java.util.Date;
 import java.util.Enumeration;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import javax.net.ssl.SSLContext;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 import fr.recia.mediacentre.ws.config.bean.DefaultHttpClientProperties;
 import fr.recia.mediacentre.ws.config.bean.ParamValueProperty;
@@ -31,19 +31,19 @@ import fr.recia.mediacentre.ws.config.bean.RessourceProperties;
 import fr.recia.mediacentre.ws.config.bean.RessourceType;
 import fr.recia.mediacentre.ws.config.bean.RessourcesProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.HttpHost;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.config.Registry;
-import org.apache.http.config.RegistryBuilder;
-import org.apache.http.conn.routing.HttpRoute;
-import org.apache.http.conn.socket.ConnectionSocketFactory;
-import org.apache.http.conn.ssl.DefaultHostnameVerifier;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
-import org.apache.http.ssl.PrivateKeyStrategy;
-import org.apache.http.ssl.SSLContexts;
+import org.apache.hc.core5.http.HttpHost;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.core5.http.config.Registry;
+import org.apache.hc.core5.http.config.RegistryBuilder;
+import org.apache.hc.client5.http.HttpRoute;
+import org.apache.hc.client5.http.socket.ConnectionSocketFactory;
+import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
+import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
+import org.apache.hc.core5.ssl.PrivateKeyStrategy;
+import org.apache.hc.core5.ssl.SSLContexts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -80,8 +80,8 @@ public class GARClientConfiguration {
 		// Default max per route is used in case it's not set for a specific route
 		ccm.setDefaultMaxPerRoute(defaultProperties.getDefaultMaxPerRoute());
 
-		final HttpHost host = new HttpHost(getGARProperties().getHostConfig().getHost(), getGARProperties()
-				.getHostConfig().getPort(), getGARProperties().getHostConfig().getScheme());
+		final HttpHost host = new HttpHost(getGARProperties().getHostConfig().getScheme(), getGARProperties()
+				.getHostConfig().getHost(), getGARProperties().getHostConfig().getPort());
 		// Max per route for a specific host route
 		ccm.setMaxPerRoute(new HttpRoute(host), getGARProperties().getHostConfig().getMaxPerRoute());
 
@@ -155,15 +155,14 @@ public class GARClientConfiguration {
 				sslContext = SSLContexts.createSystemDefault();
 			}
 
-			SSLConnectionSocketFactory sslConnectionFactory = new SSLConnectionSocketFactory(sslContext,
-					new DefaultHostnameVerifier());
+			SSLConnectionSocketFactory sslConnectionFactory = new SSLConnectionSocketFactory(sslContext);
 
 			Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory> create()
 					.register("https", sslConnectionFactory)
 					.build();
 
 			return HttpClientBuilder.create().setConnectionManagerShared(true)
-					.setConnectionManager(GARConnectionManager(registry)).setSSLSocketFactory(sslConnectionFactory)
+					.setConnectionManager(GARConnectionManager(registry))
 					.setDefaultRequestConfig(requestConfig).build();
 		} catch (Exception e) {
 			log.error("Could not create HttpClient ! {}", e.getMessage(), e);

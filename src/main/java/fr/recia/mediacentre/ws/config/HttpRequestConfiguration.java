@@ -15,13 +15,11 @@
  */
 package fr.recia.mediacentre.ws.config;
 
-import javax.annotation.PostConstruct;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.client.config.RequestConfig;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.core5.util.Timeout;
 import fr.recia.mediacentre.ws.config.bean.HttpRequestTimeoutProperties;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -42,9 +40,9 @@ public class HttpRequestConfiguration {
 
 	private RequestConfig buildRequestConfig() {
 		return RequestConfig.custom()
-				.setConnectionRequestTimeout(httpRequestTimeoutConfiguration.getConnectionRequestTimeout())
-				.setConnectTimeout(httpRequestTimeoutConfiguration.getConectTimeout())
-				.setSocketTimeout(httpRequestTimeoutConfiguration.getSocketTimeout())
+				.setConnectionRequestTimeout(Timeout.ofMilliseconds(httpRequestTimeoutConfiguration.getConnectionRequestTimeout()))
+				.setConnectTimeout(Timeout.ofMilliseconds(httpRequestTimeoutConfiguration.getConectTimeout()))
+				.setResponseTimeout(Timeout.ofMilliseconds(httpRequestTimeoutConfiguration.getSocketTimeout()))
 				.build();
 	}
 }
