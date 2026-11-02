@@ -15,33 +15,58 @@
  */
 package fr.recia.mediacentre.ws.config;
 
-import lombok.extern.slf4j.Slf4j;
 import fr.recia.mediacentre.ws.config.bean.AppSecurityProperties;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 @Slf4j
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+@RequiredArgsConstructor
+public class WebSecurityConfiguration {
 
-	@Autowired
-	private AppSecurityProperties securityProperties;
+    private final AppSecurityProperties securityProperties;
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		String hasIpAddress = "hasIpAddress('127.0.0.1') or hasIpAddress('::1')";
-		for (String ip: securityProperties.getAuthorizedIPAccess()) {
-			hasIpAddress += " or hasIpAddress('" + ip + "')";
-		}
+    static String buildAccessExpression(final List<String> authorizedIps) {
+        final StringBuilder hasIpAddress = new StringBuilder(
+                "hasIpAddress('127.0.0.1') or hasIpAddress('::1')"
+        );
+        for (final String ip : authorizedIps) {
+            hasIpAddress.append(" or hasIpAddress('").append(ip).append("')");
+        }
+        return hasIpAddress.toString();
+    }
 
-		log.debug("WebSecurity configuration: autorize access on '/api/**' for {}", hasIpAddress);
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return (request, response, accessDeniedException) -> {
+            log.warn("Access denied for IP '{}' on '{}'", request.getRemoteAddr(), request.getRequestURI());
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+        };
+    }
 
-		http.csrf().disable().exceptionHandling().and().authorizeRequests().antMatchers("/**").access(hasIpAddress)
-				.and().httpBasic().disable();
+    @Bean
+    public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
+        final String accessExpression = buildAccessExpression(securityProperties.getAuthorizedIPAccess());
 
-	}
+        log.debug("WebSecurity configuration: autorize access on '/**' for {}", accessExpression);
+
+        http.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/**").access(new WebExpressionAuthorizationManager(accessExpression)))
+                .exceptionHandling(handling -> handling.accessDeniedHandler(accessDeniedHandler()))
+                .httpBasic(AbstractHttpConfigurer::disable);
+
+        return http.build();
+    }
 }
