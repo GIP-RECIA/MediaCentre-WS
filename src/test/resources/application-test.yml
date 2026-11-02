@@ -103,7 +103,7 @@ ressources:
           - attribut: isMemberOf
             pattern: ".*"
 localRessources:
-  ressourcePathDirectory: "/home/jgribonvald/Travail/workspace-sts/mediacentre-ws/src/main/resources/json/LocalRessources"
+  ressourcePathDirectory: "src/main/resources/json/LocalRessources"
   refreshTimeOfPathDirectory: 5000
   userAttributeIdEtab: ESCOUAI
   userAttributeId: uid
