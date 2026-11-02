@@ -52,7 +52,7 @@ public class InternalFileServiceImpl implements IRemoteRequestService, Initializ
 	private EvaluatorDroit evaluatorDroit = new EvaluatorDroit();
 
 	public ListeRessourcesDiffusables getRessourcesDiffusables() {
-		return null;
+		return new ListeRessourcesDiffusables();
 	}
 
 	public List<Ressource> getRessources(@NotNull final Map<String, List<String>> userInfos) {
