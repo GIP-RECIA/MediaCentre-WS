@@ -35,6 +35,7 @@ import fr.recia.mediacentre.ws.model.ressource.diffusion.ListeRessourcesDiffusab
 import fr.recia.mediacentre.ws.model.structure.Structure;
 import fr.recia.mediacentre.ws.service.exception.AuthorizedResourceException;
 import fr.recia.mediacentre.ws.service.exception.CustomRestRequestException;
+import fr.recia.mediacentre.ws.service.exception.GarDataIntegrityException;
 import fr.recia.mediacentre.ws.service.exception.ListRequestErrorException;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -77,10 +78,12 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 		try {
 			return getRessourcesDiffusables(uri);
 		} catch (CustomRestRequestException e) {
-		log.error(
-				"Error on constructing the URL to request", uri);
-		throw new RestClientException("Mauvaise configuration de l'application.", e);
-	}
+			log.error("Error on constructing the URL to request", uri);
+			throw new RestClientException("Mauvaise configuration de l'application.", e);
+		} catch (GarDataIntegrityException e) {
+			log.error("Réponse GAR invalide pour les ressources diffusables sur l'URI {}", uri, e);
+			throw new RestClientException("Réponse du GAR invalide pour les ressources diffusables.", e);
+		}
 	}
 
 
@@ -160,7 +163,7 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 		String userMappedIdEtab = context.mappedIdEtab();
 
 		List<Ressource> ressources = new ArrayList<>();
-		List<RestClientException> exceptions = new ArrayList<>();
+		List<RuntimeException> exceptions = new ArrayList<>();
 		for (String attr : userAttrVals) {
 			if (userParamIdEtab.equalsIgnoreCase(authorizedAttrLoop)) {
 				userMappedIdEtab = attr;
@@ -178,7 +181,7 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 				log.error("The user defined with theses attributes '{}' doesn't have attribute replacement possible on URI {}",
 						userInfos, context.uri());
 				throw new RestClientException("Mauvaise configuration de l'application.", e);
-			} catch (RestClientException e) {
+			} catch (RestClientException | GarDataIntegrityException e) {
 				// provinding the error stacktrace only on debug as the custom logged error should be suffisant.
 				exceptions.add(e);
 			}
@@ -208,6 +211,10 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 			log.error("The user defined with theses attributes '{}' doesn't have attribute replacement possible on URI {}",
 					userInfos, context.uri());
 			throw new RestClientException("Mauvaise configuration de l'application.", e);
+		} catch (GarDataIntegrityException e) {
+			ListRequestErrorException lree = new ListRequestErrorException();
+			lree.addException(e);
+			throw lree;
 		}
 	}
 
@@ -217,7 +224,14 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 		requestHeaders.set("Date", new Date().toString());
 		requestHeaders.put("Accept", Lists.newArrayList(MediaType.APPLICATION_JSON_VALUE));
 		ListeRessourcesWrapper ressourcesObj = runUriCall(uri, new ParameterizedTypeReference<ListeRessourcesWrapper>(){}, requestHeaders);
-		return (ressourcesObj != null && ressourcesObj.getListeRessources() != null) ? ressourcesObj.getListeRessources().getRessource() : Lists.newArrayList();
+		if (ressourcesObj == null || ressourcesObj.getListeRessources() == null) {
+			return Lists.newArrayList();
+		}
+		List<Ressource> ressources = ressourcesObj.getListeRessources().getRessource();
+		if (ressources == null) {
+			throw new GarDataIntegrityException("Le GAR a renvoyé une liste de ressources nulle pour l'URI " + uri);
+		}
+		return ressources;
 	}
 
 	private ListeRessourcesDiffusables getRessourcesDiffusables(final String uri) throws CustomRestRequestException, RestClientException {
@@ -225,7 +239,11 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 		requestHeaders.putAll(this.httpHeaders);
 		requestHeaders.set("Date", new Date().toString());
 		requestHeaders.put("Accept", Lists.newArrayList(MediaType.APPLICATION_XML_VALUE));
-		return runUriCall(uri, new ParameterizedTypeReference<ListeRessourcesDiffusables>(){}, requestHeaders);
+		ListeRessourcesDiffusables result = runUriCall(uri, new ParameterizedTypeReference<ListeRessourcesDiffusables>(){}, requestHeaders);
+		if (result == null) {
+			throw new GarDataIntegrityException("Le GAR a renvoyé une réponse vide pour les ressources diffusables sur l'URI " + uri);
+		}
+		return result;
 	}
 
 	private <T> T runUriCall(final String uri, final ParameterizedTypeReference<T> responseType, final HttpHeaders headers) throws CustomRestRequestException, RestClientException {
@@ -290,6 +308,9 @@ public class GARRequestServiceImpl implements IRemoteRequestService, Initializin
 			idEtab = new IdEtablissement(etablissement.getId(), etablissement.getCode(), etablissement.getDisplayName());
 		}
 		for (Ressource newRS : complementRessources) {
+			if (newRS == null) {
+				throw new GarDataIntegrityException("Le GAR a renvoyé un élément null dans la liste de ressources");
+			}
 			newRS.setIdEtablissement(Lists.newArrayList(idEtab));
 			initialRessources.add(newRS);
 		}
