@@ -57,19 +57,19 @@ public class TypePresentation implements Serializable {
         this.nom = nom;
     }
 
-    @JsonProperty(value = "code", required = true)
+    @JsonProperty(value = "code")
     public String getCode() {
         return code;
     }
-    @JsonProperty(value = "code", required = true)
+    @JsonProperty(value = "code")
     public void setCode(String code) {
         this.code = code;
     }
-    @JsonProperty(value = "nom", required = true)
+    @JsonProperty(value = "nom")
     public String getNom() {
         return nom;
     }
-    @JsonProperty(value = "nom", required = true)
+    @JsonProperty(value = "nom")
     public void setNom(String nom) {
         this.nom = nom;
     }

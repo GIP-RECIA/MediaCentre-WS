@@ -52,19 +52,19 @@ public class UriDescription implements Serializable {
         this.uri = uri;
     }
 
-    @JsonProperty(value = "nom", required = true)
+    @JsonProperty(value = "nom")
     public String getNom() {
         return nom;
     }
-    @JsonProperty(value = "nom", required = true)
+    @JsonProperty(value = "nom")
     public void setNom(String nom) {
         this.nom = nom;
     }
-    @JsonProperty(value = "uri", required = true)
+    @JsonProperty(value = "uri")
     public String getUri() {
         return uri;
     }
-    @JsonProperty(value = "uri", required = true)
+    @JsonProperty(value = "uri")
     public void setUri(String uri) {
         this.uri = uri;
     }

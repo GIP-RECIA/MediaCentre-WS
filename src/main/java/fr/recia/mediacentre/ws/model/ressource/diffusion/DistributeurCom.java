@@ -55,19 +55,19 @@ public class DistributeurCom implements Serializable {
         this.nomDistributeurCom = nomDistributeurCom;
     }
 
-    @JsonProperty(value = "distributeurCom", required = true)
+    @JsonProperty(value = "distributeurCom")
     public String getDistributeurCom() {
         return distributeurCom;
     }
-    @JsonProperty(value = "distributeurCom", required = true)
+    @JsonProperty(value = "distributeurCom")
     public void setDistributeurCom(String distributeurCom) {
         this.distributeurCom = distributeurCom;
     }
-    @JsonProperty(value = "nomDistributeurCom", required = true)
+    @JsonProperty(value = "nomDistributeurCom")
     public String getNomDistributeurCom() {
         return nomDistributeurCom;
     }
-    @JsonProperty(value = "nomDistributeurCom", required = true)
+    @JsonProperty(value = "nomDistributeurCom")
     public void setNomDistributeurCom(String nomDistributeurCom) {
         this.nomDistributeurCom = nomDistributeurCom;
     }

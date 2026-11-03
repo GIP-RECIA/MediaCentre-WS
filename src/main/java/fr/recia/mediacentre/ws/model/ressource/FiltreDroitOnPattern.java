@@ -54,22 +54,22 @@ public class FiltreDroitOnPattern{
         compilePattern();
     }
 
-    @JsonProperty(value = "attribut", required = true)
+    @JsonProperty(value = "attribut")
     public String getAttribut() {
         return attribut;
     }
 
-    @JsonProperty(value = "attribut", required = true)
+    @JsonProperty(value = "attribut")
     public void setAttribut(@NotBlank String attribut) {
         this.attribut = attribut;
     }
 
-    @JsonProperty(value = "pattern", required = true)
+    @JsonProperty(value = "pattern")
     public String getPattern() {
         return pattern;
     }
 
-    @JsonProperty(value = "pattern", required = true)
+    @JsonProperty(value = "pattern")
     public void setPattern(@NotBlank String pattern) {
         this.pattern = pattern;
         compilePattern();

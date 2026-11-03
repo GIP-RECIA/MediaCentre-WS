@@ -146,12 +146,12 @@ public class Ressource implements Serializable {
         this.description = description;
     }
 
-    @JsonProperty(value = "distributeurTech", required = true)
+    @JsonProperty(value = "distributeurTech")
     public String getDistributeurTech() {
         return distributeurTech;
     }
 
-    @JsonProperty(value = "distributeurTech", required = true)
+    @JsonProperty(value = "distributeurTech")
     public void setDistributeurTech(String distributeurTech) {
         this.distributeurTech = distributeurTech;
     }
@@ -166,42 +166,42 @@ public class Ressource implements Serializable {
         this.domaineEnseignement = domaineEnseignement;
     }
 
-    @JsonProperty(value = "idEditeur", required = true)
+    @JsonProperty(value = "idEditeur")
     public String getIdEditeur() {
         return idEditeur;
     }
 
-    @JsonProperty(value = "idEditeur", required = true)
+    @JsonProperty(value = "idEditeur")
     public void setIdEditeur(String idEditeur) {
         this.idEditeur = idEditeur;
     }
 
-    @JsonProperty(value = "idRessource", required = true)
+    @JsonProperty(value = "idRessource")
     public String getIdRessource() {
         return idRessource;
     }
 
-    @JsonProperty(value = "idRessource", required = true)
+    @JsonProperty(value = "idRessource")
     public void setIdRessource(String idRessource) {
         this.idRessource = idRessource;
     }
 
-    @JsonProperty(value = "idEtablissement", required = true)
+    @JsonProperty(value = "idEtablissement")
     public List<IdEtablissement> getIdEtablissement() {
         return idEtablissement;
     }
 
-    @JsonProperty(value = "idEtablissement", required = true)
+    @JsonProperty(value = "idEtablissement")
     public void setIdEtablissement(List<IdEtablissement> idEtablissement) {
         this.idEtablissement = idEtablissement;
     }
 
-    @JsonProperty(value = "idType", required = true)
+    @JsonProperty(value = "idType")
     public String getIdType() {
         return idType;
     }
 
-    @JsonProperty(value = "idType", required = true)
+    @JsonProperty(value = "idType")
     public void setIdType(String idType) {
         this.idType = idType;
     }
@@ -216,32 +216,32 @@ public class Ressource implements Serializable {
         this.niveauEducatif = niveauEducatif;
     }
 
-    @JsonProperty(value = "nomEditeur", required = true)
+    @JsonProperty(value = "nomEditeur")
     public String getNomEditeur() {
         return nomEditeur;
     }
 
-    @JsonProperty(value = "nomEditeur", required = true)
+    @JsonProperty(value = "nomEditeur")
     public void setNomEditeur(String nomEditeur) {
         this.nomEditeur = nomEditeur;
     }
 
-    @JsonProperty(value = "nomRessource", required = true)
+    @JsonProperty(value = "nomRessource")
     public String getNomRessource() {
         return nomRessource;
     }
 
-    @JsonProperty(value = "nomRessource", required = true)
+    @JsonProperty(value = "nomRessource")
     public void setNomRessource(String nomRessource) {
         this.nomRessource = nomRessource;
     }
 
-    @JsonProperty(value = "sourceEtiquette", required = true, access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(value = "sourceEtiquette", access = JsonProperty.Access.READ_ONLY)
     public String getSourceEtiquette() {
         return sourceEtiquette;
     }
 
-    @JsonProperty(value = "nomSourceEtiquetteGar", required = true, access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "nomSourceEtiquetteGar", access = JsonProperty.Access.WRITE_ONLY)
     public void setSourceEtiquette(String sourceEtiquette) {
         this.sourceEtiquette = sourceEtiquette;
     }
@@ -256,12 +256,12 @@ public class Ressource implements Serializable {
         this.typePedagogique = typePedagogique;
     }
 
-    @JsonProperty(value = "typePresentation", required = true)
+    @JsonProperty(value = "typePresentation")
     public TypePresentation getTypePresentation() {
         return typePresentation;
     }
 
-    @JsonProperty(value = "typePresentation", required = true)
+    @JsonProperty(value = "typePresentation")
     public void setTypePresentation(TypePresentation typePresentation) {
         this.typePresentation = typePresentation;
     }
@@ -276,12 +276,12 @@ public class Ressource implements Serializable {
         this.typologieDocument = typologieDocument;
     }
 
-    @JsonProperty(value = "urlAccesRessource", required = true)
+    @JsonProperty(value = "urlAccesRessource")
     public String getUrlAccesRessource() {
         return urlAccesRessource;
     }
 
-    @JsonProperty(value = "urlAccesRessource", required = true)
+    @JsonProperty(value = "urlAccesRessource")
     public void setUrlAccesRessource(String urlAccesRessource) {
         this.urlAccesRessource = urlAccesRessource;
     }
@@ -306,22 +306,22 @@ public class Ressource implements Serializable {
         this.urlVignette = urlVignette;
     }
 
-    @JsonProperty(value = "validateurTech", required = true)
+    @JsonProperty(value = "validateurTech")
     public String getValidateurTech() {
         return validateurTech;
     }
 
-    @JsonProperty(value = "validateurTech", required = true)
+    @JsonProperty(value = "validateurTech")
     public void setValidateurTech(String validateurTech) {
         this.validateurTech = validateurTech;
     }
 
-    @JsonProperty(value = "description", required = true)
+    @JsonProperty(value = "description")
     public String getDescription() {
         return description;
     }
 
-    @JsonProperty(value = "description", required = true)
+    @JsonProperty(value = "description")
     public void setDescription(String description) {
         this.description = description;
     }

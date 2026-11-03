@@ -37,7 +37,7 @@ import lombok.ToString;
 public class ErreurWrapper implements Serializable {
 
     @Valid
-    @JsonProperty(value = "Erreur", required = true)
+    @JsonProperty(value = "Erreur")
     @NotNull
     private Erreur erreur;
 

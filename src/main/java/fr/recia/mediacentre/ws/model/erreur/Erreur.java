@@ -36,10 +36,10 @@ import java.io.Serializable;
 public class Erreur implements Serializable
 {
 
-    @JsonProperty(value = "Code", required = true)
+    @JsonProperty(value = "Code")
     @NotBlank
     private String code;
-    @JsonProperty(value = "Message", required = true)
+    @JsonProperty(value = "Message")
     @NotBlank
     private String message;
     @JsonProperty("Resource")

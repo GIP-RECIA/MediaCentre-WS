@@ -108,94 +108,94 @@ public class RessourceDiffusable implements Serializable {
         this.membreFamille = membreFamille;
     }
 
-    @JsonProperty(value = "distributeurTech", required = true)
+    @JsonProperty(value = "distributeurTech")
     public String getDistributeurTech() {
         return distributeurTech;
     }
 
-    @JsonProperty(value = "distributeurTech", required = true)
+    @JsonProperty(value = "distributeurTech")
     public void setDistributeurTech(String distributeurTech) {
         this.distributeurTech = distributeurTech;
     }
 
-    @JsonProperty(value = "nomDistributeurTech", required = true)
+    @JsonProperty(value = "nomDistributeurTech")
     public String getNomDistributeurTech() {
         return nomDistributeurTech;
     }
 
-    @JsonProperty(value = "nomDistributeurTech", required = true)
+    @JsonProperty(value = "nomDistributeurTech")
     public void setNomDistributeurTech(String nomDistributeurTech) {
         this.nomDistributeurTech = nomDistributeurTech;
     }
 
-    @JsonProperty(value = "idEditeur", required = true)
+    @JsonProperty(value = "idEditeur")
     public String getIdEditeur() {
         return idEditeur;
     }
 
-    @JsonProperty(value = "idEditeur", required = true)
+    @JsonProperty(value = "idEditeur")
     public void setIdEditeur(String idEditeur) {
         this.idEditeur = idEditeur;
     }
 
-    @JsonProperty(value = "idRessource", required = true)
+    @JsonProperty(value = "idRessource")
     @JacksonXmlProperty(localName = "idRessource")
     public String getIdRessource() {
         return idRessource;
     }
 
-    @JsonProperty(value = "idRessource", required = true)
+    @JsonProperty(value = "idRessource")
     @JacksonXmlProperty(localName = "idRessource")
     public void setIdRessource(String idRessource) {
         this.idRessource = idRessource;
     }
 
-    @JsonProperty(value = "nomEditeur", required = true)
+    @JsonProperty(value = "nomEditeur")
     public String getNomEditeur() {
         return nomEditeur;
     }
 
-    @JsonProperty(value = "nomEditeur", required = true)
+    @JsonProperty(value = "nomEditeur")
     public void setNomEditeur(String nomEditeur) {
         this.nomEditeur = nomEditeur;
     }
 
-    @JsonProperty(value = "nomRessource", required = true)
+    @JsonProperty(value = "nomRessource")
     public String getNomRessource() {
         return nomRessource;
     }
 
-    @JsonProperty(value = "nomRessource", required = true)
+    @JsonProperty(value = "nomRessource")
     public void setNomRessource(String nomRessource) {
         this.nomRessource = nomRessource;
     }
 
-    @JsonProperty(value = "affichable", required = true)
+    @JsonProperty(value = "affichable")
     public boolean isAffichable() {
         return affichable;
     }
 
-    @JsonProperty(value = "affichable", required = true)
+    @JsonProperty(value = "affichable")
     public void setAffichable(boolean affichable) {
         this.affichable = affichable;
     }
 
-    @JsonProperty(value = "diffusable", required = true)
+    @JsonProperty(value = "diffusable")
     public boolean isDiffusable() {
         return diffusable;
     }
 
-    @JsonProperty(value = "diffusable", required = true)
+    @JsonProperty(value = "diffusable")
     public void setDiffusable(boolean diffusable) {
         this.diffusable = diffusable;
     }
 
-    @JsonProperty(value = "distributeursCom", required = true)
+    @JsonProperty(value = "distributeursCom")
     public List<DistributeurCom> getDistributeursCom() {
         return distributeursCom;
     }
 
-    @JsonProperty(value = "distributeursCom", required = true)
+    @JsonProperty(value = "distributeursCom")
     public void setDistributeursCom(List<DistributeurCom> distributeursCom) {
         this.distributeursCom = distributeursCom;
     }
