@@ -45,6 +45,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -73,11 +74,11 @@ public class StructureInfoRequestService {
                 log.debug("Obtained Structure List from {} returned \n{}", structuresIds, map.getMapStructures());
             }
             return map.getMapStructures();
-        } catch (CustomRestRequestException e) {
+        } catch (CustomRestRequestException | RestClientException e) {
+            log.warn("Impossible d'obtenir les informations de structure pour {} - les ressources seront affichées avec leur code UAI brut à la place du nom d'établissement.", structuresIds, e);
             return Maps.newLinkedHashMap();
         }
     }
-
     protected MapStructuresWrapper runCallAPI(@NotNull final Set<String> structuresIds) throws CustomRestRequestException {
        if (!structuresIds.isEmpty()){
            String ids = "";
@@ -118,12 +119,14 @@ public class StructureInfoRequestService {
                } else {
                    log.error("Erreur client request on URL {}, returned status {}, with response {}", constructedURL, e.getStatusCode(), e.getResponseBodyAsString());
                }
+               throw e;
            } catch (ResourceAccessException e) {
                if (log.isDebugEnabled()) {
                    log.error("Erreur client request on URL {} with error ", constructedURL, e);
                } else {
                    log.error("Erreur client request on URL {} with error ", constructedURL, e.getLocalizedMessage());
                }
+               throw e;
            }
        }
        return new MapStructuresWrapper();
