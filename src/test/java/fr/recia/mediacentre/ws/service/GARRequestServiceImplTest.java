@@ -1,3 +1,18 @@
+/**
+ * Copyright (C) 2017 GIP-RECIA https://www.recia.fr/
+ * @Author (C) 2017 Julien Gribonvald <julien.gribonvald@recia.fr>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *                 http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package fr.recia.mediacentre.ws.service;
 
 import fr.recia.mediacentre.ws.config.bean.ParamValueProperty;
@@ -5,6 +20,7 @@ import fr.recia.mediacentre.ws.model.ressource.ListeRessources;
 import fr.recia.mediacentre.ws.model.ressource.ListeRessourcesWrapper;
 import fr.recia.mediacentre.ws.model.ressource.Ressource;
 import fr.recia.mediacentre.ws.model.ressource.diffusion.ListeRessourcesDiffusables;
+import fr.recia.mediacentre.ws.service.exception.GarDataIntegrityException;
 import fr.recia.mediacentre.ws.service.exception.ListRequestErrorException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -60,6 +76,7 @@ class GARRequestServiceImplTest {
         RessourceProperties garConfiguration = new RessourceProperties();
         garConfiguration.setHostConfig(hostConfig);
         garConfiguration.setRessourceUri(ressourceUriTemplate);
+        garConfiguration.setRessourceDiffusableUri("/api/ressourcesDiffusables/fixed");
         garConfiguration.setAttributeOnLoop("uai");
         garConfiguration.setAttributeIdEtab("uai");
         garConfiguration.setAppParams(new ArrayList<>());
@@ -192,5 +209,81 @@ class GARRequestServiceImplTest {
 
         assertEquals("Mauvaise configuration de l'application.", ex.getMessage());
         verify(restTemplate, never()).exchange(any(URI.class), eq(HttpMethod.GET), any(HttpEntity.class), any(ParameterizedTypeReference.class));
+    }
+
+    @Test
+    void oneGarDataIntegrityIssueAmongSeveralEtablissementsStillReturnsTheOthers() throws Exception {
+        RestTemplate restTemplate = Mockito.mock(RestTemplate.class);
+        Mockito.when(restTemplate.exchange(any(URI.class), eq(HttpMethod.GET), any(HttpEntity.class), any(ParameterizedTypeReference.class)))
+                .thenReturn(responseWith(1))
+                .thenReturn(new ResponseEntity<>(new ListeRessourcesWrapper(new ListeRessources(null)), HttpStatus.OK))
+                .thenReturn(responseWith(1));
+
+        GARRequestServiceImpl service = buildLoopingService(restTemplate, "/api/ressources/{uai}");
+
+        List<Ressource> ressources = service.getRessources(userInfosWithUais("UAI1", "UAI2", "UAI3"));
+
+        assertEquals(2, ressources.size(), "les 2 établissements avec une réponse valide doivent être conservés malgré une liste de ressources nulle sur le 2e");
+    }
+
+    @Test
+    void allEtablissementsWithNullRessourceListThrowsAggregatedException() {
+        RestTemplate restTemplate = Mockito.mock(RestTemplate.class);
+        Mockito.when(restTemplate.exchange(any(URI.class), eq(HttpMethod.GET), any(HttpEntity.class), any(ParameterizedTypeReference.class)))
+                .thenReturn(new ResponseEntity<>(new ListeRessourcesWrapper(new ListeRessources(null)), HttpStatus.OK));
+
+        GARRequestServiceImpl service = buildLoopingService(restTemplate, "/api/ressources/{uai}");
+
+        ListRequestErrorException ex = assertThrows(ListRequestErrorException.class,
+                () -> service.getRessources(userInfosWithUais("UAI1", "UAI2", "UAI3")));
+
+        assertEquals(3, ex.getExceptions().size());
+        ex.getExceptions().forEach(e -> assertEquals(GarDataIntegrityException.class, e.getClass()));
+    }
+
+    @Test
+    void nullRessourceListOnSingleCallPathThrowsWrappedDataIntegrityException() {
+        // pas d'attribut de boucle renseigné dans userInfos -> passe par fetchRessourcesOnce, pas fetchRessourcesForEachAttribute
+        RestTemplate restTemplate = Mockito.mock(RestTemplate.class);
+        Mockito.when(restTemplate.exchange(any(URI.class), eq(HttpMethod.GET), any(HttpEntity.class), any(ParameterizedTypeReference.class)))
+                .thenReturn(new ResponseEntity<>(new ListeRessourcesWrapper(new ListeRessources(null)), HttpStatus.OK));
+
+        GARRequestServiceImpl service = buildLoopingService(restTemplate, "/api/ressources/fixed");
+
+        ListRequestErrorException ex = assertThrows(ListRequestErrorException.class,
+                () -> service.getRessources(new HashMap<>()));
+
+        assertEquals(1, ex.getExceptions().size());
+        assertEquals(GarDataIntegrityException.class, ex.getExceptions().get(0).getClass());
+    }
+
+    @Test
+    void nullElementInRessourceListThrowsWrappedDataIntegrityException() {
+        List<Ressource> listWithNullElement = new ArrayList<>();
+        listWithNullElement.add(null);
+        RestTemplate restTemplate = Mockito.mock(RestTemplate.class);
+        Mockito.when(restTemplate.exchange(any(URI.class), eq(HttpMethod.GET), any(HttpEntity.class), any(ParameterizedTypeReference.class)))
+                .thenReturn(new ResponseEntity<>(new ListeRessourcesWrapper(new ListeRessources(listWithNullElement)), HttpStatus.OK));
+
+        GARRequestServiceImpl service = buildLoopingService(restTemplate, "/api/ressources/fixed");
+
+        ListRequestErrorException ex = assertThrows(ListRequestErrorException.class,
+                () -> service.getRessources(new HashMap<>()));
+
+        assertEquals(1, ex.getExceptions().size());
+        assertEquals(GarDataIntegrityException.class, ex.getExceptions().get(0).getClass());
+    }
+
+    @Test
+    void nullBodyOnRessourcesDiffusablesThrowsRestClientException() {
+        RestTemplate restTemplate = Mockito.mock(RestTemplate.class);
+        Mockito.when(restTemplate.exchange(any(URI.class), eq(HttpMethod.GET), any(HttpEntity.class), any(ParameterizedTypeReference.class)))
+                .thenReturn(ResponseEntity.status(HttpStatus.NO_CONTENT).build());
+
+        GARRequestServiceImpl service = buildLoopingService(restTemplate, "/api/ressources/fixed");
+
+        RestClientException ex = assertThrows(RestClientException.class, service::getRessourcesDiffusables);
+
+        assertEquals("Réponse du GAR invalide pour les ressources diffusables.", ex.getMessage());
     }
 }
