@@ -40,7 +40,7 @@ public class RessourceListResource {
 	@Autowired
 	List<IRemoteRequestService> remoteServices;
 
-	@RequestMapping(value = "/ressources", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = {"/ressources", "/ressources/"}, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Ressource> getRessources(@RequestBody Map<String, List<String>> userInfos) {
 		log.debug("Requesting ressources for user {}", userInfos);
 		List<Ressource> ressources = Lists.newArrayList();
@@ -68,7 +68,7 @@ public class RessourceListResource {
 		return ressources;
 	}
 
-	@RequestMapping(value = "/ressourcesDiffusables", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@RequestMapping(value = {"/ressourcesDiffusables", "/ressourcesDiffusables/"}, method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public List<ListeRessourcesDiffusables> getRessourcesDiffusablesGAR() {
 		log.debug("Requesting ressources Diffusables GAR");
 		List<ListeRessourcesDiffusables> ressources = Lists.newArrayList();
