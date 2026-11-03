@@ -55,7 +55,7 @@ structureInfoRest:
   hostConfig:
     scheme: https
     host: localhost
-    port: 443
+    #port: 443
     maxPerRoute: 50
   uri:
    #duration in second
